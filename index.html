@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Brasil em Dados — desenvolvimento, PIB e investimento</title>
-<meta name="description" content="Três leituras de longo prazo do Brasil: atlas do desenvolvimento 1996–2026, composição do PIB 1995–2025 e a trajetória do investimento (FBCF).">
+<title>Brasil em Dados — desenvolvimento, PIB, investimento e projeções</title>
+<meta name="description" content="Quatro leituras do Brasil: atlas do desenvolvimento, composição do PIB, investimento (FBCF) e projeções para o governo 2027–2030.">
 <meta name="theme-color" content="#f2ede3">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -77,6 +77,20 @@ p{margin:0 0 14px}p:last-child{margin-bottom:0}
 .card__go span:last-child{font-size:15px;transition:transform .18s ease}
 .card:hover .card__go span:last-child{transform:translateX(3px)}
 
+.feature{display:block;background:var(--ink);color:var(--paper);text-decoration:none;padding:34px 36px;border:1px solid var(--ink);position:relative;transition:transform .18s ease,box-shadow .18s ease}
+.feature:hover{transform:translateY(-3px);box-shadow:0 26px 54px -34px rgba(23,21,15,.6);color:var(--paper)}
+.feature__grid{display:grid;grid-template-columns:1.35fr .65fr;gap:38px;align-items:end}
+.feature__kicker{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#c9d6e4;margin-bottom:14px}
+.feature h3{font-family:var(--serif);font-size:clamp(28px,3.4vw,44px);line-height:1.02;letter-spacing:-.035em;margin:0 0 12px;color:var(--paper)}
+.feature h3 em{font-style:italic;font-weight:500;color:#c9d6e4}
+.feature p{font-size:13px;line-height:1.6;color:#bcb3a3;max-width:660px;margin:0 0 16px}
+.feature__go{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#c9d6e4;display:flex;gap:8px;align-items:center}
+.feature:hover .feature__go span:last-child{transform:translateX(3px)}
+.feature__go span:last-child{transition:transform .18s ease}
+.feature__stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;border-left:1px solid #3a362d;padding-left:30px}
+.feature__stat b{display:block;font-family:var(--serif);font-size:clamp(28px,3vw,42px);line-height:.95;letter-spacing:-.04em;color:var(--paper)}
+.feature__stat span{display:block;font-family:var(--mono);font-size:7.5px;letter-spacing:.07em;text-transform:uppercase;color:#8f8676;margin-top:4px;line-height:1.35}
+
 .footer{background:var(--ink);color:var(--paper);padding:46px 0 28px}
 .footer__grid{display:grid;grid-template-columns:1.5fr .8fr .8fr;gap:34px}
 .footer h3{font-family:var(--serif);font-size:26px;line-height:1.05;margin:0 0 8px;color:var(--paper)}
@@ -90,6 +104,8 @@ p{margin:0 0 14px}p:last-child{margin-bottom:0}
   .hero__grid{grid-template-columns:1fr;gap:30px}.hero__card{max-width:560px}
   .cards{grid-template-columns:1fr}.card{min-height:0}
   .thesis-grid{grid-template-columns:1fr}
+  .feature__grid{grid-template-columns:1fr;gap:24px}
+  .feature__stats{border-left:0;border-top:1px solid #3a362d;padding-left:0;padding-top:18px}
   .footer__grid{grid-template-columns:1fr 1fr}
 }
 @media(max-width:640px){
@@ -100,6 +116,9 @@ p{margin:0 0 14px}p:last-child{margin-bottom:0}
   .hero__card{max-width:none}.brand__text{display:none}
   .footer__grid{grid-template-columns:1fr}.footer__bottom{flex-direction:column;gap:5px}
   .card{padding:20px 18px 16px}.card h3{font-size:25px}
+  .feature{padding:24px 20px}
+  .feature h3{font-size:27px}
+  .feature__stats{grid-template-columns:1fr 1fr}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card{transition:none}}
 @media print{.topbar,.hero::before{display:none!important}body{background:#fff}.card{break-inside:avoid;box-shadow:none}.footer{background:#fff;color:#000}.footer p,.footer a,.footer__label,.footer__bottom{color:#000}}
@@ -122,16 +141,16 @@ p{margin:0 0 14px}p:last-child{margin-bottom:0}
 <section class="hero" id="inicio">
   <div class="wrap hero__grid">
     <div>
-      <div class="kicker">Brasil em Dados · 1995—2026</div>
-      <h1>Trinta anos de transformação. <em>Três leituras do mesmo país.</em></h1>
+      <div class="kicker">Brasil em Dados · 1995—2030</div>
+      <h1>Trinta anos de transformação. <em>Quatro leituras do mesmo país.</em></h1>
       <p class="hero__deck">
         O Brasil é a 11ª maior economia do mundo e a 101ª em renda por habitante.
-        Estes três relatórios reconstroem como o país cresceu, o que produziu e por que
-        não convergiu — com fatos datados, contas nacionais e séries comparáveis.
+        Estes quatro relatórios reconstroem como o país cresceu, o que produziu, por que
+        não convergiu — e o que esperar do novo governo.
       </p>
       <div class="hero__byline">
         Páginas estáticas, sem backend e com fontes abertas. Dados de IBGE, Ipea, BCB,
-        World Bank, FMI, OCDE, PNUD, INPE, MapBiomas, OMS, Unesco e FAO. Outubro de 2026.
+        TSE, World Bank, FMI, OCDE, PNUD, INPE, MapBiomas, OMS, Unesco e FAO. Outubro de 2026.
       </div>
     </div>
 
@@ -169,10 +188,11 @@ p{margin:0 0 14px}p:last-child{margin-bottom:0}
     <div class="section__head">
       <div class="section__num">01</div>
       <div>
-        <h2 class="section__title">Os três relatórios</h2>
+        <h2 class="section__title">Os três relatórios históricos</h2>
         <p class="section__deck">
           Cada página é uma camada distinta do mesmo problema: os fatos que mudaram o regime
           econômico, a estrutura do que o país produz e a taxa com que acumula capital.
+          A quarta leitura olha para frente.
         </p>
       </div>
     </div>
@@ -239,12 +259,48 @@ p{margin:0 0 14px}p:last-child{margin-bottom:0}
   </div>
 </section>
 
-<section class="section" id="leitura" style="background:var(--paper-2)">
+<section class="section" id="projecoes">
   <div class="wrap">
     <div class="section__head">
       <div class="section__num">02</div>
       <div>
-        <h2 class="section__title">A tese comum aos três</h2>
+        <h2 class="section__title">Projeções e expectativas de governo</h2>
+        <p class="section__deck">
+          O plano de Lula promete continuidade com mais investimento, redistribuição e
+          protagonismo ambiental. O mercado projeta crescimento baixo, juros altos e dívida
+          em alta. A distância entre os dois é o novo mandato.
+        </p>
+      </div>
+    </div>
+
+    <a class="feature" href="projecoes-governo-2027-2030.html">
+      <div class="feature__grid">
+        <div>
+          <div class="feature__kicker">Novo · 04 · Projeções 2027—2030</div>
+          <h3>O plano promete transformação.<br><em>O mercado projeta continuidade.</em></h3>
+          <p>
+            O que o programa de Lula prevê, o que o Focus/BCB espera e três cenários para
+            o novo mandato. Os números que vão definir se o Brasil muda de patamar — ou
+            apenas repete o ciclo.
+          </p>
+          <div class="feature__go"><span>Abrir o relatório</span><span>→</span></div>
+        </div>
+        <div class="feature__stats">
+          <div class="feature__stat"><b>1,3%</b><span>PIB 2027 · mercado</span></div>
+          <div class="feature__stat"><b>95%</b><span>dívida 2030 · mercado</span></div>
+          <div class="feature__stat"><b>3</b><span>cenários</span></div>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section class="section" id="leitura" style="background:var(--paper-2)">
+  <div class="wrap">
+    <div class="section__head">
+      <div class="section__num">03</div>
+      <div>
+        <h2 class="section__title">A tese comum aos três relatórios históricos</h2>
         <p class="section__deck">
           O Brasil cresceu socialmente mais do que cresceu economicamente. A inclusão foi real;
           a transformação produtiva, incompleta.
@@ -280,13 +336,14 @@ p{margin:0 0 14px}p:last-child{margin-bottom:0}
       <div>
         <div class="footer__label">Sobre</div>
         <h3>Brasil em Dados</h3>
-        <p>Três relatórios independentes e complementares sobre desenvolvimento, estrutura produtiva e investimento. Todo o conteúdo é estático e pode ser lido offline.</p>
+        <p>Quatro relatórios independentes e complementares sobre desenvolvimento, estrutura produtiva, investimento e o novo governo. Todo o conteúdo é estático e pode ser lido offline.</p>
       </div>
       <div>
         <div class="footer__label">Relatórios</div>
         <a href="desenvolvimento-brasil-1996-2026.html">Atlas do desenvolvimento</a>
         <a href="composicao-pib-brasil-1995-2025.html">Composição do PIB</a>
         <a href="investimento-brasil-1995-2025.html">Investimento (FBCF)</a>
+        <a href="projecoes-governo-2027-2030.html">Projeções 2027–2030</a>
       </div>
       <div>
         <div class="footer__label">Fontes</div>
@@ -296,7 +353,7 @@ p{margin:0 0 14px}p:last-child{margin-bottom:0}
         <a href="https://www.bcb.gov.br" target="_blank" rel="noopener">Banco Central</a>
       </div>
     </div>
-    <div class="footer__bottom"><span>Elaborado com dados públicos · outubro de 2026</span><span>Brasil · 1995—2026</span></div>
+    <div class="footer__bottom"><span>Elaborado com dados públicos · outubro de 2026</span><span>Brasil · 1995—2030</span></div>
   </div>
 </footer>
 
