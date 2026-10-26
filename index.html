@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brasil em Dados — desenvolvimento, PIB e investimento</title>
+<meta name="description" content="Três leituras de longo prazo do Brasil: atlas do desenvolvimento 1996–2026, composição do PIB 1995–2025 e a trajetória do investimento (FBCF).">
+<meta name="theme-color" content="#f2ede3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f2ede3;--paper-2:#ebe4d6;--white:#fffdf8;--ink:#17150f;--ink-2:#3d3a32;--muted:#655f53;
+  --line:#d5cbbb;--line-2:#bfb3a0;--green:#1f4d3f;--red:#b23a2a;--gold:#a97b28;--blue:#3b5578;
+  --serif:'Fraunces',Georgia,'Times New Roman',serif;--sans:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;--mono:'JetBrains Mono',ui-monospace,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--green);color:var(--white)}
+a{color:var(--green);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--ink)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+.topbar{position:sticky;top:0;z-index:110;background:rgba(242,237,227,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.topbar__inner{display:flex;align-items:center;justify-content:space-between;gap:24px;height:58px}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink)}
+.brand__mark{width:30px;height:30px;border:1px solid var(--ink);display:grid;place-items:center;font-family:var(--mono);font-size:9px;line-height:1;background:var(--green);color:var(--paper)}
+.brand__text{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.topbar__year{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--muted);border:1px solid var(--line-2);padding:4px 7px;white-space:nowrap}
+
+.hero{position:relative;padding:76px 0 52px;border-bottom:1px solid var(--line);overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:78px 78px;opacity:.18;-webkit-mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.45) 60%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.45) 60%,transparent 100%);pointer-events:none}
+.hero__grid{position:relative;display:grid;grid-template-columns:minmax(0,1.45fr) minmax(300px,.55fr);gap:48px;align-items:end}
+.kicker{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.kicker::before{content:"";width:26px;height:1px;background:var(--green)}
+.hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(44px,6.2vw,84px);line-height:.94;letter-spacing:-.045em;margin:0 0 22px}
+.hero h1 em{display:block;font-style:italic;font-weight:500;color:var(--green)}
+.hero__deck{font-size:19px;line-height:1.55;color:var(--ink-2);max-width:700px;margin:0 0 24px}
+.hero__byline{font-family:var(--mono);font-size:9.5px;line-height:1.7;letter-spacing:.04em;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;max-width:660px}
+.hero__card{background:var(--white);border:1px solid var(--line);box-shadow:0 1px 0 rgba(23,21,15,.04),0 24px 60px -38px rgba(23,21,15,.35);padding:20px 20px 14px;position:relative}
+.hero__card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--green)}
+.hero__card-head{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:8px}
+.hero__card-head span:first-child{font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.hero__card-head span:last-child{font-family:var(--serif);font-size:20px}
+.hero-stat{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--line)}
+.hero-stat:last-of-type{border-bottom:0}
+.hero-stat__label{font-size:11px;color:var(--muted);line-height:1.3}
+.hero-stat__value{font-family:var(--serif);font-size:27px;line-height:1;letter-spacing:-.03em;white-space:nowrap}
+.hero-stat__value small{font-family:var(--mono);font-size:8px;color:var(--muted);margin-left:2px}
+.hero__note{font-size:9.5px;line-height:1.45;color:var(--muted);border-top:1px solid var(--line);padding-top:8px;margin-top:7px}
+
+.section{padding:72px 0;border-bottom:1px solid var(--line)}
+.section__head{display:grid;grid-template-columns:76px minmax(0,1fr);gap:22px;margin-bottom:30px}
+.section__num{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--green);padding-top:9px}
+.section__title{font-family:var(--serif);font-size:clamp(32px,4vw,48px);line-height:1.02;letter-spacing:-.035em;font-weight:600;margin:0 0 12px}
+.section__deck{font-size:16.5px;line-height:1.58;color:var(--muted);max-width:800px;margin:0}
+h2,h3{font-family:var(--serif);font-weight:600;letter-spacing:-.02em;margin:0}
+p{margin:0 0 14px}p:last-child{margin-bottom:0}
+.tiny{font-family:var(--mono);font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.thesis-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px}
+.card{display:flex;flex-direction:column;background:var(--white);border:1px solid var(--line);padding:22px 22px 18px;text-decoration:none;color:var(--ink);position:relative;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;min-height:360px}
+.card:hover{transform:translateY(-3px);border-color:var(--line-2);box-shadow:0 22px 42px -34px rgba(23,21,15,.45);color:var(--ink)}
+.card__top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:26px}
+.card__n{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--green)}
+.card__tag{font-family:var(--mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);padding:3px 6px;white-space:nowrap}
+.card h3{font-size:27px;line-height:1.05;letter-spacing:-.03em;margin:0 0 10px}
+.card h3 em{font-style:italic;font-weight:500;color:var(--green)}
+.card p{font-size:12.5px;line-height:1.6;color:var(--ink-2);margin:0 0 16px}
+.card__metrics{display:flex;gap:16px;flex-wrap:wrap;margin-top:auto;padding-top:14px;border-top:1px solid var(--line)}
+.card__metric{display:flex;flex-direction:column;gap:2px}
+.card__metric b{font-family:var(--serif);font-size:22px;line-height:1;letter-spacing:-.03em;font-weight:600}
+.card__metric span{font-family:var(--mono);font-size:7.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.card__go{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:16px;padding-top:12px;border-top:1px solid var(--line);font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+.card__go span:last-child{font-size:15px;transition:transform .18s ease}
+.card:hover .card__go span:last-child{transform:translateX(3px)}
+
+.footer{background:var(--ink);color:var(--paper);padding:46px 0 28px}
+.footer__grid{display:grid;grid-template-columns:1.5fr .8fr .8fr;gap:34px}
+.footer h3{font-family:var(--serif);font-size:26px;line-height:1.05;margin:0 0 8px;color:var(--paper)}
+.footer p{font-size:11px;line-height:1.55;color:#bcb3a3;max-width:560px}
+.footer__label{font-family:var(--mono);font-size:8px;letter-spacing:.11em;text-transform:uppercase;color:#8f8676;margin-bottom:9px}
+.footer a{color:#d9cbb8;text-decoration:none;font-size:11px;display:block;margin-bottom:4px}
+.footer a:hover{color:#fff}
+.footer__bottom{display:flex;justify-content:space-between;gap:18px;border-top:1px solid #3a362d;margin-top:28px;padding-top:13px;font-family:var(--mono);font-size:7.5px;letter-spacing:.07em;text-transform:uppercase;color:#8f8676}
+
+@media(max-width:1000px){
+  .hero__grid{grid-template-columns:1fr;gap:30px}.hero__card{max-width:560px}
+  .cards{grid-template-columns:1fr}.card{min-height:0}
+  .thesis-grid{grid-template-columns:1fr}
+  .footer__grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  .wrap{padding:0 16px}.hero{padding:52px 0 40px}.hero h1{font-size:clamp(38px,10.5vw,54px)}
+  .hero__deck{font-size:16px}.section{padding:54px 0}
+  .section__head{grid-template-columns:1fr;gap:7px}.section__num{padding-top:0}
+  .section__title{font-size:31px}
+  .hero__card{max-width:none}.brand__text{display:none}
+  .footer__grid{grid-template-columns:1fr}.footer__bottom{flex-direction:column;gap:5px}
+  .card{padding:20px 18px 16px}.card h3{font-size:25px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card{transition:none}}
+@media print{.topbar,.hero::before{display:none!important}body{background:#fff}.card{break-inside:avoid;box-shadow:none}.footer{background:#fff;color:#000}.footer p,.footer a,.footer__label,.footer__bottom{color:#000}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar__inner">
+    <a class="brand" href="index.html" aria-label="Brasil em Dados">
+      <span class="brand__mark">BR<br>DADOS</span>
+      <span class="brand__text">Brasil em Dados</span>
+    </a>
+    <span class="topbar__year">OUT · 2026</span>
+  </div>
+</header>
+
+<main>
+
+<section class="hero" id="inicio">
+  <div class="wrap hero__grid">
+    <div>
+      <div class="kicker">Brasil em Dados · 1995—2026</div>
+      <h1>Trinta anos de transformação. <em>Três leituras do mesmo país.</em></h1>
+      <p class="hero__deck">
+        O Brasil é a 11ª maior economia do mundo e a 101ª em renda por habitante.
+        Estes três relatórios reconstroem como o país cresceu, o que produziu e por que
+        não convergiu — com fatos datados, contas nacionais e séries comparáveis.
+      </p>
+      <div class="hero__byline">
+        Páginas estáticas, sem backend e com fontes abertas. Dados de IBGE, Ipea, BCB,
+        World Bank, FMI, OCDE, PNUD, INPE, MapBiomas, OMS, Unesco e FAO. Outubro de 2026.
+      </div>
+    </div>
+
+    <aside class="hero__card" aria-label="Indicadores-chave do Brasil">
+      <div class="hero__card-head">
+        <span>Ficha do país</span>
+        <span>2025</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat__label">PIB nominal no mundo</span>
+        <span class="hero-stat__value">11º<small>de 214</small></span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat__label">PIB per capita no mundo</span>
+        <span class="hero-stat__value">101º<small>de 214</small></span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat__label">Investimento (FBCF)</span>
+        <span class="hero-stat__value">16,8<small>% do PIB</small></span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat__label">Desigualdade (Gini)</span>
+        <span class="hero-stat__value">50,3<small>8º maior</small></span>
+      </div>
+      <div class="hero__note">
+        Renda per capita presa em ~14% da americana desde 1995. A Coreia chegou a 55%;
+        a China, a 20%. Fonte: World Bank.
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="section" id="relatorios">
+  <div class="wrap">
+    <div class="section__head">
+      <div class="section__num">01</div>
+      <div>
+        <h2 class="section__title">Os três relatórios</h2>
+        <p class="section__deck">
+          Cada página é uma camada distinta do mesmo problema: os fatos que mudaram o regime
+          econômico, a estrutura do que o país produz e a taxa com que acumula capital.
+        </p>
+      </div>
+    </div>
+
+    <div class="cards">
+
+      <a class="card" href="desenvolvimento-brasil-1996-2026.html">
+        <div class="card__top">
+          <span class="card__n">01 · ATLAS</span>
+          <span class="card__tag">1996—2026</span>
+        </div>
+        <h3>Atlas do desenvolvimento <em>brasileiro</em></h3>
+        <p>
+          48 fatos estruturantes, 6 eras, 9 forças e 8 cadeias causais. A história de como o
+          Brasil reduziu a pobreza e ampliou o acesso sem elevar a produtividade — e onde o
+          país está no mundo.
+        </p>
+        <div class="card__metrics">
+          <div class="card__metric"><b>48</b><span>fatos</span></div>
+          <div class="card__metric"><b>6</b><span>eras</span></div>
+          <div class="card__metric"><b>12</b><span>gráficos</span></div>
+        </div>
+        <div class="card__go"><span>Abrir o atlas</span><span>→</span></div>
+      </a>
+
+      <a class="card" href="composicao-pib-brasil-1995-2025.html">
+        <div class="card__top">
+          <span class="card__n">02 · PIB</span>
+          <span class="card__tag">1995—2025</span>
+        </div>
+        <h3>Composição do PIB, <em>ano a ano</em></h3>
+        <p>
+          De onde vem a produção — agro, indústria, serviços e impostos — e para onde vai a
+          demanda: famílias, governo, investimento e setor externo. Série de 31 anos, tabela
+          completa e CSV.
+        </p>
+        <div class="card__metrics">
+          <div class="card__metric"><b>31</b><span>anos</span></div>
+          <div class="card__metric"><b>2</b><span>óticas</span></div>
+          <div class="card__metric"><b>16,8%</b><span>FBCF em 2025</span></div>
+        </div>
+        <div class="card__go"><span>Ver a composição</span><span>→</span></div>
+      </a>
+
+      <a class="card" href="investimento-brasil-1995-2025.html">
+        <div class="card__top">
+          <span class="card__n">03 · CAPITAL</span>
+          <span class="card__tag">1995—2025</span>
+        </div>
+        <h3>Investimento: <em>o capital que falta</em></h3>
+        <p>
+          A trajetória da formação bruta de capital fixo, o peso do investimento público e
+          privado e o gap de infraestrutura estimado em 2,35% do PIB por ano.
+        </p>
+        <div class="card__metrics">
+          <div class="card__metric"><b>20,3%</b><span>FBCF em 1995</span></div>
+          <div class="card__metric"><b>16,8%</b><span>FBCF em 2025</span></div>
+          <div class="card__metric"><b>2,35%</b><span>gap do PIB/ano</span></div>
+        </div>
+        <div class="card__go"><span>Ler o relatório</span><span>→</span></div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="leitura" style="background:var(--paper-2)">
+  <div class="wrap">
+    <div class="section__head">
+      <div class="section__num">02</div>
+      <div>
+        <h2 class="section__title">A tese comum aos três</h2>
+        <p class="section__deck">
+          O Brasil cresceu socialmente mais do que cresceu economicamente. A inclusão foi real;
+          a transformação produtiva, incompleta.
+        </p>
+      </div>
+    </div>
+    <div class="thesis-grid">
+      <div style="border-top:2px solid var(--ink);padding-top:14px">
+        <div class="tiny" style="margin-bottom:7px">01 · Renda</div>
+        <p style="font-size:14px;line-height:1.6;color:var(--ink-2)">A renda per capita subiu 48% em 30 anos, mas ficou em ~14% da americana. A Coreia partiu de 33% e chegou a 55%.</p>
+      </div>
+      <div style="border-top:2px solid var(--ink);padding-top:14px">
+        <div class="tiny" style="margin-bottom:7px">02 · Estrutura</div>
+        <p style="font-size:14px;line-height:1.6;color:var(--ink-2)">A indústria perdeu 3,2 p.p. do PIB; serviços e commodities ganharam espaço. A mudança foi de composição, não de produtividade.</p>
+      </div>
+      <div style="border-top:2px solid var(--ink);padding-top:14px">
+        <div class="tiny" style="margin-bottom:7px">03 · Capital</div>
+        <p style="font-size:14px;line-height:1.6;color:var(--ink-2)">O investimento caiu de 20,3% para 16,8% do PIB — 143º de 181 países. Sem capital, a convergência fica mais lenta.</p>
+      </div>
+    </div>
+    <p style="font-size:11px;line-height:1.6;color:var(--muted);margin-top:24px;max-width:820px">
+      Posições entre países com dado disponível. PIB nominal e per capita: World Bank, 2025.
+      FBCF: World Bank/IBGE. Gini: World Bank, último dado. Atlas: ver metodologia e fontes na própria página.
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__label">Sobre</div>
+        <h3>Brasil em Dados</h3>
+        <p>Três relatórios independentes e complementares sobre desenvolvimento, estrutura produtiva e investimento. Todo o conteúdo é estático e pode ser lido offline.</p>
+      </div>
+      <div>
+        <div class="footer__label">Relatórios</div>
+        <a href="desenvolvimento-brasil-1996-2026.html">Atlas do desenvolvimento</a>
+        <a href="composicao-pib-brasil-1995-2025.html">Composição do PIB</a>
+        <a href="investimento-brasil-1995-2025.html">Investimento (FBCF)</a>
+      </div>
+      <div>
+        <div class="footer__label">Fontes</div>
+        <a href="https://data.worldbank.org" target="_blank" rel="noopener">World Bank</a>
+        <a href="https://www.ibge.gov.br" target="_blank" rel="noopener">IBGE</a>
+        <a href="https://www.ipea.gov.br" target="_blank" rel="noopener">Ipea</a>
+        <a href="https://www.bcb.gov.br" target="_blank" rel="noopener">Banco Central</a>
+      </div>
+    </div>
+    <div class="footer__bottom"><span>Elaborado com dados públicos · outubro de 2026</span><span>Brasil · 1995—2026</span></div>
+  </div>
+</footer>
+
+</body>
+</html>

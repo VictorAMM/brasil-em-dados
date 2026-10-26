@@ -1,0 +1,2594 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Investimento no Brasil — 30 anos de FBCF, setores e a fronteira público-privada</title>
+<meta name="description" content="Relatório visual sobre a formação bruta de capital fixo no Brasil (1995–2025): público x privado, setores, infraestrutura, orientação dos governos e impacto social e econômico.">
+<meta name="author" content="Análise de dados públicos">
+<meta name="theme-color" content="#f3eee4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f3eee4;
+  --paper-2:#ece5d8;
+  --paper-3:#e4dbca;
+  --white:#fffdf8;
+  --ink:#17150f;
+  --ink-2:#3d3a32;
+  --muted:#655f53;
+  --line:#d5cbbb;
+  --line-2:#bfb3a0;
+  --red:#b23a2a;
+  --red-soft:#e9cbc4;
+  --teal:#1d5f58;
+  --teal-soft:#c6ddd8;
+  --gold:#b0812d;
+  --blue:#3b5578;
+  --plum:#7d4560;
+  --green:#4f6f52;
+  --slate:#6b7c93;
+  --shadow:0 1px 0 rgba(23,21,15,.04),0 24px 60px -38px rgba(23,21,15,.35);
+  --serif:'Fraunces',Georgia,'Times New Roman',serif;
+  --sans:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:16px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+::selection{background:var(--red);color:var(--white)}
+a{color:var(--red);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--ink)}
+img,svg{max-width:100%}
+button{font:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+.narrow{max-width:880px}
+.mono{font-family:var(--mono)}
+.muted{color:var(--muted)}
+.center{text-align:center}
+
+/* ---------- progress + topbar ---------- */
+.progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:120;background:transparent;pointer-events:none}
+.progress__bar{height:100%;width:0;background:var(--red);transition:width .08s linear}
+.topbar{
+  position:sticky;top:0;z-index:110;
+  background:rgba(243,238,228,.88);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.topbar__inner{display:flex;align-items:center;justify-content:space-between;gap:24px;height:58px}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink);flex:0 0 auto}
+.brand__mark{
+  width:30px;height:30px;border:1px solid var(--ink);display:grid;place-items:center;
+  font-family:var(--mono);font-size:9px;letter-spacing:.05em;line-height:1;
+  background:var(--ink);color:var(--paper);
+}
+.brand__text{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;align-items:center;gap:2px;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;padding:8px 9px;white-space:nowrap;
+  border-bottom:1px solid transparent;transition:color .15s,border-color .15s
+}
+.nav a:hover{color:var(--ink)}
+.nav a.active{color:var(--ink);border-bottom-color:var(--red)}
+.topbar__year{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--muted);border:1px solid var(--line-2);padding:4px 7px;white-space:nowrap}
+
+/* ---------- hero ---------- */
+.hero{position:relative;padding:84px 0 64px;border-bottom:1px solid var(--line);overflow:hidden}
+.hero::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:76px 76px;opacity:.22;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.55) 55%,transparent 100%);
+  mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.55) 55%,transparent 100%);
+}
+.hero__grid{position:relative;display:grid;grid-template-columns:minmax(0,1.55fr) minmax(300px,.72fr);gap:56px;align-items:end}
+.kicker{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:22px}
+.kicker::before{content:"";width:26px;height:1px;background:var(--red);display:inline-block}
+.hero h1{
+  font-family:var(--serif);font-weight:600;font-size:clamp(46px,6.4vw,88px);
+  line-height:.94;letter-spacing:-.045em;margin:0 0 26px;max-width:900px;
+}
+.hero h1 em{display:block;font-style:italic;font-weight:500;color:var(--red)}
+.hero__deck{font-size:19px;line-height:1.55;color:var(--ink-2);max-width:690px;margin:0 0 28px}
+.hero__byline{font-family:var(--mono);font-size:10px;line-height:1.7;letter-spacing:.04em;color:var(--muted);max-width:620px;border-top:1px solid var(--line);padding-top:16px}
+.hero__card{
+  background:var(--white);border:1px solid var(--line);box-shadow:var(--shadow);
+  padding:22px 22px 16px;position:relative;
+}
+.hero__card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--ink)}
+.hero__card-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:12px}
+.hero__card-head span:first-child{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero__card-head span:last-child{font-family:var(--serif);font-size:22px;line-height:1}
+.hero-stat{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:16px;padding:10px 0;border-bottom:1px solid var(--line)}
+.hero-stat:last-of-type{border-bottom:0}
+.hero-stat__label{font-size:12px;color:var(--muted);line-height:1.35}
+.hero-stat__value{font-family:var(--serif);font-size:31px;line-height:1;letter-spacing:-.03em;white-space:nowrap}
+.hero-stat__value small{font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-left:3px}
+.hero__spark{margin-top:8px;padding-top:10px;border-top:1px solid var(--line)}
+#chart-hero-spark{min-height:0}
+.hero__spark-label{display:flex;justify-content:space-between;font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+
+/* ---------- generic sections ---------- */
+.section{padding:88px 0;border-bottom:1px solid var(--line);position:relative}
+.section--tint{background:var(--paper-2)}
+.section--dark{background:var(--ink);color:var(--paper);border-bottom:0}
+.section--dark .muted,.section--dark .section__deck{color:#bcb3a3}
+.section--dark a{color:#e9cbc4}
+.section__head{display:grid;grid-template-columns:86px minmax(0,1fr);gap:24px;margin-bottom:38px;align-items:start}
+.section__num{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--red);padding-top:10px}
+.section--dark .section__num{color:#e9cbc4}
+.section__title{font-family:var(--serif);font-size:clamp(34px,4.2vw,52px);line-height:1.02;letter-spacing:-.035em;font-weight:600;margin:0 0 14px;max-width:900px}
+.section__deck{font-size:17px;line-height:1.6;color:var(--muted);max-width:790px;margin:0}
+.section--dark .section__title{color:var(--paper)}
+h3{font-family:var(--serif);font-weight:600;letter-spacing:-.02em;margin:0}
+p{margin:0 0 16px}
+p:last-child{margin-bottom:0}
+strong{font-weight:600}
+.small{font-size:12px;line-height:1.55;color:var(--muted)}
+.tiny{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.rule{height:1px;background:var(--line);margin:32px 0}
+.grid-2{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:40px;align-items:start}
+.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.grid-2>*, .grid-3>*, .grid-4>*, .agenda-grid>*, .impact-grid>*, .scatter-grid>*{min-width:0}
+.stack{display:flex;flex-direction:column;gap:16px}
+.card{background:var(--white);border:1px solid var(--line);padding:22px}
+.card--flat{background:transparent}
+.card--accent{border-top:3px solid var(--ink)}
+.card h4{font-family:var(--serif);font-size:21px;line-height:1.15;margin:0 0 8px;letter-spacing:-.02em}
+.card p{font-size:13.5px;line-height:1.58;color:var(--ink-2)}
+.callout{border-left:3px solid var(--red);background:rgba(178,58,42,.065);padding:18px 22px;margin:26px 0}
+.callout p{font-size:15px;line-height:1.55;margin:0;color:var(--ink-2)}
+.callout strong{color:var(--ink)}
+.quote{
+  font-family:var(--serif);font-size:clamp(25px,3.2vw,38px);line-height:1.16;letter-spacing:-.02em;
+  max-width:930px;margin:0;color:var(--ink)
+}
+.quote em{color:var(--red)}
+.quote__source{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:14px}
+.tag{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line-2);padding:3px 7px;border-radius:999px;color:var(--muted);white-space:nowrap}
+.tag--red{border-color:#d9a79d;color:var(--red);background:rgba(178,58,42,.06)}
+.tag--teal{border-color:#a9cbc4;color:var(--teal);background:rgba(29,95,88,.06)}
+.tag--gold{border-color:#d9c18c;color:#7e5a15;background:rgba(176,129,45,.09)}
+.tag--dark{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+/* ---------- stats ---------- */
+.stat{border-top:2px solid var(--ink);padding-top:14px}
+.stat__value{font-family:var(--serif);font-size:clamp(38px,4.4vw,58px);line-height:.94;letter-spacing:-.045em;margin-bottom:8px}
+.stat__value small{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--muted);margin-left:3px}
+.stat__label{font-size:12px;line-height:1.4;color:var(--muted)}
+.stat__note{font-size:10px;color:var(--muted);margin-top:5px}
+
+/* ---------- chart shell ---------- */
+.chart-card{background:var(--white);border:1px solid var(--line);padding:20px 22px 12px}
+.chart-card--flush{padding:0;border:0;background:transparent}
+.chart-head{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:6px;flex-wrap:wrap}
+.chart-title{font-size:14px;font-weight:600;line-height:1.3}
+.chart-sub{font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--muted);align-items:center}
+.legend span{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.legend i{width:11px;height:11px;display:inline-block;flex:0 0 auto}
+.legend i.dot{border-radius:50%;width:8px;height:8px}
+.chart{width:100%;position:relative;min-height:120px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart svg text{font-family:var(--sans);fill:var(--muted);font-size:11px}
+.chart svg .axis-value{font-family:var(--mono);font-size:9.5px;fill:var(--muted)}
+.chart svg .axis-label{font-family:var(--mono);font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;fill:var(--muted)}
+.chart svg .series-label{font-family:var(--sans);font-size:11px;font-weight:600;fill:var(--ink)}
+.chart svg .annotation{font-family:var(--sans);font-size:10px;fill:var(--ink-2)}
+.chart svg .annotation-bg{fill:var(--white);stroke:var(--line);stroke-width:.7}
+.chart svg .gov-label{font-family:var(--mono);font-size:8px;letter-spacing:.05em;fill:var(--ink-2)}
+.chart svg .grid{stroke:var(--line);stroke-width:.7;stroke-dasharray:2 4}
+.chart svg .baseline{stroke:var(--line-2);stroke-width:1}
+.chart-note{font-size:10.5px;line-height:1.5;color:var(--muted);margin-top:8px}
+.chart-note a{color:var(--muted)}
+
+/* ---------- tables ---------- */
+.table-wrap{width:100%;overflow-x:auto;border:1px solid var(--line);background:var(--white)}
+table{border-collapse:collapse;width:100%;font-size:12.5px}
+th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:8.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--paper-2)}
+tbody tr:hover{background:rgba(176,129,45,.06)}
+td.num,th.num{text-align:right;font-family:var(--mono);font-size:11px;white-space:nowrap}
+td.name{font-weight:600}
+.table-note{font-size:10.5px;color:var(--muted);margin-top:8px;line-height:1.5}
+.mobile-only{display:none}
+@media(max-width:640px){.mobile-only{display:block}}
+.matrix td{font-size:11.5px;line-height:1.45}
+.matrix td:first-child{font-weight:600;min-width:150px}
+.matrix .tag{font-size:8px;padding:2px 5px}
+.matrix tr.total td{border-top:2px solid var(--ink);font-weight:600;background:var(--paper-2)}
+
+/* ---------- synthesis ---------- */
+.synthesis{padding:64px 0 70px}
+.synthesis__grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.synthesis__item{padding:22px 20px;border-right:1px solid var(--line);min-height:190px}
+.synthesis__item:last-child{border-right:0}
+.synthesis__num{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--red);margin-bottom:18px}
+.synthesis__big{font-family:var(--serif);font-size:38px;line-height:.95;letter-spacing:-.04em;margin-bottom:8px}
+.synthesis__title{font-size:12px;font-weight:600;line-height:1.3;margin-bottom:6px}
+.synthesis__text{font-size:11px;line-height:1.5;color:var(--muted)}
+
+/* ---------- infrastructure ---------- */
+.infra-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+.donut-wrap{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.donut-wrap .chart{flex:0 0 230px;max-width:230px}
+.donut-legend{flex:1 1 170px;display:flex;flex-direction:column;gap:9px}
+.donut-legend__row{display:grid;grid-template-columns:10px 1fr auto;gap:8px;align-items:baseline;font-size:11.5px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.donut-legend__row i{width:10px;height:10px;display:block}
+.donut-legend__row b{font-family:var(--mono);font-size:10px;font-weight:500;text-align:right;white-space:nowrap}
+.donut-legend__row span{color:var(--muted)}
+
+/* ---------- government cards ---------- */
+.gov-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.gov-card{background:var(--white);border:1px solid var(--line);border-top:4px solid var(--gov-color,var(--ink));padding:22px 22px 18px;display:flex;flex-direction:column;gap:13px}
+.gov-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.gov-years{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted)}
+.gov-card h3{font-size:30px;line-height:1;margin:0 0 1px}
+.gov-role{font-size:11px;color:var(--muted);margin:0}
+.gov-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:11px 0}
+.gov-metrics b{display:block;font-family:var(--serif);font-size:23px;line-height:1;letter-spacing:-.03em}
+.gov-metrics span{display:block;font-family:var(--mono);font-size:8px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:4px;line-height:1.3}
+.gov-spark{height:52px}
+.gov-list{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px}
+.gov-list li{font-size:11.5px;line-height:1.45;color:var(--ink-2);padding-left:13px;position:relative}
+.gov-list li::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;background:var(--gov-color,var(--ink))}
+.gov-legacy{font-size:11px;line-height:1.5;color:var(--muted);border-top:1px solid var(--line);padding-top:9px;margin:0}
+.gov-legacy strong{color:var(--ink)}
+
+/* ---------- impact ---------- */
+.impact-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:28px}
+.impact-list{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line)}
+.impact-item{display:grid;grid-template-columns:42px minmax(0,1fr);gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+.impact-item__icon{width:34px;height:34px;border:1px solid var(--line-2);display:grid;place-items:center;font-family:var(--mono);font-size:10px;color:var(--red);background:var(--white)}
+.impact-item h4{font-size:13px;margin:0 0 3px;font-family:var(--sans);font-weight:600}
+.impact-item p{font-size:11.5px;line-height:1.5;color:var(--muted);margin:0}
+.scatter-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.matrix-2x2{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);background:var(--line);gap:1px}
+.matrix-2x2__cell{background:var(--white);padding:18px;min-height:150px}
+.matrix-2x2__cell h4{font-size:12px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 8px}
+.matrix-2x2__cell p{font-size:11.5px;line-height:1.5;margin:0;color:var(--ink-2)}
+.matrix-2x2__cell ul{margin:0;padding-left:15px;font-size:11.5px;line-height:1.55;color:var(--ink-2)}
+
+/* ---------- scenarios / agenda ---------- */
+.agenda-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:32px;align-items:start}
+.policy-list{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line)}
+.policy-item{display:grid;grid-template-columns:28px 1fr;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.policy-item__n{font-family:var(--mono);font-size:10px;color:var(--red);padding-top:2px}
+.policy-item h4{font-size:12.5px;margin:0 0 3px;font-weight:600;font-family:var(--sans)}
+.policy-item p{font-size:11px;line-height:1.45;color:var(--muted);margin:0}
+.scenario-table td:first-child{font-weight:600}
+.scenario-table td small{display:block;font-size:9.5px;color:var(--muted);font-weight:400;margin-top:2px}
+
+/* ---------- method ---------- */
+details{border-top:1px solid var(--line);padding:18px 0}
+details:last-of-type{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-family:var(--serif);font-size:22px;letter-spacing:-.02em;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--mono);font-size:16px;color:var(--red)}
+details[open] summary::after{content:"–"}
+details .details-body{padding-top:14px;font-size:13px;line-height:1.62;color:var(--ink-2);max-width:900px}
+details .details-body p{margin-bottom:12px}
+details .details-body ul{margin:0 0 12px;padding-left:18px}
+details .details-body li{margin-bottom:6px}
+.source-list{list-style:none;margin:0;padding:0;counter-reset:src}
+.source-list li{counter-increment:src;position:relative;padding:9px 0 9px 30px;border-bottom:1px solid var(--line);font-size:12px;line-height:1.5}
+.source-list li::before{content:counter(src);position:absolute;left:0;top:9px;font-family:var(--mono);font-size:9px;color:var(--red)}
+.source-list a{word-break:break-word}
+.footnote{font-size:10.5px;line-height:1.5;color:var(--muted)}
+.footnote a{color:var(--muted);text-decoration:underline}
+
+/* ---------- footer ---------- */
+.footer{background:var(--ink);color:var(--paper);padding:56px 0 34px}
+.footer__grid{display:grid;grid-template-columns:1.4fr .8fr .8fr;gap:40px}
+.footer h3{font-family:var(--serif);font-size:30px;line-height:1.05;margin:0 0 10px;color:var(--paper)}
+.footer p{font-size:12px;line-height:1.6;color:#bcb3a3;max-width:560px}
+.footer__label{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#8f8676;margin-bottom:10px}
+.footer a{color:#e9cbc4;text-decoration:none;font-size:12px;display:block;margin-bottom:6px}
+.footer a:hover{color:#fff}
+.footer__bottom{display:flex;justify-content:space-between;gap:20px;border-top:1px solid #3a362d;margin-top:36px;padding-top:16px;font-family:var(--mono);font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;color:#8f8676}
+
+/* ---------- tooltip ---------- */
+.tooltip{
+  position:fixed;top:0;left:0;z-index:200;pointer-events:none;
+  background:#17150f;color:#f3eee4;padding:10px 12px;max-width:300px;
+  font-size:11px;line-height:1.45;box-shadow:0 10px 30px rgba(0,0,0,.25);
+  opacity:0;transform:translate(-9999px,-9999px);transition:opacity .1s;
+}
+.tooltip.show{opacity:1}
+.tt-year{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#bcb3a3;margin-bottom:6px;display:flex;justify-content:space-between;gap:12px}
+.tt-row{display:flex;justify-content:space-between;gap:18px;margin:2px 0}
+.tt-row b{font-family:var(--mono);font-weight:500;white-space:nowrap}
+.tt-row .sw{width:7px;height:7px;display:inline-block;margin-right:5px;vertical-align:1px}
+.tt-note{border-top:1px solid #3a362d;margin-top:6px;padding-top:5px;color:#bcb3a3;font-size:10px}
+
+/* ---------- animations ---------- */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;transition:none}
+  .tooltip{transition:none}
+}
+
+/* ---------- responsive ---------- */
+@media(max-width:1080px){
+  .hero__grid{grid-template-columns:1fr;gap:34px}
+  .hero__card{max-width:560px}
+  .synthesis__grid{grid-template-columns:repeat(3,1fr)}
+  .synthesis__item:nth-child(3){border-right:0}
+  .synthesis__item:nth-child(n+4){border-top:1px solid var(--line)}
+  .nav a{padding:8px 7px}
+}
+@media(max-width:900px){
+  .wrap{padding:0 22px}
+  .hero{padding:60px 0 48px}
+  .section{padding:64px 0}
+  .section__head{grid-template-columns:52px 1fr;gap:14px}
+  .grid-2,.impact-grid,.agenda-grid,.infra-layout{grid-template-columns:1fr}
+  .grid-3{grid-template-columns:1fr 1fr}
+  .grid-4{grid-template-columns:1fr 1fr}
+  .gov-grid{grid-template-columns:1fr}
+  .scatter-grid{grid-template-columns:1fr}
+  .footer__grid{grid-template-columns:1fr 1fr}
+  .topbar__year{display:none}
+  .topbar{overflow:hidden}
+  .nav{flex:1;min-width:0;justify-content:flex-start;-webkit-mask-image:linear-gradient(to right,#000 90%,transparent);mask-image:linear-gradient(to right,#000 90%,transparent)}
+}
+@media(max-width:640px){
+  .wrap{padding:0 16px}
+  .hero h1{font-size:clamp(38px,11.5vw,56px)}
+  .hero__deck{font-size:16.5px}
+  .section__head{grid-template-columns:1fr;gap:8px}
+  .section__num{padding-top:0}
+  .section__title{font-size:34px}
+  .synthesis__grid{grid-template-columns:1fr}
+  .synthesis__item{border-right:0;border-bottom:1px solid var(--line);min-height:0}
+  .synthesis__item:last-child{border-bottom:0}
+  .grid-3,.grid-4{grid-template-columns:1fr}
+  .gov-metrics{grid-template-columns:1fr 1fr 1fr}
+  .donut-wrap .chart{flex:1 1 100%;max-width:100%}
+  .footer__grid{grid-template-columns:1fr}
+  .footer__bottom{flex-direction:column;gap:6px}
+  .chart-card{padding:16px 12px 10px}
+  .hero__card{padding:18px}
+  .hero-stat__value{font-size:27px}
+  .matrix-2x2{grid-template-columns:1fr}
+  .scenario-table{font-size:10px}
+  .scenario-table th,.scenario-table td{padding:7px 4px}
+  .scenario-table td small{font-size:8px;line-height:1.35}
+  .nav a{font-size:8.5px;padding:7px 6px}
+  .brand__text{display:none}
+}
+@media print{
+  .topbar,.progress,.tooltip,.nav,.hero::before{display:none!important}
+  body{background:#fff;font-size:11pt}
+  .section{padding:30px 0;break-inside:avoid}
+  .chart-card,.card,.gov-card{break-inside:avoid;box-shadow:none}
+  a{color:#000;text-decoration:none}
+  .footer{background:#fff;color:#000;border-top:1px solid #000}
+  .footer p,.footer a,.footer__label,.footer__bottom{color:#000}
+}
+</style>
+</head>
+<body>
+
+<div class="progress"><div class="progress__bar" id="progressBar"></div></div>
+
+<header class="topbar">
+  <div class="wrap topbar__inner">
+    <a class="brand" href="#inicio" aria-label="Voltar ao início">
+      <span class="brand__mark">FBCF<br>BR</span>
+      <span class="brand__text">Investimento · 1995—2025</span>
+    </a>
+    <nav class="nav" aria-label="Seções do relatório">
+      <a href="#nivel">Nível</a>
+      <a href="#publico-privado">Público × privado</a>
+      <a href="#setores">Setores</a>
+      <a href="#governos">Governos</a>
+      <a href="#impacto">Impacto</a>
+      <a href="#agenda">Agenda</a>
+      <a href="#metodologia">Método</a>
+    </nav>
+    <span class="topbar__year">OUT · 2026</span>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="inicio">
+  <div class="wrap hero__grid">
+    <div>
+      <div class="kicker">Relatório especial · investimento e desenvolvimento</div>
+      <h1>O Brasil investe pouco. <em>E o privado responde por 82% da FBCF.</em></h1>
+      <p class="hero__deck">
+        Trinta anos de formação bruta de capital fixo (1995–2025): o que o Estado fez, o que a
+        iniciativa privada fez, para onde foi o dinheiro e por que isso importa para o crescimento
+        e para a desigualdade.
+      </p>
+      <div class="hero__byline">
+        Análise baseada em IBGE, World Bank, FGV IBRE, Ipea, ABDIB, Inter.B/CNI e Banco Central.
+        Valores normalizados pelo PIB. Atualizado em outubro de 2026.
+      </div>
+    </div>
+
+    <aside class="hero__card" aria-label="Indicadores-chave de 2025">
+      <div class="hero__card-head">
+        <span>Ficha do investimento</span>
+        <span>2024–25</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat__label">Formação bruta de capital fixo · 2025</span>
+        <span class="hero-stat__value" data-count="16.8" data-dec="1">16,8<small>% PIB</small></span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat__label">Investimento público total · 2025</span>
+        <span class="hero-stat__value" data-count="2.71" data-dec="2">2,71<small>% PIB</small></span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat__label">Participação privada na FBCF · 2024</span>
+        <span class="hero-stat__value" data-count="82" data-dec="0">82<small>%</small></span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat__label">Investimento em infraestrutura · 2024</span>
+        <span class="hero-stat__value" data-count="2.27" data-dec="2">2,27<small>% PIB</small></span>
+      </div>
+      <div class="hero__spark">
+        <div class="hero__spark-label"><span>FBCF · % do PIB</span><span>1995—2025</span></div>
+        <div class="chart" id="chart-hero-spark" aria-hidden="true"></div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ================= SÍNTESE ================= -->
+<section class="synthesis" id="sintese">
+  <div class="wrap">
+    <div class="synthesis__grid reveal">
+      <div class="synthesis__item">
+        <div class="synthesis__num">01 · NÍVEL</div>
+        <div class="synthesis__big">18,0%</div>
+        <div class="synthesis__title">média da FBCF em 30 anos</div>
+        <div class="synthesis__text">Pico de 20,9% em 2013; mínimo de 14,6% em 2017. Em 2025, 16,8% — ainda abaixo da média histórica.</div>
+      </div>
+      <div class="synthesis__item">
+        <div class="synthesis__num">02 · ORIGEM</div>
+        <div class="synthesis__big">82%</div>
+        <div class="synthesis__title">da FBCF é privada</div>
+        <div class="synthesis__text">Em 2024, o setor público respondeu por 18% do investimento total, mas por apenas 0,67% do PIB em infraestrutura econômica.</div>
+      </div>
+      <div class="synthesis__item">
+        <div class="synthesis__num">03 · DESTINO</div>
+        <div class="synthesis__big">45%</div>
+        <div class="synthesis__title">da FBCF é construção</div>
+        <div class="synthesis__text">Na composição de 2023, máquinas e bens manufaturados são 38%; propriedade intelectual e serviços, 14%. Infraestrutura é só 2,27% do PIB (2024).</div>
+      </div>
+      <div class="synthesis__item">
+        <div class="synthesis__num">04 · GOVERNO</div>
+        <div class="synthesis__big">4,6%</div>
+        <div class="synthesis__title">pico do investimento público</div>
+        <div class="synthesis__text">Em 2010. Caiu para 1,9% em 2017 e voltou a 3,05% em 2024. Orientação política explica a composição, não o nível.</div>
+      </div>
+      <div class="synthesis__item">
+        <div class="synthesis__num">05 · IMPACTO</div>
+        <div class="synthesis__big">2,4—3,9×</div>
+        <div class="synthesis__title">retorno social do saneamento</div>
+        <div class="synthesis__text">Multiplicador do investimento público: 1,3 na média, 2,2 em recessão, 0,8 na expansão. Onde se investe importa.</div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:44px">
+      <div class="reveal">
+        <p class="quote">A pergunta decisiva não é <em>“público ou privado”</em>. É quem faz o quê, com que custo de capital e com que retorno social.</p>
+        <div class="quote__source">A tese deste relatório</div>
+      </div>
+      <div class="reveal">
+        <p style="font-size:15px;line-height:1.62;color:var(--ink-2)">
+          O Brasil investe menos do que precisa e menos do que a média mundial. A taxa de
+          investimento não recuperou o patamar de 2013; a composição mudou; o Estado perdeu
+          espaço na infraestrutura; e o setor privado ocupa hoje cerca de 70% desse mercado.
+          Entender essa divisão é essencial para separar o que é escolha política do que é
+          restrição fiscal, e o que é gargalo de oferta do que é falha de alocação.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 01 NÍVEL ================= -->
+<section class="section" id="nivel">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <div class="section__num">01</div>
+      <div>
+        <h2 class="section__title">Trinta anos em uma linha: o investimento que sobe, desaba e não volta ao pico</h2>
+        <p class="section__deck">
+          A formação bruta de capital fixo é o investimento que amplia a capacidade produtiva:
+          máquinas, construção, software, P&amp;D. Medida em % do PIB, ela resume o apetite do
+          país por futuro. A trajetória brasileira é de estabilidade mediana, um salto nos anos
+          2000 e uma queda que redefiniu o padrão de crescimento.
+        </p>
+      </div>
+    </div>
+
+    <div class="chart-card reveal">
+      <div class="chart-head">
+        <div>
+          <div class="chart-title">Formação bruta de capital fixo — % do PIB, 1995–2025</div>
+          <div class="chart-sub">Brasil · série encadeada · eixo truncado em 11%</div>
+        </div>
+        <div class="legend">
+          <span><i style="background:var(--ink)"></i>FBCF total</span>
+          <span><i style="background:var(--red);height:1px"></i>média 1995–2025</span>
+        </div>
+      </div>
+      <div class="chart" id="chart-main" role="img" aria-label="Gráfico de linha da FBCF brasileira entre 1995 e 2025, com faixas de governos"></div>
+      <div class="chart-note">
+        Fonte: IBGE, Contas Nacionais (via World Bank, NE.GDI.FTOT.ZS). 2025 preliminar.
+        O eixo vertical não começa em zero para dar legibilidade à variação; a inclinação visual é maior do que a variação absoluta.
+      </div>
+    </div>
+
+    <div class="grid-3" style="margin-top:24px">
+      <div class="stat reveal">
+        <div class="stat__value">20,9<small>%</small></div>
+        <div class="stat__label">Pico histórico da FBCF, em 2013</div>
+        <div class="stat__note">O país investiu R$ 1,11 trilhão a preços correntes — 20,9% do PIB.</div>
+      </div>
+      <div class="stat reveal">
+        <div class="stat__value">−6,3<small>p.p.</small></div>
+        <div class="stat__label">Queda da FBCF entre 2013 e 2017</div>
+        <div class="stat__note">Em volume, o investimento caiu cerca de 29% no período. Foi a maior destruição de capital da série recente.</div>
+      </div>
+      <div class="stat reveal">
+        <div class="stat__value">−7<small>%</small></div>
+        <div class="stat__label">FBCF real de 2025 vs. 2013</div>
+        <div class="stat__note">Mesmo com a recuperação de 2018–2025, o nível real ainda é ~7% inferior ao do pico.</div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:40px">
+      <div class="reveal">
+        <h3 style="font-size:28px;margin-bottom:14px">O que a linha conta</h3>
+        <p>
+          Entre 1995 e 2002, a FBCF oscilou entre 17% e 20% do PIB, sob a estabilização do Real,
+          a abertura comercial e o programa de privatizações. A crise cambial de 1999 derrubou
+          o investimento para 17,0%; a recuperação veio com o ciclo de commodities e o crédito.
+        </p>
+        <p>
+          De 2003 a 2010, a taxa subiu de 16,6% para 20,5%, impulsionada pelo PAC, pelo crédito
+          do BNDES, pelo mercado de trabalho e pela construção. O pico de 2013 (20,9%) foi o
+          ponto máximo de um modelo que combinava investimento público, concessões e desonerações.
+        </p>
+        <p>
+          A partir de 2014, a combinação de recessão, crise fiscal, Lava Jato e queda do preço
+          das commodities interrompeu o ciclo. A FBCF caiu para 14,6% em 2017. A recuperação
+          posterior foi parcial e concentrada em máquinas e construção residencial — não em
+          infraestrutura pesada.
+        </p>
+      </div>
+      <div class="reveal">
+        <div class="card card--accent">
+          <div class="tiny" style="margin-bottom:10px">Comparação internacional · 2024</div>
+          <div class="chart" id="chart-intl" role="img" aria-label="Comparação internacional da FBCF em percentual do PIB em 2024"></div>
+          <div class="chart-note">
+            Brasil: 16,9% do PIB. Mundo: 25,6%. Para igualar a média mundial, o país precisaria
+            investir cerca de R$ 1,0 trilhão por ano a mais (a preços de 2024).
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout reveal">
+      <p><strong>O elo frágil.</strong> O consumo e o emprego se recuperaram mais rápido do que a
+      capacidade produtiva. Sem investimento, o crescimento esbarra em oferta, importa mais e
+      pressiona preços. A taxa de 16,8% em 2025 — R$ 2,1 trilhões — é insuficiente para
+      sustentar crescimento de 3% ao ano por muito tempo e está longe dos 20%+ do início da
+      década de 2010.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 02 PÚBLICO X PRIVADO ================= -->
+<section class="section section--tint" id="publico-privado">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <div class="section__num">02</div>
+      <div>
+        <h2 class="section__title">Quem investe: o Estado recua, o privado ocupa — mas não em tudo</h2>
+        <p class="section__deck">
+          O investimento público brasileiro é pequeno no agregado, mas decisivo na infraestrutura.
+          Em 2024, a iniciativa privada respondeu por 82% da FBCF e 70% da infraestrutura, mas
+          sua presença é muito desigual entre setores. Onde o retorno é difuso, o Estado ainda
+          é o investidor majoritário.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="chart-card reveal">
+        <div class="chart-head">
+          <div>
+            <div class="chart-title">FBCF por origem — % do PIB, 1995–2025</div>
+            <div class="chart-sub">Público = governo geral + estatais federais · privado = residual</div>
+          </div>
+          <div class="legend">
+            <span><i style="background:var(--red)"></i>Público</span>
+            <span><i style="background:var(--teal)"></i>Privado</span>
+          </div>
+        </div>
+        <div class="chart" id="chart-pubpriv" role="img" aria-label="Área empilhada do investimento público e privado em percentual do PIB"></div>
+        <div class="chart-note">
+          Série pública: Ipea (1995–2015) e FGV IBRE (2016–2025); 2016 é estimativa. O conceito
+          inclui governo geral e estatais federais, bruto de depreciação. O privado é o resíduo
+          da FBCF total e inclui famílias, empresas privadas e estrangeiras.
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="chart-card reveal">
+          <div class="chart-head">
+            <div>
+              <div class="chart-title">Composição da FBCF em 2024</div>
+              <div class="chart-sub">% do investimento total</div>
+            </div>
+          </div>
+          <div class="donut-wrap">
+            <div class="chart" id="chart-donut" role="img" aria-label="Donut da composição da FBCF por origem em 2024"></div>
+            <div class="donut-legend" id="donut-legend"></div>
+          </div>
+        </div>
+
+        <div class="chart-card reveal">
+          <div class="chart-head">
+            <div>
+              <div class="chart-title">Investimento público por esfera — 2024</div>
+              <div class="chart-sub">% do PIB · governo geral + estatais</div>
+            </div>
+          </div>
+          <div class="chart" id="chart-publevels" role="img" aria-label="Barras do investimento público por esfera de governo em 2024"></div>
+          <div class="chart-note">
+            Governo geral: 2,12% do PIB. Estatais federais: ~0,93%. Soma: 3,05% do PIB.
+            Os municípios são o maior investidor público (1,15%), seguidos pelos estados
+            (0,73%) e pela União (0,24%).
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-3" style="margin-top:28px">
+      <div class="card reveal">
+        <div class="tag tag--red" style="margin-bottom:10px">Público</div>
+        <h4>3,05% do PIB em 2024 — o melhor desde 2014</h4>
+        <p>
+          Mesmo assim, o investimento público está abaixo do pico de 4,6% em 2010 e da média
+          de 4,1% do período 2010–2014. Em 2025 recuou para 2,71%.
+        </p>
+      </div>
+      <div class="card reveal">
+        <div class="tag tag--teal" style="margin-bottom:10px">Privado</div>
+        <h4>13,9% do PIB em 2024 — mas 2,5 p.p. abaixo de 2011–14</h4>
+        <p>
+          A queda da FBCF não foi só pública: o investimento privado caiu de ~16,5% do PIB
+          (2011–14) para ~13,9% (2023–25). O privado explica a maior parte da queda em nível;
+          o público, a maior queda proporcional.
+        </p>
+      </div>
+      <div class="card reveal">
+        <div class="tag tag--gold" style="margin-bottom:10px">Infraestrutura</div>
+        <h4>0,67% do PIB de investimento público em infra</h4>
+        <p>
+          É o equivalente a 22% do investimento público total (conceito amplo, que inclui
+          estatais). O restante está em prédios, equipamentos, saúde, educação, defesa e
+          estatais — inclusive Petrobras.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:36px">
+      <div class="reveal">
+        <h3 style="font-size:26px;margin-bottom:12px">O privado não substitui o público em todos os lugares</h3>
+        <p>
+          Nos anos 1990 e 2000, parte da queda da participação pública é composição: a venda
+          de estatais transferiu investimento para o privado sem necessariamente reduzir o
+          investimento total. Em energia elétrica e telecomunicações, o privado responde por
+          89% e ~100% do investimento. São setores com receita regulada, escala e retorno
+          apropriável. Em transportes e saneamento, a divisão é quase meio a meio: 52% e 54%
+          públicos, respectivamente. São setores com externalidades altas, risco regulatório
+          e retorno social que não se converte integralmente em tarifa.
+        </p>
+        <p>
+          É por isso que a discussão “público versus privado” empobrece o debate. A questão
+          relevante é o desenho contratual: quem assume o risco de demanda, quem financia, como
+          se remunera o capital e como se protege o usuário.
+        </p>
+      </div>
+      <div class="reveal">
+        <div class="card">
+          <div class="tiny" style="margin-bottom:10px">Financiamento · 2025</div>
+          <div class="grid-2" style="gap:18px">
+            <div>
+              <div class="stat__value" style="font-size:34px">14,4<small>%</small></div>
+              <div class="stat__label">poupança bruta / PIB</div>
+            </div>
+            <div>
+              <div class="stat__value" style="font-size:34px">16,8<small>%</small></div>
+              <div class="stat__label">investimento / PIB</div>
+            </div>
+          </div>
+          <div class="rule" style="margin:16px 0"></div>
+          <p style="font-size:12px">
+            A diferença de 2,4 p.p. do PIB é poupança externa. O IDE (investimento direto
+            estrangeiro) foi de 3,4% do PIB em 2024 — mas nem todo IDE é capital novo: parte
+            é aquisição de empresas. O país financia investimento com poupança doméstica
+            insuficiente e custo de capital alto.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout reveal">
+      <p><strong>O investimento público em infraestrutura econômica é de apenas 0,67% do PIB —
+      22% do investimento público total (3,05%), que inclui estatais e outras finalidades.</strong>
+      O restante se distribui entre equipamentos, edificações, saúde, educação, defesa e estatais.
+      Não é um problema em si — saúde e educação também são capital —, mas ajuda a explicar por
+      que o Brasil investe pouco em estradas, saneamento e mobilidade mesmo quando o investimento
+      público total cresce.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 03 SETORES ================= -->
+<section class="section" id="setores">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <div class="section__num">03</div>
+      <div>
+        <h2 class="section__title">Para onde vai o dinheiro: construção, máquinas e um país que investe pouco em infraestrutura</h2>
+        <p class="section__deck">
+          O investimento brasileiro é intensivo em construção e máquinas, mas a infraestrutura
+          pesada perdeu participação. Energia e telecomunicações atraem o privado; transportes
+          e saneamento concentram o maior hiato entre o realizado e o necessário.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="chart-card reveal">
+        <div class="chart-head">
+          <div>
+            <div class="chart-title">O que é a FBCF — por tipo de ativo, 2023</div>
+            <div class="chart-sub">% do investimento total · % do PIB entre parênteses</div>
+          </div>
+        </div>
+        <div class="donut-wrap">
+          <div class="chart" id="chart-assets" role="img" aria-label="Donut da composição da FBCF por tipo de ativo em 2023"></div>
+          <div class="donut-legend" id="assets-legend"></div>
+        </div>
+        <div class="chart-note">
+          Fonte: IBGE, Tabela de Usos 2023 (produtos). Construção inclui residencial
+          (~3,3% do PIB) e outras edificações/estruturas (~4,1%). Máquinas, equipamentos e
+          bens manufaturados: ~6,2% do PIB. Propriedade intelectual, software e outros
+          serviços: ~2,4% do PIB.
+        </div>
+      </div>
+
+      <div class="chart-card reveal">
+        <div class="chart-head">
+          <div>
+            <div class="chart-title">Infraestrutura por setor — 2024</div>
+            <div class="chart-sub">R$ bilhões correntes · público × privado</div>
+          </div>
+          <div class="legend">
+            <span><i style="background:var(--red)"></i>Público</span>
+            <span><i style="background:var(--teal)"></i>Privado</span>
+          </div>
+        </div>
+        <div class="chart" id="chart-infra" role="img" aria-label="Barras empilhadas do investimento em infraestrutura por setor e origem"></div>
+        <div class="chart-note">
+          Fonte: Inter.B Consultoria / CNI (2024). Total: R$ 266,8 bilhões = 2,27% do PIB.
+          A ABDIB estima R$ 260,6 bilhões (2,22% do PIB) por diferença de escopo. Energia
+          elétrica: 42% do total; transportes: 32%; saneamento: 15%; telecom: 11%.
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:24px">
+      <div class="chart-card reveal">
+        <div class="chart-head">
+          <div>
+            <div class="chart-title">O hiato de infraestrutura — % do PIB por ano</div>
+            <div class="chart-sub">realizado em 2024 vs. necessário · barras de gap</div>
+          </div>
+        </div>
+        <div class="chart" id="chart-gap" role="img" aria-label="Barras de investimento realizado versus necessário em infraestrutura"></div>
+        <div class="chart-note">
+          Fonte: ABDIB, Livro Azul da Infraestrutura 2024. O gap total é de 2,35% do PIB
+          (R$ 276,5 bilhões/ano), excluindo energia elétrica, que está acima da necessidade.
+          A linha “Total ex-energia” usa 1,12% realizado e 3,47% necessário; o total geral
+          (com energia) é 2,22% e 4,31%. Transportes concentram 73% do gap.
+        </div>
+      </div>
+
+      <div class="reveal">
+        <h3 style="font-size:26px;margin-bottom:12px">O padrão setorial</h3>
+        <p>
+          O Brasil investe relativamente bem em energia elétrica — 1,10% do PIB, acima da
+          necessidade estimada — e em telecomunicações, onde o privado sustenta quase todo o
+          investimento. São setores com cadeia produtiva madura, regulação estável e receita
+          previsível.
+        </p>
+        <p>
+          O problema está em transportes e saneamento. Transportes realizam 0,55% do PIB e
+          precisariam de 2,26% — um gap de 1,71 p.p., o maior de todos. Saneamento realiza
+          0,27% e precisaria de 0,45%; o gap parece pequeno em pontos do PIB, mas representa
+          R$ 21,5 bilhões por ano e afeta diretamente saúde, produtividade e qualidade de vida.
+        </p>
+        <p>
+          A construção residencial, cujo investimento responde por cerca de 3,3% do PIB, é
+          majoritariamente privada e tem impacto social alto — mas não resolve o déficit
+          habitacional sozinha. Já a propriedade intelectual é ~2% do PIB, mas o componente
+          de P&amp;D é só ~0,5% — bem abaixo da média global (~2,5%) — e ajuda a explicar
+          parte do baixo crescimento da produtividade.
+        </p>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:36px">
+      <div class="chart-head" style="margin-bottom:12px">
+        <div>
+          <div class="chart-title">Matriz setorial: peso, investimento, origem e retorno</div>
+          <div class="chart-sub">leitura qualitativa · dados de 2023–24</div>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="matrix">
+          <thead>
+            <tr>
+              <th>Setor</th>
+              <th class="num">Peso no VA</th>
+              <th class="num">Investimento recente</th>
+              <th>Origem</th>
+              <th>Retorno econômico</th>
+              <th>Retorno social</th>
+              <th>Gargalo principal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Energia elétrica</td>
+              <td class="num">2,6%</td>
+              <td class="num">1,10%</td>
+              <td><span class="tag tag--teal">Privado 89%</span></td>
+              <td>Alto</td>
+              <td>Médio</td>
+              <td>Expansão renovável e redes; risco hidrológico.</td>
+            </tr>
+            <tr>
+              <td>Transportes e logística</td>
+              <td class="num">3,6%</td>
+              <td class="num">0,55%</td>
+              <td><span class="tag tag--red">Público 52%</span></td>
+              <td>Alto</td>
+              <td>Alto</td>
+              <td>Gap de 1,71 p.p. do PIB; rodovias, ferrovias e mobilidade.</td>
+            </tr>
+            <tr>
+              <td>Saneamento</td>
+              <td class="num">n.d.</td>
+              <td class="num">0,27%</td>
+              <td><span class="tag tag--red">Público 54%</span></td>
+              <td>Médio</td>
+              <td>Muito alto</td>
+              <td>45% sem saneamento seguro; gap de 0,18 p.p.</td>
+            </tr>
+            <tr>
+              <td>Telecomunicações</td>
+              <td class="num">3,4%</td>
+              <td class="num">0,29%</td>
+              <td><span class="tag tag--teal">Privado ~100%</span></td>
+              <td>Alto</td>
+              <td>Médio</td>
+              <td>Gap de 0,47 p.p.; expansão de 5G e conectividade rural.</td>
+            </tr>
+            <tr>
+              <td>Construção residencial</td>
+              <td class="num">n.d.</td>
+              <td class="num">3,3%</td>
+              <td><span class="tag tag--teal">Privado dominante</span></td>
+              <td>Médio</td>
+              <td>Alto</td>
+              <td>Déficit habitacional e custo do crédito.</td>
+            </tr>
+            <tr>
+              <td>Indústria de transformação</td>
+              <td class="num">15,3%</td>
+              <td class="num">6,2%**</td>
+              <td><span class="tag tag--teal">Privado ~90%</span></td>
+              <td>Alto</td>
+              <td>Baixo/médio</td>
+              <td>Baixa produtividade, P&amp;D e abertura comercial.</td>
+            </tr>
+            <tr>
+              <td>Agropecuária</td>
+              <td class="num">7,1%</td>
+              <td class="num">n.d.</td>
+              <td><span class="tag tag--teal">Privado ~95%</span></td>
+              <td>Alto</td>
+              <td>Médio</td>
+              <td>Logística, crédito e armazenagem.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-note">
+        Peso no VA: participação no valor adicionado bruto (IBGE, 2023), usando o grupo de
+        atividade mais próximo (ex.: utilities para energia; informação e comunicação para
+        telecom), não necessariamente o setor exato. Saneamento e construção residencial são
+        subcomponentes de atividades maiores e não têm linha separada; por isso “n.d.”.
+        Investimento 2024: infraestrutura — ABDIB, Livro Azul 2024 (% do PIB); construção
+        residencial e bens manufaturados — IBGE/TRU; agropecuária — n.d. A composição em
+        R$ bilhões do gráfico anterior é da Inter.B/CNI e tem escopo ligeiramente diferente.
+        ** Bens manufaturados (máquinas, equipamentos e outros) de todos os setores,
+        % do PIB (2023); não é investimento exclusivo da indústria. Retorno econômico/social
+        é uma classificação qualitativa baseada em estudos setoriais, não uma estimativa numérica.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 04 GOVERNOS ================= -->
+<section class="section section--tint" id="governos">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <div class="section__num">04</div>
+      <div>
+        <h2 class="section__title">A inclinação de cada governo — e por que ela explica menos do que parece</h2>
+        <p class="section__deck">
+          Orientação política ajuda a entender a composição do investimento: privatizar,
+          concessionar, usar estatais ou ampliar o PAC. Mas o nível da FBCF responde mais ao
+          ciclo econômico, ao espaço fiscal e ao custo de capital do que ao rótulo ideológico.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="chart-card reveal">
+        <div class="chart-head">
+          <div>
+            <div class="chart-title">Orientação econômica × FBCF média</div>
+            <div class="chart-sub">escala analítica de −4 (liberal) a +4 (desenvolvimentista)</div>
+          </div>
+        </div>
+        <div class="chart" id="chart-orientation" role="img" aria-label="Dispersão entre orientação econômica dos governos e FBCF média"></div>
+        <div class="chart-note">
+          Classificação analítica dos autores, não posição oficial de partidos. A reta não é
+          ajustada: com seis observações, qualquer regressão seria instável. Leia os pontos.
+        </div>
+      </div>
+
+      <div class="reveal">
+        <h3 style="font-size:26px;margin-bottom:12px">O que os dados mostram</h3>
+        <p>
+          Os dois maiores patamares médios de FBCF ocorreram sob orientações opostas: FHC
+          (18,5%, liberal) e Dilma (19,2%, desenvolvimentista). O menor, sob Temer (15,1%,
+          liberal). Bolsonaro (16,9%, liberal-conservador) ficou acima de Temer e ligeiramente
+          acima de Lula 3 (16,7%, social-desenvolvimentista).
+        </p>
+        <p>
+          A explicação não está no rótulo, mas no contexto: FHC colheu a estabilização e o
+          choque de privatizações; Lula e Dilma surfaram o superciclo de commodities e o crédito;
+          Temer herdou a recessão e impôs o teto de gastos; Bolsonaro enfrentou a pandemia e
+          priorizou transferências; Lula 3 retomou o PAC em um ambiente de juros altos e
+          restrição fiscal.
+        </p>
+        <p>
+          Há, porém, uma regularidade: <strong>o investimento público é majoritariamente
+          pró-cíclico e eleitoral</strong>, com a exceção do impulso anticíclico de 2009–10.
+          A média em anos eleitorais (1998–2022) foi de 3,42% do PIB, contra 2,97% nos demais
+          anos. O padrão perde força depois de 2015, quando o espaço fiscal se fecha.
+        </p>
+      </div>
+    </div>
+
+    <div class="gov-grid" style="margin-top:36px">
+      <article class="gov-card reveal" style="--gov-color:var(--slate)">
+        <div class="gov-top">
+          <div>
+            <div class="gov-years">1995–2002 · 2 mandatos</div>
+            <h3>FHC</h3>
+            <p class="gov-role">Liberal reformista · estabilização e desestatização</p>
+          </div>
+          <span class="tag">−3</span>
+        </div>
+        <div class="gov-metrics">
+          <div><b>18,5%</b><span>FBCF média</span></div>
+          <div><b>3,2%</b><span>público</span></div>
+          <div><b>2,4%</b><span>PIB/ano</span></div>
+        </div>
+        <div class="gov-spark" data-start="1995" data-end="2002" data-color="#6b7c93"></div>
+        <ul class="gov-list">
+          <li>Plano Real, câmbio fixo até 1999, Lei de Responsabilidade Fiscal (2000) e Lei de Concessões (1995).</li>
+          <li>Privatizações: US$ 78,6 bi em receita (1995–2002), 80% em infraestrutura e serviços.</li>
+          <li>FBCF média de 18,5%; investimento público de 3,2%; crescimento de 2,4% ao ano.</li>
+        </ul>
+        <p class="gov-legacy"><strong>Legado:</strong> criou o marco regulatório e transferiu ao privado parte da infraestrutura. A pobreza caiu 5,0 p.p.; o Gini, 1,4 ponto.</p>
+      </article>
+
+      <article class="gov-card reveal" style="--gov-color:var(--gold)">
+        <div class="gov-top">
+          <div>
+            <div class="gov-years">2003–2010 · 2 mandatos</div>
+            <h3>Lula</h3>
+            <p class="gov-role">Desenvolvimentismo distributivo · inclusão e PAC</p>
+          </div>
+          <span class="tag">+3</span>
+        </div>
+        <div class="gov-metrics">
+          <div><b>18,2%</b><span>FBCF média</span></div>
+          <div><b>3,2%</b><span>público</span></div>
+          <div><b>4,1%</b><span>PIB/ano</span></div>
+        </div>
+        <div class="gov-spark" data-start="2003" data-end="2010" data-color="#b0812d"></div>
+        <ul class="gov-list">
+          <li>PAC 1 (2007), Bolsa Família, valorização do salário mínimo, crédito e BNDES.</li>
+          <li>FBCF sobe de 16,6% para 20,5%; investimento público chega a 4,6% em 2010.</li>
+          <li>Pobreza cai 18,7 p.p. entre 2003 e 2011 — o maior avanço social da série.</li>
+        </ul>
+        <p class="gov-legacy"><strong>Legado:</strong> crescimento com inclusão e o maior ciclo de investimento público da era recente; parte dele financiada pelo ciclo de commodities.</p>
+      </article>
+
+      <article class="gov-card reveal" style="--gov-color:var(--red)">
+        <div class="gov-top">
+          <div>
+            <div class="gov-years">2011–2016</div>
+            <h3>Dilma</h3>
+            <p class="gov-role">Desenvolvimentismo intervencionista · PAC 2 e desonerações</p>
+          </div>
+          <span class="tag">+4</span>
+        </div>
+        <div class="gov-metrics">
+          <div><b>19,2%</b><span>FBCF média</span></div>
+          <div><b>3,6%</b><span>público</span></div>
+          <div><b>0,4%</b><span>PIB/ano</span></div>
+        </div>
+        <div class="gov-spark" data-start="2011" data-end="2016" data-color="#b23a2a"></div>
+        <ul class="gov-list">
+          <li>PAC 2, Plano Brasil Maior, desonerações tributárias e concessões de infraestrutura.</li>
+          <li>FBCF atinge o pico de 20,9% em 2013 e desaba para 15,5% em 2016.</li>
+          <li>Crise fiscal, recessão de 2015–16 e aumento do desemprego para 11,6%.</li>
+        </ul>
+        <p class="gov-legacy"><strong>Legado:</strong> o pico e o colapso no mesmo período. A pobreza caiu 3,1 p.p.; o Gini subiu 0,5 ponto.</p>
+      </article>
+
+      <article class="gov-card reveal" style="--gov-color:var(--blue)">
+        <div class="gov-top">
+          <div>
+            <div class="gov-years">2016–2018</div>
+            <h3>Temer</h3>
+            <p class="gov-role">Liberal-austeridade · teto de gastos e reformas</p>
+          </div>
+          <span class="tag">−4</span>
+        </div>
+        <div class="gov-metrics">
+          <div><b>15,1%</b><span>FBCF média</span></div>
+          <div><b>2,4%</b><span>público</span></div>
+          <div><b>−0,1%</b><span>PIB/ano</span></div>
+        </div>
+        <div class="gov-spark" data-start="2016" data-end="2018" data-color="#3b5578"></div>
+        <ul class="gov-list">
+          <li>EC 95/2016 (teto de gastos), reforma trabalhista (2017), PPI e Lei das Estatais.</li>
+          <li>Investimento público cai a 1,94% do PIB em 2017 — o menor da série.</li>
+          <li>FBCF de 14,6% em 2017, mínimo histórico; recuperação tímida em 2018.</li>
+        </ul>
+        <p class="gov-legacy"><strong>Legado:</strong> ajuste fiscal e reformas microeconômicas, mas com o menor nível de investimento da série. Pobreza estável; Gini +0,5 ponto.</p>
+      </article>
+
+      <article class="gov-card reveal" style="--gov-color:var(--green)">
+        <div class="gov-top">
+          <div>
+            <div class="gov-years">2019–2022</div>
+            <h3>Bolsonaro</h3>
+            <p class="gov-role">Liberal-conservador · privatizações e emergência</p>
+          </div>
+          <span class="tag">−3</span>
+        </div>
+        <div class="gov-metrics">
+          <div><b>16,9%</b><span>FBCF média</span></div>
+          <div><b>2,4%</b><span>público</span></div>
+          <div><b>1,4%</b><span>PIB/ano</span></div>
+        </div>
+        <div class="gov-spark" data-start="2019" data-end="2022" data-color="#4f6f52"></div>
+        <ul class="gov-list">
+          <li>Reforma da Previdência (2019), privatização da Eletrobras (2022), PPI e marco do saneamento.</li>
+          <li>Pandemia: Auxílio Emergencial e queda da FBCF em 2020; recuperação em 2021–22.</li>
+          <li>Investimento público médio de 2,4% do PIB; FBCF de 17,8% em 2022.</li>
+        </ul>
+        <p class="gov-legacy"><strong>Legado:</strong> reformas e desestatização, com investimento público baixo. Pobreza cai 2,7 p.p., mas com forte volatilidade (30,6% em 2021).</p>
+      </article>
+
+      <article class="gov-card reveal" style="--gov-color:var(--plum)">
+        <div class="gov-top">
+          <div>
+            <div class="gov-years">2023–2026 · em curso</div>
+            <h3>Lula 3</h3>
+            <p class="gov-role">Social-desenvolvimentista · Novo PAC e arcabouço fiscal</p>
+          </div>
+          <span class="tag">+3</span>
+        </div>
+        <div class="gov-metrics">
+          <div><b>16,7%</b><span>FBCF média</span></div>
+          <div><b>2,8%</b><span>público</span></div>
+          <div><b>3,0%</b><span>PIB/ano</span></div>
+        </div>
+        <div class="gov-spark" data-start="2023" data-end="2025" data-color="#7d4560"></div>
+        <ul class="gov-list">
+          <li>Novo PAC (lançamento): R$ 1,7 trilhão (R$ 371 bi OGU, R$ 343 bi estatais, R$ 362 bi financiamentos, R$ 612 bi privado).</li>
+          <li>Arcabouço fiscal (2023), reforma tributária e retomada do investimento público.</li>
+          <li>Investimento público: 2,61% (2023), 3,05% (2024), 2,71% (2025). FBCF: 16,4%, 16,9%, 16,8%.</li>
+        </ul>
+        <p class="gov-legacy"><strong>Legado em aberto:</strong> o desafio é executar o PAC com juros altos, espaço fiscal limitado e capacidade de execução desigual entre entes.</p>
+      </article>
+    </div>
+
+    <div class="callout reveal">
+      <p><strong>A inclinação do governo atual.</strong> O governo Lula 3 combina uma orientação
+      social-desenvolvimentista — PAC, BNDES, política industrial, valorização do salário mínimo —
+      com um arcabouço fiscal que limita a expansão do gasto. O investimento público subiu para
+      3,05% do PIB em 2024, o maior nível desde 2014, mas recuou para 2,71% em 2025. A FBCF
+      ficou em 16,8%, sem recuperar o patamar de 2013. O teste do mandato é transformar anúncio
+      em execução: licenciamento, projetos, contratos e entrega de obra.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 05 IMPACTO ================= -->
+<section class="section" id="impacto">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <div class="section__num">05</div>
+      <div>
+        <h2 class="section__title">Impacto social × econômico: o investimento é condição necessária, não suficiente</h2>
+        <p class="section__deck">
+          Investimento amplia capacidade, emprego e produtividade. Mas o retorno social depende
+          de onde se investe, de como se opera o ativo e de quanto se gasta em políticas
+          complementares. A década de 2000 mostra que crescimento e investimento podem vir
+          junto com queda forte da pobreza; a de 2010 mostra que o contrário também é possível.
+        </p>
+      </div>
+    </div>
+
+    <div class="chart-card reveal">
+      <div class="chart-head">
+        <div>
+          <div class="chart-title">Três trajetórias, uma década perdida</div>
+          <div class="chart-sub">FBCF (% do PIB) · pobreza (% da população) · desemprego (%)</div>
+        </div>
+        <div class="legend">
+          <span><i style="background:var(--ink)"></i>FBCF</span>
+          <span><i style="background:var(--red)"></i>Pobreza</span>
+          <span><i style="background:var(--teal)"></i>Desemprego</span>
+        </div>
+      </div>
+      <div class="chart" id="chart-social" role="img" aria-label="Pequenos múltiplos de FBCF, pobreza e desemprego entre 1995 e 2025"></div>
+      <div class="chart-note">
+        Pobreza: linha de US$ 6,85/dia (PPP 2017), World Bank; 2020 é atípico por causa do
+        Auxílio Emergencial. Desemprego: modelo OIT/World Bank. FBCF: IBGE. Faixas verticais:
+        governos. Correlações simples; não implicam causalidade.
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:28px">
+      <div class="reveal">
+        <h3 style="font-size:26px;margin-bottom:12px">O canal econômico</h3>
+        <div class="impact-list">
+          <div class="impact-item">
+            <div class="impact-item__icon">01</div>
+            <div><h4>Demanda no curto prazo</h4><p>Obra e compra de equipamentos movimentam construção, indústria e serviços. O multiplicador do investimento público é estimado em 1,3 na média — e chega a 2,2 em recessão.</p></div>
+          </div>
+          <div class="impact-item">
+            <div class="impact-item__icon">02</div>
+            <div><h4>Capacidade no médio prazo</h4><p>Mais capital por trabalhador eleva a produtividade. A taxa de investimento baixa ajuda a explicar o crescimento médio de 2,3% ao ano desde 1995.</p></div>
+          </div>
+          <div class="impact-item">
+            <div class="impact-item__icon">03</div>
+            <div><h4>Custo logístico e energético</h4><p>Infraestrutura deficiente encarece a produção. O gap de transportes é de 1,71 p.p. do PIB; o de telecom, 0,47 p.p.; o de saneamento, 0,18 p.p.</p></div>
+          </div>
+          <div class="impact-item">
+            <div class="impact-item__icon">04</div>
+            <div><h4>Confiança e efeito crowding-in</h4><p>Investimento público em infraestrutura pode atrair privado ao reduzir risco e custo. O contrário — crowding-out — ocorre quando o gasto pressiona juros e inflação.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <h3 style="font-size:26px;margin-bottom:12px">O canal social</h3>
+        <div class="impact-list">
+          <div class="impact-item">
+            <div class="impact-item__icon">01</div>
+            <div><h4>Saneamento</h4><p>Cada R$ 1 investido retorna entre R$ 2,4 e R$ 3,9 em saúde, produtividade e renda, segundo estudos setoriais. Ainda assim, 45% da população não tem saneamento seguro.</p></div>
+          </div>
+          <div class="impact-item">
+            <div class="impact-item__icon">02</div>
+            <div><h4>Mobilidade e habitação</h4><p>Reduzem tempo de deslocamento e melhoram acesso ao trabalho. A construção residencial é 3,3% do PIB, mas o déficit habitacional segue alto.</p></div>
+          </div>
+          <div class="impact-item">
+            <div class="impact-item__icon">03</div>
+            <div><h4>Saúde e educação</h4><p>Investimento em capital físico (hospitais, escolas) só gera retorno com custeio e gestão. É o caso clássico em que o “ativo” não basta.</p></div>
+          </div>
+          <div class="impact-item">
+            <div class="impact-item__icon">04</div>
+            <div><h4>Desigualdade regional</h4><p>Infraestrutura no Norte e Nordeste tem retorno social alto, mas menor retorno privado. Sem política pública, o mercado não fecha esse gap.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scatter-grid reveal" style="margin-top:32px">
+      <div class="chart-card">
+        <div class="chart-head">
+          <div>
+            <div class="chart-title">FBCF e crescimento do PIB</div>
+            <div class="chart-sub">cada ponto é um ano · 1995–2025</div>
+          </div>
+        </div>
+        <div class="chart" id="chart-scatter-gdp" role="img" aria-label="Dispersão entre FBCF e crescimento do PIB"></div>
+        <div class="chart-note">Correlação contemporânea: r = 0,35. O investimento acompanha o crescimento, mas não o antecipa de forma clara nesta amostra.</div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-head">
+          <div>
+            <div class="chart-title">FBCF e desemprego</div>
+            <div class="chart-sub">cada ponto é um ano · 1995–2025</div>
+          </div>
+        </div>
+        <div class="chart" id="chart-scatter-unemp" role="img" aria-label="Dispersão entre FBCF e desemprego"></div>
+        <div class="chart-note">Correlação: r = −0,63. Anos de maior investimento tendem a ter menor desemprego — associação, não prova de causalidade.</div>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:34px">
+      <div class="chart-head" style="margin-bottom:12px">
+        <div>
+          <div class="chart-title">O que mudou nos indicadores sociais — início e fim da série</div>
+          <div class="chart-sub">Brasil · valores de início e fim da série</div>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Indicador</th><th class="num">Início</th><th class="num">Fim</th><th class="num">Variação</th><th>Leitura</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="name">Pobreza (US$ 6,85/dia)</td><td class="num">54,8%</td><td class="num">20,6%</td><td class="num">−34,2 p.p.</td><td>Queda forte, concentrada em 2003–2014 e 2022–24.</td></tr>
+            <tr><td class="name">Índice de Gini</td><td class="num">59,5</td><td class="num">50,3</td><td class="num">−9,2 pts</td><td>Melhora, mas o Brasil segue entre os mais desiguais do mundo.</td></tr>
+            <tr><td class="name">IDH</td><td class="num">0,666</td><td class="num">0,786*</td><td class="num">+0,120</td><td>Avanço consistente, com estagnação em 2015–21.</td></tr>
+            <tr><td class="name">Expectativa de vida</td><td class="num">67,7</td><td class="num">76,0</td><td class="num">+8,3 anos</td><td>Ganho grande, com queda temporária na pandemia.</td></tr>
+            <tr><td class="name">Saneamento seguro</td><td class="num">33,7%**</td><td class="num">55,0%</td><td class="num">+21,3 p.p.</td><td>Avanço lento; ainda 45% sem saneamento seguro.</td></tr>
+            <tr><td class="name">Mortalidade até 5 anos (por mil)</td><td class="num">47,7</td><td class="num">14,2</td><td class="num">−70%</td><td>Um dos maiores ganhos sociais da série.</td></tr>
+            <tr><td class="name">Desemprego</td><td class="num">7,1%</td><td class="num">6,0%***</td><td class="num">−1,1 p.p.</td><td>Ciclo: pico de 13,7% em 2020; mínimo recente em 2025.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-note">
+        * IDH de 2023 (último disponível). ** Saneamento de 2000 (início da série do World Bank).
+        *** Desemprego de 2025. Fontes: World Bank, UNDP/OWID, IBGE.
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:34px">
+      <div class="chart-head" style="margin-bottom:12px">
+        <div>
+          <div class="chart-title">Onde o retorno social é maior do que o retorno privado</div>
+          <div class="chart-sub">mapa qualitativo para decisão de política</div>
+        </div>
+      </div>
+      <div class="matrix-2x2">
+        <div class="matrix-2x2__cell">
+          <h4>Alto retorno social + alto retorno econômico</h4>
+          <ul>
+            <li>Saneamento básico</li>
+            <li>Transporte de carga e ferrovias</li>
+            <li>Energia elétrica e transmissão</li>
+            <li>Mobilidade urbana em metrópoles</li>
+          </ul>
+          <p style="margin-top:10px"><strong>Ação:</strong> combinar concessão/PPP com garantias públicas e metas de universalização.</p>
+        </div>
+        <div class="matrix-2x2__cell">
+          <h4>Alto retorno social + baixo retorno privado</h4>
+          <ul>
+            <li>Escolas e hospitais em áreas remotas</li>
+            <li>Habitação popular</li>
+            <li>Rodovias vicinais</li>
+            <li>Saneamento rural</li>
+          </ul>
+          <p style="margin-top:10px"><strong>Ação:</strong> investimento público direto, subsídio focalizado e manutenção.</p>
+        </div>
+        <div class="matrix-2x2__cell">
+          <h4>Alto retorno econômico + baixo retorno social</h4>
+          <ul>
+            <li>Portos e aeroportos de carga</li>
+            <li>Telecomunicações de alta capacidade</li>
+            <li>Energia para exportação</li>
+            <li>Data centers e infraestrutura digital</li>
+          </ul>
+          <p style="margin-top:10px"><strong>Ação:</strong> leilões, regulação e competição; o Estado não precisa ser o investidor.</p>
+        </div>
+        <div class="matrix-2x2__cell">
+          <h4>Retorno incerto ou difuso</h4>
+          <ul>
+            <li>Grandes projetos com baixa execução</li>
+            <li>Obras inacabadas</li>
+            <li>Ativos sem custeio</li>
+            <li>Projetos com risco de captura</li>
+          </ul>
+          <p style="margin-top:10px"><strong>Ação:</strong> avaliação ex-ante, transparência e critérios de priorização.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout reveal">
+      <p><strong>O contraste de duas décadas.</strong> Entre 2003 e 2010, a FBCF média foi de
+      18,2% do PIB; a pobreza caiu 18,7 p.p. até 2011. Entre 2011 e 2014, a FBCF média subiu
+      para 20,4%, mas a pobreza caiu apenas 5,8 p.p.; entre 2015 e 2019, a FBCF caiu para 15,7%
+      e a pobreza voltou a subir. O investimento ajuda, mas o resultado social depende da
+      composição do gasto, do crescimento e das políticas de transferência e salário mínimo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 06 AGENDA ================= -->
+<section class="section section--tint" id="agenda">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <div class="section__num">06</div>
+      <div>
+        <h2 class="section__title">O que trava o investimento — e o que fazer com o espaço que existe</h2>
+        <p class="section__deck">
+          O Brasil não precisa apenas investir mais; precisa investir melhor, com menor custo
+          de capital e maior capacidade de execução. A agenda combina poupança, regulação,
+          crédito, planejamento e priorização setorial.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid-3">
+      <div class="card card--accent reveal">
+        <div class="tiny" style="margin-bottom:8px">Restrição 01</div>
+        <h4>Poupança doméstica baixa</h4>
+        <p>14,4% do PIB em 2025. O investimento de 16,8% depende de 2,4 p.p. de poupança externa. Sem elevar a poupança, o país fica vulnerável a choques de financiamento e a juros altos.</p>
+      </div>
+      <div class="card card--accent reveal">
+        <div class="tiny" style="margin-bottom:8px">Restrição 02</div>
+        <h4>Espaço fiscal comprimido</h4>
+        <p>Despesas obrigatórias, dívida bruta elevada e juros reais altos limitam o investimento público. O teto de gastos e o arcabouço fiscal tentam conciliar controle e prioridade.</p>
+      </div>
+      <div class="card card--accent reveal">
+        <div class="tiny" style="margin-bottom:8px">Restrição 03</div>
+        <h4>Custo de capital alto</h4>
+        <p>Crédito longo, barato e estável é escasso. O BNDES e os bancos públicos suavizam, mas não substituem um mercado de capitais profundo para infraestrutura.</p>
+      </div>
+      <div class="card card--accent reveal">
+        <div class="tiny" style="margin-bottom:8px">Restrição 04</div>
+        <h4>Execução e licenciamento</h4>
+        <p>Projetos param por licenciamento, desapropriação, falhas de projeto e baixa capacidade técnica. O gargalo não é só dinheiro: é tempo e governança.</p>
+      </div>
+      <div class="card card--accent reveal">
+        <div class="tiny" style="margin-bottom:8px">Restrição 05</div>
+        <h4>Composição inadequada</h4>
+        <p>Construção pesada e infraestrutura perderam peso; a propriedade intelectual é ~2% do PIB, mas o P&amp;D é só ~0,5%. O investimento que mais cresce é o de máquinas — importante, mas insuficiente para destravar produtividade.</p>
+      </div>
+      <div class="card card--accent reveal">
+        <div class="tiny" style="margin-bottom:8px">Restrição 06</div>
+        <h4>Risco regulatório</h4>
+        <p>Mudanças de regra, judicialização e renegociação de contratos elevam o prêmio de risco. Concessões só funcionam com regras estáveis e agências fortes.</p>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:42px">
+      <div class="reveal">
+        <h3 style="font-size:28px;margin-bottom:12px">Cenários ilustrativos · 2026–2030</h3>
+        <div class="table-wrap">
+          <table class="scenario-table">
+            <thead>
+              <tr><th>Cenário</th><th class="num">FBCF</th><th class="num">Público</th><th class="num">PIB</th><th class="num">Pobreza</th><th class="num">Gap infra</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Base<small>manutenção do quadro atual</small></td>
+                <td class="num">17,0%</td><td class="num">2,7%</td><td class="num">2,0%</td><td class="num">18%</td><td class="num">2,3%</td>
+              </tr>
+              <tr>
+                <td>Reforma<small>melhora regulatória e fiscal</small></td>
+                <td class="num">19,0%</td><td class="num">3,2%</td><td class="num">2,8%</td><td class="num">15%</td><td class="num">1,8%</td>
+              </tr>
+              <tr>
+                <td>Empurrão<small>PAC + concessões + crédito</small></td>
+                <td class="num">21,0%</td><td class="num">3,8%</td><td class="num">3,5%</td><td class="num">13%</td><td class="num">1,2%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-note">
+          Cenários ilustrativos, não previsões. O objetivo é mostrar a ordem de grandeza das
+          combinações necessárias para elevar a FBCF e reduzir o gap. Pobreza: linha de
+          US$ 6,85/dia. Gap de infraestrutura: % do PIB/ano.
+        </div>
+      </div>
+
+      <div class="reveal">
+        <h3 style="font-size:28px;margin-bottom:12px">Agenda de política</h3>
+        <div class="policy-list">
+          <div class="policy-item"><div class="policy-item__n">01</div><div><h4>Elevar a poupança e reduzir o custo de capital</h4><p>Reformas que melhorem o equilíbrio fiscal, aprofundem o mercado de capitais e reduzam o prêmio de risco.</p></div></div>
+          <div class="policy-item"><div class="policy-item__n">02</div><div><h4>Priorizar retorno social alto</h4><p>Saneamento, mobilidade, manutenção de ativos e escolas em áreas vulneráveis. O retorno social supera o privado.</p></div></div>
+          <div class="policy-item"><div class="policy-item__n">03</div><div><h4>Destravar o privado onde ele comparece</h4><p>Energia, telecom, portos e ferrovias: leilões, regulação estável, contratos claros e competição.</p></div></div>
+          <div class="policy-item"><div class="policy-item__n">04</div><div><h4>Melhorar a execução</h4><p>Planejamento, licenciamento, governança, transparência e capacidade técnica dos entes.</p></div></div>
+          <div class="policy-item"><div class="policy-item__n">05</div><div><h4>Medir o retorno</h4><p>Avaliação ex-post, auditoria de obras, indicadores de entrega e critérios públicos de priorização.</p></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout reveal">
+      <p><strong>O que observar em 2026–2027.</strong> A execução do Novo PAC, o ritmo de
+      concessões, a trajetória da Selic e do crédito, a poupança doméstica, a FBCF trimestral
+      e a capacidade de os municípios executarem investimento. São esses os sinais que dirão
+      se a recuperação de 2023–24 é estrutural ou apenas um ciclo curto.</p>
+    </div>
+
+    <div class="reveal" style="margin-top:48px;text-align:center">
+      <p class="quote" style="margin:0 auto">Sem investimento, o Brasil não cresce. <em>Com investimento mal alocado, cresce menos do que poderia.</em></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= METODOLOGIA ================= -->
+<section class="section" id="metodologia">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <div class="section__num">07</div>
+      <div>
+        <h2 class="section__title">Método, definições e limites dos dados</h2>
+        <p class="section__deck">
+          Transparência importa mais do que precisão aparente. Abaixo estão as definições, as
+          fontes, as quebras de série e o que este relatório não permite concluir.
+        </p>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <details open>
+        <summary>O que é FBCF — e o que não é</summary>
+        <div class="details-body">
+          <p>A Formação Bruta de Capital Fixo (FBCF) é o valor das aquisições de ativos fixos —
+          máquinas, equipamentos, construções, software, P&amp;D — usados por mais de um ano na
+          produção. Não inclui variação de estoques, investimento financeiro, compra de terrenos
+          ou aquisições de empresas. É o conceito mais próximo de “investimento produtivo” nas
+          contas nacionais.</p>
+          <p>O investimento público usado aqui é o conceito de aquisição líquida de ativos físicos
+          do setor público consolidado: governo central, estados, municípios e empresas estatais
+          federais. Ele é bruto de depreciação e não coincide exatamente com a FBCF da
+          administração pública nas contas nacionais. O investimento privado é o resíduo:
+          FBCF total menos investimento público.</p>
+          <p>Isso significa que o “privado” inclui famílias (construção residencial), empresas
+          privadas nacionais e estrangeiras e instituições sem fins lucrativos. Não é apenas
+          “grande empresa”.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Quebras de série e escolhas de agregação</summary>
+        <div class="details-body">
+          <ul>
+            <li><strong>FBCF total:</strong> IBGE, Contas Nacionais Trimestrais/Anuais, série encadeada. 1995–2024 consolidado; 2025 preliminar (divulgação de março de 2026). 2026 não entra nas médias anuais porque os dados trimestrais ainda são parciais.</li>
+            <li><strong>Investimento público:</strong> Ipea (1995–2015) e FGV IBRE (2016–2025). 2016 é estimativa de transição. A série da FGV tem revisões e inclui estatais federais; o pico de 2009 aparece como 4,72% em revisões recentes, enquanto a série do Ipea aponta 4,58% em 2010. O texto usa “cerca de 4,6%” para evitar falsa precisão. Estatais estaduais e municipais não entram nessa conta e permanecem no resíduo privado. A série não é ajustada por privatizações: a venda de uma estatal desloca seu investimento do público para o privado sem mudar a FBCF total; parte da queda da participação pública nos anos 1990/2000 é composição, não retração econômica.</li>
+            <li><strong>Infraestrutura:</strong> Inter.B/CNI para a composição público-privada em R$ bilhões (2024); ABDIB para o hiato realizado versus necessário. As duas casas diferem em escopo (R$ 266,8 bi vs. R$ 260,6 bi); por isso não são somadas na mesma conta.</li>
+            <li><strong>Composição por ativo:</strong> IBGE, Tabela de Usos 2023 (produtos), agrupada em quatro blocos: construção; bens manufaturados; propriedade intelectual/serviços; agropecuária/extrativa. Percentuais arredondados.</li>
+            <li><strong>Médias por governo:</strong> usam anos-calendário. 2016, ano do impeachment, aparece tanto em Dilma quanto em Temer; as médias são aproximações, não a contabilidade exata de cada mandato.</li>
+            <li><strong>Pobreza e Gini:</strong> World Bank, linha de US$ 6,85/dia (PPP 2017) e índice de Gini. 2020 é atípico por causa do Auxílio Emergencial; 2010 não tem observação de Gini na base usada, e a pobreza de 2010 também está ausente — por isso 2011 é usado como proxy do fim do período Lula.</li>
+            <li><strong>IDH:</strong> UNDP via Our World in Data; último ano disponível, 2023.</li>
+            <li><strong>Desemprego:</strong> World Bank (modelo OIT), não a PNAD Contínua. As magnitudes diferem ligeiramente das divulgadas pelo IBGE.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>Correlação não é causalidade</summary>
+        <div class="details-body">
+          <p>Os coeficientes de correlação apresentados (r = 0,35 para FBCF × PIB; r = −0,63 para
+          FBCF × desemprego) descrevem associação linear em uma amostra de 31 anos. Eles não
+          identificam o efeito causal do investimento sobre o crescimento ou o emprego. Para
+          isso seria necessário um modelo com variáveis de controle, defasagens e identificação
+          exógena — o que está fora do escopo deste relatório.</p>
+          <p>A leitura correta é: anos de maior investimento tendem a ser anos de maior atividade
+          e menor desemprego. A direção da causalidade pode correr nos dois sentidos: o
+          crescimento estimula o investimento, e o investimento sustenta o crescimento.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Tabela completa — 1995 a 2025</summary>
+        <div class="details-body" style="max-width:none">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:10px">
+            <p class="small" style="margin:0">Valores em % do PIB, exceto indicadores sociais. “—” = sem dado comparável.</p>
+            <button id="btn-csv" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:var(--ink);color:var(--paper);border:0;padding:8px 12px;cursor:pointer">Baixar CSV</button>
+          </div>
+          <p class="table-note mobile-only" style="margin:0 0 8px">Deslize a tabela para o lado para ver todas as colunas →</p>
+          <div class="table-wrap">
+            <table id="annual-table">
+              <thead>
+                <tr>
+                  <th>Ano</th><th class="num">FBCF</th><th class="num">Público</th><th class="num">Privado</th><th class="num">% público</th>
+                  <th class="num">Cresc. PIB</th><th class="num">Desemp.</th><th class="num">Pobreza</th><th class="num">Gini</th><th class="num">IDH</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Fontes</summary>
+        <div class="details-body" style="max-width:none">
+          <ol class="source-list">
+            <li>IBGE. <em>Sistema de Contas Nacionais — Brasil</em>. <a href="https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9052-sistema-de-contas-nacionais-brasil.html" target="_blank" rel="noopener">ibge.gov.br</a>.</li>
+            <li>IBGE. <em>Contas Nacionais Trimestrais</em>. <a href="https://www.ibge.gov.br/estatisticas/economicas/industria/9300-contas-nacionais-trimestrais.html" target="_blank" rel="noopener">ibge.gov.br</a>.</li>
+            <li>World Bank. <em>Gross fixed capital formation (% of GDP) — Brazil</em>. <a href="https://data.worldbank.org/indicator/NE.GDI.FTOT.ZS?locations=BR" target="_blank" rel="noopener">data.worldbank.org</a>.</li>
+            <li>FGV IBRE. <em>Investimentos públicos: série histórica 1947–2025</em>. <a href="https://observatorio-politica-fiscal.ibre.fgv.br/series-historicas/investimentos-publicos/investimentos-publicos-serie-historica-1947-2025" target="_blank" rel="noopener">observatorio-politica-fiscal.ibre.fgv.br</a>.</li>
+            <li>Ipea. <em>Investimento público no Brasil: trajetória e relações com o regime fiscal</em> (TD 2515). <a href="https://www.econstor.eu/bitstream/10419/146651/1/865457034.pdf" target="_blank" rel="noopener">econstor.eu</a>.</li>
+            <li>ABDIB. <em>Investimentos em infraestrutura — 2024</em>. <a href="https://www.abdib.org.br/investimentos-infraestrutura/" target="_blank" rel="noopener">abdib.org.br</a>.</li>
+            <li>Inter.B Consultoria / CNI. <em>Carta de Infraestrutura</em>. <a href="https://interb.com.br/carta/24a-carta-de-infraestrutura/" target="_blank" rel="noopener">interb.com.br</a>.</li>
+            <li>Banco Central do Brasil. <em>Estudo Especial n. 63/2019 — Evolução recente da formação bruta de capital fixo</em> (referência metodológica). <a href="https://www.bcb.gov.br/conteudo/relatorioinflacao/EstudosEspeciais/EE063_Evolucao_recente_da_formacao_bruta_de_capital_fixo.pdf" target="_blank" rel="noopener">bcb.gov.br</a>.</li>
+            <li>BNDES. <em>Privatização no Brasil — 1990–1994 e 1995–2002</em>. <a href="https://web.bndes.gov.br/bib/jspui/handle/1408/23865" target="_blank" rel="noopener">bndes.gov.br</a>.</li>
+            <li>Casa Civil. <em>Novo PAC</em>. <a href="https://www.gov.br/casacivil/pt-br/novopac" target="_blank" rel="noopener">gov.br</a>.</li>
+            <li>Trata Brasil. <em>Benefícios econômicos e sociais da expansão do saneamento</em>. <a href="https://tratabrasil.org.br/beneficios-economicos-e-sociais-da-expansao-do-saneamento-brasileiro/" target="_blank" rel="noopener">tratabrasil.org.br</a>.</li>
+            <li>Orair, R. et al. <em>Investimento público no Brasil e suas relações com ciclo econômico e regime fiscal</em>. Economia e Sociedade, 2018. <a href="https://www.scielo.br/pdf/ecos/v27n3/1982-3533-ecos-27-03-0939.pdf" target="_blank" rel="noopener">scielo.br</a>.</li>
+            <li>Our World in Data / UNDP. <em>Human Development Index — Brazil</em>. <a href="https://ourworldindata.org/grapher/human-development-index?country=BRA" target="_blank" rel="noopener">ourworldindata.org</a>.</li>
+            <li>World Bank. <em>Poverty headcount ratio (US$ 6,85/dia) and Gini index — Brazil</em>. <a href="https://data.worldbank.org/indicator/SI.POV.UMIC?locations=BR" target="_blank" rel="noopener">pobreza</a> · <a href="https://data.worldbank.org/indicator/SI.POV.GINI?locations=BR" target="_blank" rel="noopener">Gini</a>.</li>
+          </ol>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__label">Sobre este relatório</div>
+        <h3>Investimento, Estado e crescimento — 1995 a 2025</h3>
+        <p>Um retrato analítico da formação bruta de capital fixo brasileira, da divisão público-privada e dos setores que mais importam para o crescimento e para a desigualdade. Todos os valores estão normalizados pelo PIB e as fontes estão documentadas na seção de método.</p>
+      </div>
+      <div>
+        <div class="footer__label">Seções</div>
+        <a href="#nivel">01 · Nível</a>
+        <a href="#publico-privado">02 · Público × privado</a>
+        <a href="#setores">03 · Setores</a>
+        <a href="#governos">04 · Governos</a>
+        <a href="#impacto">05 · Impacto</a>
+        <a href="#agenda">06 · Agenda</a>
+      </div>
+      <div>
+        <div class="footer__label">Dados</div>
+        <a href="#metodologia">Metodologia e limites</a>
+        <a href="#metodologia">Tabela completa</a>
+        <a href="#metodologia">Fontes</a>
+        <a href="#" onclick="window.print();return false;">Imprimir / salvar PDF</a>
+        <a href="#inicio">Voltar ao topo ↑</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>Elaborado com dados públicos · outubro de 2026</span>
+      <span>FBCF · Brasil · 1995—2025</span>
+    </div>
+  </div>
+</footer>
+
+<div class="tooltip" id="tooltip" role="status" aria-live="polite"></div>
+
+<script>
+/* ============================================================
+   DADOS
+   ============================================================ */
+const DATA = [
+  {y:1995, fbcf:20.29, pub:3.48, gdp:4.22, unemp:7.09, pov:54.8, gini:59.5, hdi:0.666, fdi:0.63, sav:14.44},
+  {y:1996, fbcf:18.64, pub:3.74, gdp:2.21, unemp:8.04, pov:54.9, gini:59.8, hdi:0.671, fdi:1.48, sav:14.04},
+  {y:1997, fbcf:19.12, pub:3.52, gdp:3.39, unemp:9.00, pov:55.1, gini:59.8, hdi:0.676, fdi:2.15, sav:13.71},
+  {y:1998, fbcf:18.54, pub:3.90, gdp:0.34, unemp:10.15, pov:54.3, gini:59.6, hdi:0.680, fdi:3.34, sav:13.89},
+  {y:1999, fbcf:17.02, pub:2.43, gdp:0.47, unemp:11.12, pov:55.8, gini:59.0, hdi:0.684, fdi:4.73, sav:12.74},
+  {y:2000, fbcf:18.30, pub:2.55, gdp:4.39, unemp:10.89, pov:null, gini:null, hdi:0.690, fdi:5.03, sav:13.99},
+  {y:2001, fbcf:18.42, pub:2.81, gdp:1.39, unemp:10.65, pov:50.3, gini:58.4, hdi:0.694, fdi:4.15, sav:13.59},
+  {y:2002, fbcf:17.93, pub:3.30, gdp:3.05, unemp:10.64, pov:49.8, gini:58.1, hdi:0.700, fdi:3.25, sav:15.41},
+  {y:2003, fbcf:16.60, pub:2.56, gdp:1.14, unemp:11.17, pov:50.9, gini:57.6, hdi:0.705, fdi:1.81, sav:16.42},
+  {y:2004, fbcf:17.32, pub:2.60, gdp:5.76, unemp:10.07, pov:49.5, gini:56.5, hdi:0.712, fdi:2.71, sav:18.86},
+  {y:2005, fbcf:17.06, pub:2.60, gdp:3.20, unemp:10.55, pov:47.5, gini:56.3, hdi:0.718, fdi:1.73, sav:18.11},
+  {y:2006, fbcf:17.21, pub:2.92, gdp:3.96, unemp:9.69, pov:43.7, gini:55.6, hdi:0.725, fdi:1.75, sav:18.41},
+  {y:2007, fbcf:18.00, pub:2.82, gdp:6.07, unemp:9.28, pov:41.2, gini:54.9, hdi:0.732, fdi:3.19, sav:19.35},
+  {y:2008, fbcf:19.39, pub:3.52, gdp:5.09, unemp:8.27, pov:38.2, gini:54.0, hdi:0.739, fdi:2.99, sav:19.23},
+  {y:2009, fbcf:19.10, pub:4.03, gdp:-0.13, unemp:9.42, pov:36.3, gini:53.7, hdi:0.742, fdi:1.89, sav:16.38},
+  {y:2010, fbcf:20.53, pub:4.58, gdp:7.53, unemp:8.42, pov:null, gini:null, hdi:0.748, fdi:3.73, sav:17.80},
+  {y:2011, fbcf:20.61, pub:3.76, gdp:3.97, unemp:7.58, pov:32.2, gini:52.9, hdi:0.753, fdi:3.92, sav:18.60},
+  {y:2012, fbcf:20.72, pub:3.98, gdp:1.92, unemp:7.25, pov:30.4, gini:53.4, hdi:0.758, fdi:3.75, sav:17.68},
+  {y:2013, fbcf:20.91, pub:4.07, gdp:3.00, unemp:7.07, pov:27.9, gini:52.7, hdi:0.762, fdi:3.04, sav:18.15},
+  {y:2014, fbcf:19.87, pub:4.02, gdp:0.50, unemp:6.76, pov:26.4, gini:52.1, hdi:0.765, fdi:3.57, sav:16.13},
+  {y:2015, fbcf:17.84, pub:3.00, gdp:-3.55, unemp:8.54, pov:27.4, gini:51.9, hdi:0.764, fdi:3.59, sav:14.53},
+  {y:2016, fbcf:15.52, pub:2.45, gdp:-3.28, unemp:11.58, pov:29.1, gini:53.4, hdi:0.765, fdi:4.14, sav:13.42},
+  {y:2017, fbcf:14.56, pub:1.94, gdp:1.32, unemp:12.79, pov:29.3, gini:53.3, hdi:0.770, fdi:3.34, sav:13.58},
+  {y:2018, fbcf:15.10, pub:2.70, gdp:1.78, unemp:12.33, pov:28.7, gini:53.9, hdi:0.774, fdi:4.08, sav:12.71},
+  {y:2019, fbcf:15.47, pub:2.26, gdp:1.22, unemp:11.94, pov:28.0, gini:53.5, hdi:0.776, fdi:3.69, sav:12.31},
+  {y:2020, fbcf:16.56, pub:2.63, gdp:-3.28, unemp:13.70, pov:20.8, gini:48.8, hdi:0.770, fdi:2.59, sav:14.84},
+  {y:2021, fbcf:17.92, pub:2.05, gdp:4.76, unemp:13.16, pov:30.6, gini:52.9, hdi:0.768, fdi:2.78, sav:17.22},
+  {y:2022, fbcf:17.80, pub:2.53, gdp:3.02, unemp:9.23, pov:25.3, gini:51.9, hdi:0.780, fdi:3.87, sav:15.89},
+  {y:2023, fbcf:16.41, pub:2.61, gdp:3.24, unemp:7.95, pov:23.3, gini:51.5, hdi:0.786, fdi:2.86, sav:15.04},
+  {y:2024, fbcf:16.91, pub:3.05, gdp:3.42, unemp:6.80, pov:20.6, gini:50.3, hdi:null, fdi:3.39, sav:14.14},
+  {y:2025, fbcf:16.84, pub:2.71, gdp:2.29, unemp:5.97, pov:null, gini:null, hdi:null, fdi:3.41, sav:14.42}
+];
+DATA.forEach(d => { d.priv = +(d.fbcf - d.pub).toFixed(2); d.pubShare = +(d.pub / d.fbcf * 100).toFixed(1); });
+
+const PERIODS = [
+  {id:'fhc', name:'FHC', full:'Fernando Henrique Cardoso', start:1995, end:2002, color:'#6b7c93', orientation:'Liberal reformista', score:-3, avgFbcf:18.5, avgPub:3.2, avgGdp:2.4},
+  {id:'lula', name:'Lula', full:'Luiz Inácio Lula da Silva', start:2003, end:2010, color:'#b0812d', orientation:'Desenvolvimentismo distributivo', score:3, avgFbcf:18.2, avgPub:3.2, avgGdp:4.1},
+  {id:'dilma', name:'Dilma', full:'Dilma Rousseff', start:2011, end:2016, color:'#b23a2a', orientation:'Desenvolvimentismo intervencionista', score:4, avgFbcf:19.2, avgPub:3.6, avgGdp:0.4},
+  {id:'temer', name:'Temer', full:'Michel Temer', start:2016, end:2018, color:'#3b5578', orientation:'Liberal-austeridade', score:-4, avgFbcf:15.1, avgPub:2.4, avgGdp:-0.1},
+  {id:'bolsonaro', name:'Bolsonaro', full:'Jair Bolsonaro', start:2019, end:2022, color:'#4f6f52', orientation:'Liberal-conservador', score:-3, avgFbcf:16.9, avgPub:2.4, avgGdp:1.4},
+  {id:'lula3', name:'Lula 3', full:'Luiz Inácio Lula da Silva', start:2023, end:2026, color:'#7d4560', orientation:'Social-desenvolvimentista', score:3, avgFbcf:16.7, avgPub:2.8, avgGdp:3.0}
+];
+
+const fmt1 = v => (v==null || Number.isNaN(v)) ? '—' : v.toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1});
+const fmt2 = v => (v==null || Number.isNaN(v)) ? '—' : v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const fmt0 = v => (v==null || Number.isNaN(v)) ? '—' : v.toLocaleString('pt-BR',{minimumFractionDigits:0,maximumFractionDigits:0});
+const yearData = y => DATA.find(d => d.y === y);
+const president = y => {
+  if (y <= 2002) return 'FHC';
+  if (y <= 2010) return 'Lula';
+  if (y <= 2015) return 'Dilma';
+  if (y === 2016) return 'Dilma/Temer';
+  if (y <= 2018) return 'Temer';
+  if (y <= 2022) return 'Bolsonaro';
+  return 'Lula 3';
+};
+
+/* ============================================================
+   HELPERS SVG
+   ============================================================ */
+const NS = 'http://www.w3.org/2000/svg';
+const tooltip = document.getElementById('tooltip');
+let tooltipTimer = null;
+
+function svgEl(tag, attrs={}){
+  const el = document.createElementNS(NS, tag);
+  for (const k in attrs){
+    if (attrs[k] === undefined || attrs[k] === null) continue;
+    el.setAttribute(k, attrs[k]);
+  }
+  return el;
+}
+function makeSvg(w,h,label){
+  const s = svgEl('svg', {'viewBox':`0 0 ${w} ${h}`, 'role':'img', 'aria-label':label});
+  s.style.width = '100%';
+  s.style.height = 'auto';
+  s.style.display = 'block';
+  return s;
+}
+function clearNode(node){ while(node.firstChild) node.removeChild(node.firstChild); }
+function linePath(pts){
+  return pts.map((p,i)=>`${i===0?'M':'L'} ${p[0].toFixed(2)} ${p[1].toFixed(2)}`).join(' ');
+}
+function scale(d0,d1,r0,r1){ return v => r0 + (v-d0)/(d1-d0)*(r1-r0); }
+function clamp(v,a,b){ return Math.max(a, Math.min(b,v)); }
+function niceTicks(min,max,step){
+  const out=[]; for(let v=Math.ceil(min/step)*step; v<=max+1e-9; v+=step) out.push(+v.toFixed(6)); return out;
+}
+function showTip(html, ev){
+  tooltip.innerHTML = html;
+  tooltip.classList.add('show');
+  moveTip(ev);
+  if (tooltipTimer) clearTimeout(tooltipTimer);
+}
+function moveTip(ev){
+  const pad = 14;
+  const r = tooltip.getBoundingClientRect();
+  let x = ev.clientX + pad;
+  let y = ev.clientY + pad;
+  if (x + r.width > window.innerWidth - 8) x = ev.clientX - r.width - pad;
+  if (y + r.height > window.innerHeight - 8) y = ev.clientY - r.height - pad;
+  tooltip.style.transform = `translate(${Math.max(8,x)}px, ${Math.max(8,y)}px)`;
+}
+function hideTip(){
+  tooltipTimer = setTimeout(()=>tooltip.classList.remove('show'), 40);
+}
+function ttRow(color,label,value){
+  return `<div class="tt-row"><span>${color?`<i class="sw" style="background:${color}"></i>`:''}${label}</span><b>${value}</b></div>`;
+}
+function addHover(svg, x, y, w, h, htmlFn, onEnter, onLeave){
+  const r = svgEl('rect',{x,y,width:Math.max(1,w),height:h,fill:'transparent',style:'cursor:crosshair'});
+  r.addEventListener('pointerenter', e=>{
+    const html = typeof htmlFn === 'function' ? htmlFn() : htmlFn;
+    showTip(html, e);
+    if (onEnter) onEnter();
+  });
+  r.addEventListener('pointermove', e=>{ moveTip(e); });
+  r.addEventListener('pointerleave', ()=>{ hideTip(); if (onLeave) onLeave(); });
+  svg.appendChild(r);
+  return r;
+}
+
+/* ============================================================
+   HERO SPARKLINE
+   ============================================================ */
+function renderHeroSpark(){
+  const box = document.getElementById('chart-hero-spark');
+  if (!box) return;
+  clearNode(box);
+  const w = Math.max(220, box.clientWidth || 280);
+  const h = 42;
+  const m = {l:2,r:2,t:4,b:2};
+  const iw = w-m.l-m.r, ih = h-m.t-m.b;
+  const x = scale(1995,2025,m.l,m.l+iw);
+  const y = scale(14,21.5,m.t+ih,m.t);
+  const s = makeSvg(w,h,'Minissérie da FBCF brasileira, 1995 a 2025');
+  s.setAttribute('aria-hidden','true');
+  const pts = DATA.map(d=>[x(d.y), y(d.fbcf)]);
+  const area = `M ${pts[0][0]} ${m.t+ih} L ${pts.map(p=>`${p[0]} ${p[1]}`).join(' L ')} L ${pts[pts.length-1][0]} ${m.t+ih} Z`;
+  s.appendChild(svgEl('path',{d:area,fill:'rgba(178,58,42,.08)'}));
+  s.appendChild(svgEl('path',{d:linePath(pts),fill:'none',stroke:'#17150f','stroke-width':1.6,'stroke-linejoin':'round','stroke-linecap':'round'}));
+  const last = pts[pts.length-1];
+  s.appendChild(svgEl('circle',{cx:last[0],cy:last[1],r:2.8,fill:'#b23a2a'}));
+  box.appendChild(s);
+}
+
+/* ============================================================
+   CHART 1 — MAIN FBCF LINE
+   ============================================================ */
+function renderMain(){
+  const box = document.getElementById('chart-main');
+  if (!box) return;
+  clearNode(box);
+  const w = Math.max(320, box.clientWidth);
+  const mobile = w < 700;
+  const h = mobile ? 400 : 480;
+  const m = {t: mobile ? 100 : 88, r: mobile ? 16 : 26, b: 42, l: mobile ? 36 : 48};
+  const iw = w-m.l-m.r, ih = h-m.t-m.b;
+  const x = scale(1995,2025,m.l,m.l+iw);
+  const y = scale(11,22,m.t+ih,m.t);
+  const s = makeSvg(w,h,'Formação bruta de capital fixo no Brasil, 1995 a 2025');
+
+  // Government strip
+  const sy = o => m.t - 48 + o;
+  PERIODS.forEach(p=>{
+    const x1 = x(clamp(p.start-0.5,1995,2025));
+    const x2 = x(clamp((p.end===2026?2025:p.end)+0.5,1995,2025));
+    s.appendChild(svgEl('rect',{x:x1,y:sy(0),width:Math.max(1,x2-x1),height:20,fill:p.color,opacity:.16}));
+    s.appendChild(svgEl('rect',{x:x1,y:sy(0),width:Math.max(1,x2-x1),height:3,fill:p.color}));
+    const label = p.id==='lula3' ? 'LULA 3' : p.name.toUpperCase();
+    const labelEl = svgEl('text',{x:x1+4,y:sy(15),class:'gov-label'});
+    labelEl.textContent = label;
+    s.appendChild(labelEl);
+  });
+
+  // grid + y axis
+  niceTicks(12,22,2).forEach(v=>{
+    const yy = y(v);
+    s.appendChild(svgEl('line',{x1:m.l,y1:yy,x2:m.l+iw,y2:yy,class:'grid'}));
+    const t = svgEl('text',{x:m.l-8,y:yy+3,'text-anchor':'end',class:'axis-value'});
+    t.textContent = `${v}%`;
+    s.appendChild(t);
+  });
+  s.appendChild(svgEl('line',{x1:m.l,y1:m.t+ih,x2:m.l+iw,y2:m.t+ih,class:'baseline'}));
+
+  // average line
+  const avg = 17.95;
+  s.appendChild(svgEl('line',{x1:m.l,y1:y(avg),x2:m.l+iw,y2:y(avg),stroke:'#b23a2a','stroke-width':1,'stroke-dasharray':'4 4',opacity:.7}));
+  const avgLabel = svgEl('text',{x:m.l+iw-2,y:y(avg)-5,'text-anchor':'end',class:'axis-value',fill:'#b23a2a'});
+  avgLabel.textContent = 'média 18,0%';
+  s.appendChild(avgLabel);
+
+  // area + line
+  const pts = DATA.map(d=>[x(d.y), y(d.fbcf)]);
+  const area = `M ${pts[0][0]} ${m.t+ih} L ${pts.map(p=>`${p[0].toFixed(2)} ${p[1].toFixed(2)}`).join(' L ')} L ${pts[pts.length-1][0]} ${m.t+ih} Z`;
+  const grad = svgEl('linearGradient',{id:'grad-main',x1:0,y1:0,x2:0,y2:1});
+  grad.appendChild(svgEl('stop',{offset:'0%','stop-color':'#17150f','stop-opacity':'.10'}));
+  grad.appendChild(svgEl('stop',{offset:'100%','stop-color':'#17150f','stop-opacity':'0'}));
+  const defs = svgEl('defs');
+  defs.appendChild(grad);
+  s.appendChild(defs);
+  s.appendChild(svgEl('path',{d:area,fill:'url(#grad-main)'}));
+  s.appendChild(svgEl('path',{d:linePath(pts),fill:'none',stroke:'#17150f','stroke-width':2.2,'stroke-linejoin':'round','stroke-linecap':'round'}));
+
+  // key dots + annotations
+  const marks = [
+    {y:2013, label:'Pico 20,9%', dx: mobile? -8: 8, dy:-12, anchor: mobile?'end':'start'},
+    {y:2017, label:'Mínimo 14,6%', dx: mobile? -8: -8, dy: 24, anchor: mobile?'end':'end'},
+    {y:2025, label:'2025 16,8%', dx: -6, dy: -12, anchor:'end'}
+  ];
+  marks.forEach(mk=>{
+    const d = yearData(mk.y); if(!d) return;
+    const px = x(mk.y), py = y(d.fbcf);
+    s.appendChild(svgEl('circle',{cx:px,cy:py,r:3.2,fill:'#fffdf8',stroke:'#17150f','stroke-width':1.6}));
+    const t = svgEl('text',{x:px+mk.dx,y:py+mk.dy,'text-anchor':mk.anchor,class:'annotation'});
+    t.textContent = mk.label;
+    s.appendChild(t);
+  });
+
+  // x axis
+  [1995,2000,2005,2010,2015,2020,2025].forEach(v=>{
+    const t = svgEl('text',{x:x(v),y:h-16,'text-anchor':'middle',class:'axis-value'});
+    t.textContent = v;
+    s.appendChild(t);
+  });
+
+  // hover group
+  const hover = svgEl('g',{opacity:0});
+  const hLine = svgEl('line',{y1:m.t,y2:m.t+ih,stroke:'#17150f','stroke-width':.8,'stroke-dasharray':'2 3'});
+  const hDot = svgEl('circle',{r:4,fill:'#17150f',stroke:'#fffdf8','stroke-width':2});
+  hover.appendChild(hLine); hover.appendChild(hDot);
+  s.appendChild(hover);
+
+  DATA.forEach((d,i)=>{
+    const x1 = x(clamp(d.y-0.5,1995,2025));
+    const x2 = x(clamp(d.y+0.5,1995,2025));
+    const html = () => `
+      <div class="tt-year"><span>${d.y}</span><span>${president(d.y)}</span></div>
+      ${ttRow('#17150f','FBCF total',fmt1(d.fbcf)+'% do PIB')}
+      ${ttRow('#b23a2a','Investimento público',fmt2(d.pub)+'% do PIB')}
+      ${ttRow('#1d5f58','Investimento privado',fmt1(d.priv)+'% do PIB')}
+      ${ttRow(null,'Participação pública',fmt1(d.pubShare)+'%')}
+      ${ttRow(null,'Crescimento do PIB',fmt1(d.gdp)+'%')}
+      <div class="tt-note">${d.y===2016?'Transição Dilma–Temer':''}</div>`;
+    addHover(s, x1, m.t, x2-x1, ih, html, ()=>{
+      hover.setAttribute('opacity','1');
+      hLine.setAttribute('x1',x(d.y)); hLine.setAttribute('x2',x(d.y));
+      hDot.setAttribute('cx',x(d.y)); hDot.setAttribute('cy',y(d.fbcf));
+    }, ()=>hover.setAttribute('opacity','0'));
+  });
+
+  // source label
+  const src = svgEl('text',{x:m.l,y:h-2,class:'axis-label'});
+  src.textContent = 'Fonte: IBGE / World Bank';
+  s.appendChild(src);
+
+  box.appendChild(s);
+}
+
+/* ============================================================
+   CHART 2 — PUBLIC VS PRIVATE STACKED AREA
+   ============================================================ */
+function renderPubPriv(){
+  const box = document.getElementById('chart-pubpriv');
+  if (!box) return;
+  clearNode(box);
+  const w = Math.max(320, box.clientWidth);
+  const mobile = w < 600;
+  const h = mobile ? 340 : 420;
+  const m = {t: 24, r: mobile?14:20, b: 38, l: mobile?36:46};
+  const iw = w-m.l-m.r, ih = h-m.t-m.b;
+  const x = scale(1995,2025,m.l,m.l+iw);
+  const y = scale(0,22,m.t+ih,m.t);
+  const s = makeSvg(w,h,'Investimento público e privado no Brasil, 1995 a 2025');
+
+  // bands (subtle)
+  PERIODS.forEach(p=>{
+    const x1 = x(clamp(p.start-0.5,1995,2025));
+    const x2 = x(clamp((p.end===2026?2025:p.end)+0.5,1995,2025));
+    s.appendChild(svgEl('rect',{x:x1,y:m.t,width:Math.max(1,x2-x1),height:ih,fill:p.color,opacity:.045}));
+  });
+
+  niceTicks(0,20,5).forEach(v=>{
+    const yy = y(v);
+    s.appendChild(svgEl('line',{x1:m.l,y1:yy,x2:m.l+iw,y2:yy,class:'grid'}));
+    const t = svgEl('text',{x:m.l-8,y:yy+3,'text-anchor':'end',class:'axis-value'});
+    t.textContent = `${v}%`;
+    s.appendChild(t);
+  });
+  s.appendChild(svgEl('line',{x1:m.l,y1:m.t+ih,x2:m.l+iw,y2:m.t+ih,class:'baseline'}));
+
+  const pubPts = DATA.map(d=>[x(d.y), y(d.pub)]);
+  const privTop = DATA.map(d=>[x(d.y), y(d.fbcf)]);
+  const privBottom = [...DATA].reverse().map(d=>[x(d.y), y(d.pub)]);
+
+  const pubArea = `M ${x(1995)} ${y(0)} L ${pubPts.map(p=>`${p[0].toFixed(2)} ${p[1].toFixed(2)}`).join(' L ')} L ${x(2025)} ${y(0)} Z`;
+  const privArea = `M ${privTop.map(p=>`${p[0].toFixed(2)} ${p[1].toFixed(2)}`).join(' L ')} L ${privBottom.map(p=>`${p[0].toFixed(2)} ${p[1].toFixed(2)}`).join(' L ')} Z`;
+
+  s.appendChild(svgEl('path',{d:privArea,fill:'#1d5f58',opacity:.82}));
+  s.appendChild(svgEl('path',{d:pubArea,fill:'#b23a2a',opacity:.9}));
+  s.appendChild(svgEl('path',{d:linePath(privTop),fill:'none',stroke:'#0e3f3a','stroke-width':1.2,opacity:.55}));
+
+  // labels at end
+  const d24 = yearData(2024);
+  const lx = x(2024);
+  const pubLabel = svgEl('text',{x:lx-4,y:y(d24.pub/2)+4,'text-anchor':'end',class:'series-label',fill:'#fffdf8'});
+  pubLabel.textContent = 'Público 18%';
+  s.appendChild(pubLabel);
+  const privLabel = svgEl('text',{x:lx-4,y:y((d24.pub+d24.fbcf)/2)+4,'text-anchor':'end',class:'series-label',fill:'#fffdf8'});
+  privLabel.textContent = 'Privado 82%';
+  s.appendChild(privLabel);
+
+  [1995,2000,2005,2010,2015,2020,2025].forEach(v=>{
+    const t = svgEl('text',{x:x(v),y:h-14,'text-anchor':'middle',class:'axis-value'});
+    t.textContent = v;
+    s.appendChild(t);
+  });
+
+  DATA.forEach(d=>{
+    const x1 = x(clamp(d.y-0.5,1995,2025));
+    const x2 = x(clamp(d.y+0.5,1995,2025));
+    const html = () => `
+      <div class="tt-year"><span>${d.y}</span><span>${president(d.y)}</span></div>
+      ${ttRow('#b23a2a','Público',fmt2(d.pub)+'% do PIB')}
+      ${ttRow('#1d5f58','Privado',fmt1(d.priv)+'% do PIB')}
+      ${ttRow('#17150f','Total',fmt1(d.fbcf)+'% do PIB')}
+      <div class="tt-note">Participação pública: ${fmt1(d.pubShare)}%</div>`;
+    addHover(s, x1, m.t, x2-x1, ih, html);
+  });
+
+  const src = svgEl('text',{x:m.l,y:h-2,class:'axis-label'});
+  src.textContent = 'Fonte: IBGE, Ipea, FGV IBRE';
+  s.appendChild(src);
+  box.appendChild(s);
+}
+
+/* ============================================================
+   DONUTS
+   ============================================================ */
+function arcPath(cx,cy,r,start,end){
+  const large = (end-start) > Math.PI ? 1 : 0;
+  const x1 = cx + r*Math.cos(start), y1 = cy + r*Math.sin(start);
+  const x2 = cx + r*Math.cos(end), y2 = cy + r*Math.sin(end);
+  return `M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2} Z`;
+}
+
+function renderDonut(containerId, legendId, items, centerValue, centerLabel, ariaLabel){
+  const box = document.getElementById(containerId);
+  if (!box) return;
+  clearNode(box);
+  const w = Math.max(180, box.clientWidth || 230);
+  const h = w;
+  const cx = w/2, cy = h/2, r = Math.min(w,h)*0.39;
+  const s = makeSvg(w,h,ariaLabel);
+  let angle = -Math.PI/2;
+  const total = items.reduce((a,b)=>a+b.value,0);
+  items.forEach(it=>{
+    const slice = (it.value/total)*Math.PI*2;
+    const end = angle + slice;
+    const p = svgEl('path',{d:arcPath(cx,cy,r,angle,end),fill:it.color,stroke:'#fffdf8','stroke-width':2});
+    p.style.cursor = 'pointer';
+    p.addEventListener('pointerenter', e=>showTip(`
+      <div class="tt-year"><span>${centerLabel}</span><span>${fmt1(it.value)}%</span></div>
+      ${ttRow(it.color,it.label,fmt1(it.value)+'% da FBCF')}
+      ${it.gdp ? ttRow(null,'Equivalente no PIB',fmt1(it.gdp)+'% do PIB') : ''}
+    `, e));
+    p.addEventListener('pointermove', moveTip);
+    p.addEventListener('pointerleave', hideTip);
+    s.appendChild(p);
+    angle = end;
+  });
+  // inner circle
+  s.appendChild(svgEl('circle',{cx,cy,r:r*0.62,fill:'#fffdf8'}));
+  const v = svgEl('text',{x:cx,y:cy-2,'text-anchor':'middle','font-family':'Fraunces, Georgia, serif','font-size':Math.max(20,r*0.30),'fill':'#17150f','font-weight':600});
+  v.textContent = centerValue;
+  s.appendChild(v);
+  const l = svgEl('text',{x:cx,y:cy+Math.max(14,r*0.18),'text-anchor':'middle','font-family':'JetBrains Mono, monospace','font-size':8,'letter-spacing':'.08em','fill':'#746e61'});
+  l.textContent = centerLabel;
+  s.appendChild(l);
+  box.appendChild(s);
+
+  const legend = document.getElementById(legendId);
+  if (legend){
+    legend.innerHTML = items.map(it=>`
+      <div class="donut-legend__row">
+        <i style="background:${it.color}"></i>
+        <span>${it.label}${it.gdp?` <small style="color:var(--muted)">(${fmt1(it.gdp)}% do PIB)</small>`:''}</span>
+        <b>${fmt1(it.value)}%</b>
+      </div>`).join('');
+  }
+}
+
+function renderDonuts(){
+  renderDonut('chart-donut','donut-legend',[
+    {label:'Privado', value:82.0, gdp:13.86, color:'#1d5f58'},
+    {label:'Público', value:18.0, gdp:3.05, color:'#b23a2a'}
+  ],'16,9%','do PIB em 2024','Composição da FBCF por origem em 2024');
+
+  renderDonut('chart-assets','assets-legend',[
+    {label:'Construção', value:44.9, gdp:7.37, color:'#b23a2a'},
+    {label:'Máquinas e bens manufaturados', value:37.9, gdp:6.22, color:'#1d5f58'},
+    {label:'Propriedade intelectual e serviços', value:14.4, gdp:2.36, color:'#b0812d'},
+    {label:'Agropecuária e extrativa', value:2.9, gdp:0.48, color:'#8c8475'}
+  ],'16,4%','do PIB em 2023','Composição da FBCF por tipo de ativo em 2023');
+}
+
+/* ============================================================
+   PUBLIC INVESTMENT LEVELS
+   ============================================================ */
+function renderPubLevels(){
+  const box = document.getElementById('chart-publevels');
+  if (!box) return;
+  clearNode(box);
+  const w = Math.max(300, box.clientWidth);
+  const h = 190;
+  const m = {t: 12, r: 54, b: 26, l: 104};
+  const iw = w-m.l-m.r, ih = h-m.t-m.b;
+  const items = [
+    {label:'Municípios', value:1.15, color:'#b23a2a'},
+    {label:'Estados', value:0.73, color:'#c26a4a'},
+    {label:'União', value:0.24, color:'#d9a79d'},
+    {label:'Estatais federais', value:0.93, color:'#1d5f58'}
+  ];
+  const max = 1.3;
+  const x = scale(0,max,m.l,m.l+iw);
+  const s = makeSvg(w,h,'Investimento público por esfera em 2024');
+  const barH = 24, gap = 12;
+  items.forEach((it,i)=>{
+    const yy = m.t + i*(barH+gap);
+    s.appendChild(svgEl('text',{x:m.l-8,y:yy+barH/2+4,'text-anchor':'end',class:'axis-value',fill:'#17150f'})).textContent = it.label;
+    s.appendChild(svgEl('rect',{x:m.l,y:yy,width:iw,height:barH,fill:'#e4dbca',opacity:.55}));
+    s.appendChild(svgEl('rect',{x:m.l,y:yy,width:x(it.value)-m.l,height:barH,fill:it.color}));
+    const t = svgEl('text',{x:x(it.value)+6,y:yy+barH/2+4,class:'axis-value',fill:'#17150f'});
+    t.textContent = fmt2(it.value)+'%';
+    s.appendChild(t);
+    addHover(s, m.l, yy, iw, barH, ()=>`
+      <div class="tt-year"><span>2024</span><span>Investimento público</span></div>
+      ${ttRow(it.color,it.label,fmt2(it.value)+'% do PIB')}
+    `);
+  });
+  s.appendChild(svgEl('line',{x1:m.l,y1:m.t+ih+2,x2:m.l+iw,y2:m.t+ih+2,class:'baseline'}));
+  box.appendChild(s);
+}
+
+/* ============================================================
+   INFRASTRUCTURE BARS
+   ============================================================ */
+function renderInfra(){
+  const box = document.getElementById('chart-infra');
+  if (!box) return;
+  clearNode(box);
+  const w = Math.max(320, box.clientWidth);
+  const h = 310;
+  const m = {t: 16, r: 54, b: 34, l: 92};
+  const iw = w-m.l-m.r, ih = h-m.t-m.b;
+  const items = [
+    {label:'Energia elétrica', pub:12.7, priv:100.1},
+    {label:'Transportes', pub:43.9, priv:40.8},
+    {label:'Saneamento', pub:22.0, priv:19.1},
+    {label:'Telecom', pub:0.06, priv:28.2}
+  ];
+  const max = 120;
+  const x = scale(0,max,m.l,m.l+iw);
+  const s = makeSvg(w,h,'Investimento em infraestrutura por setor e origem, 2024');
+  const barH = 30, gap = 22;
+  niceTicks(0,120,30).forEach(v=>{
+    s.appendChild(svgEl('line',{x1:x(v),y1:m.t,x2:x(v),y2:m.t+ih,class:'grid'}));
+    const t = svgEl('text',{x:x(v),y:h-12,'text-anchor':'middle',class:'axis-value'});
+    t.textContent = v;
+    s.appendChild(t);
+  });
+  items.forEach((it,i)=>{
+    const total = it.pub+it.priv;
+    const yy = m.t + i*(barH+gap);
+    s.appendChild(svgEl('text',{x:m.l-8,y:yy+barH/2+4,'text-anchor':'end',class:'axis-value',fill:'#17150f'})).textContent = it.label;
+    s.appendChild(svgEl('rect',{x:m.l,y:yy,width:x(it.pub)-m.l,height:barH,fill:'#b23a2a'}));
+    s.appendChild(svgEl('rect',{x:x(it.pub),y:yy,width:x(total)-x(it.pub),height:barH,fill:'#1d5f58'}));
+    const t = svgEl('text',{x:x(total)+6,y:yy+barH/2+4,class:'axis-value',fill:'#17150f'});
+    t.textContent = fmt1(total);
+    s.appendChild(t);
+    addHover(s, m.l, yy, iw, barH, ()=>`
+      <div class="tt-year"><span>2024</span><span>${it.label}</span></div>
+      ${ttRow('#b23a2a','Público',fmt1(it.pub)+' R$ bi')}
+      ${ttRow('#1d5f58','Privado',fmt1(it.priv)+' R$ bi')}
+      ${ttRow('#17150f','Total',fmt1(total)+' R$ bi')}
+      <div class="tt-note">${fmt1(total/266.8*100)}% do investimento em infraestrutura</div>
+    `);
+  });
+  s.appendChild(svgEl('line',{x1:m.l,y1:m.t+ih+2,x2:m.l+iw,y2:m.t+ih+2,class:'baseline'}));
+  box.appendChild(s);
+}
+
+/* ============================================================
+   GAP BARS
+   ============================================================ */
+function renderGap(){
+  const box = document.getElementById('chart-gap');
+  if (!box) return;
+  clearNode(box);
+  const w = Math.max(320, box.clientWidth);
+  const h = 330;
+  const m = {t: 16, r: 72, b: 34, l: 96};
+  const iw = w-m.l-m.r, ih = h-m.t-m.b;
+  const items = [
+    {label:'Transportes', done:0.55, need:2.26},
+    {label:'Telecom', done:0.29, need:0.76},
+    {label:'Saneamento', done:0.27, need:0.45},
+    {label:'Energia', done:1.10, need:0.84}
+  ];
+  const max = 4.0;
+  const x = scale(0,max,m.l,m.l+iw);
+  const s = makeSvg(w,h,'Investimento realizado versus necessário em infraestrutura');
+  const barH = 24, gap = 22;
+  // hatch pattern
+  const defs = svgEl('defs');
+  const pat = svgEl('pattern',{id:'hatch-gap',width:6,height:6,patternUnits:'userSpaceOnUse',patternTransform:'rotate(45)'});
+  pat.appendChild(svgEl('rect',{width:6,height:6,fill:'#fffdf8'}));
+  pat.appendChild(svgEl('line',{x1:0,y1:0,x2:0,y2:6,stroke:'#b23a2a','stroke-width':1.4,opacity:.55}));
+  defs.appendChild(pat); s.appendChild(defs);
+
+  niceTicks(0,4,1).forEach(v=>{
+    s.appendChild(svgEl('line',{x1:x(v),y1:m.t,x2:x(v),y2:m.t+ih,class:'grid'}));
+    const t = svgEl('text',{x:x(v),y:h-12,'text-anchor':'middle',class:'axis-value'});
+    t.textContent = fmt1(v).replace(',0','');
+    s.appendChild(t);
+  });
+
+  items.forEach((it,i)=>{
+    const yy = m.t + i*(barH+gap);
+    s.appendChild(svgEl('text',{x:m.l-8,y:yy+barH/2+4,'text-anchor':'end',class:'axis-value',fill:'#17150f'})).textContent = it.label;
+    s.appendChild(svgEl('rect',{x:m.l,y:yy,width:x(it.need)-m.l,height:barH,fill:'#e4dbca'}));
+    s.appendChild(svgEl('rect',{x:m.l,y:yy,width:x(Math.min(it.done,it.need))-m.l,height:barH,fill:'#1d5f58'}));
+    if (it.need > it.done){
+      s.appendChild(svgEl('rect',{x:x(it.done),y:yy,width:x(it.need)-x(it.done),height:barH,fill:'url(#hatch-gap)'}));
+    } else {
+      s.appendChild(svgEl('line',{x1:x(it.need),y1:yy-3,x2:x(it.need),y2:yy+barH+3,stroke:'#b23a2a','stroke-width':1.5,'stroke-dasharray':'3 2'}));
+      const n = svgEl('text',{x:x(it.need)+4,y:yy-4,class:'axis-value',fill:'#b23a2a'});
+      n.textContent = `necessário ${fmt2(it.need)}`;
+      s.appendChild(n);
+    }
+    const gapV = Math.max(0,it.need-it.done);
+    const t = svgEl('text',{x:m.l+iw+8,y:yy+barH/2+4,class:'axis-value',fill:it.need>it.done?'#b23a2a':'#1d5f58'});
+    t.textContent = it.need>it.done ? `gap ${fmt2(gapV)}` : 'acima';
+    s.appendChild(t);
+    addHover(s, m.l, yy, iw, barH, ()=>`
+      <div class="tt-year"><span>2024</span><span>${it.label}</span></div>
+      ${ttRow('#1d5f58','Realizado',fmt2(it.done)+'% do PIB')}
+      ${ttRow('#b23a2a','Necessário',fmt2(it.need)+'% do PIB')}
+      ${it.need>it.done?ttRow(null,'Gap',fmt2(it.need-it.done)+'% do PIB'):ttRow(null,'Situação','acima da necessidade')}
+    `);
+  });
+
+  // total (ex-energy, because the headline gap excludes the energy surplus)
+  const ty = m.t + items.length*(barH+gap) + 6;
+  s.appendChild(svgEl('line',{x1:m.l,y1:ty-6,x2:m.l+iw,y2:ty-6,stroke:'#17150f','stroke-width':1}));
+  s.appendChild(svgEl('text',{x:m.l-8,y:ty+17,'text-anchor':'end',class:'axis-value',fill:'#17150f','font-weight':600})).textContent = 'Total ex-energia';
+  s.appendChild(svgEl('rect',{x:m.l,y:ty,width:x(3.47)-m.l,height:barH,fill:'#e4dbca'}));
+  s.appendChild(svgEl('rect',{x:m.l,y:ty,width:x(1.12)-m.l,height:barH,fill:'#1d5f58'}));
+  s.appendChild(svgEl('rect',{x:x(1.12),y:ty,width:x(3.47)-x(1.12),height:barH,fill:'url(#hatch-gap)'}));
+  const tt = svgEl('text',{x:m.l+iw+8,y:ty+barH/2+4,class:'axis-value',fill:'#b23a2a','font-weight':600});
+  tt.textContent = 'gap 2,35';
+  s.appendChild(tt);
+  addHover(s, m.l, ty, iw, barH, ()=>`
+    <div class="tt-year"><span>2024</span><span>Total sem energia</span></div>
+    ${ttRow('#1d5f58','Realizado',fmt2(1.12)+'% do PIB')}
+    ${ttRow('#b23a2a','Necessário',fmt2(3.47)+'% do PIB')}
+    ${ttRow(null,'Gap',fmt2(2.35)+'% do PIB')}
+    <div class="tt-note">≈ R$ 276,5 bilhões por ano. Inclui transportes, saneamento e telecom.</div>
+  `);
+
+  box.appendChild(s);
+}
+
+/* ============================================================
+   SOCIAL SMALL MULTIPLES
+   ============================================================ */
+function renderSocial(){
+  const box = document.getElementById('chart-social');
+  if (!box) return;
+  clearNode(box);
+  const w = Math.max(320, box.clientWidth);
+  const mobile = w < 700;
+  const h = mobile ? 520 : 500;
+  const m = {t: 8, r: mobile?52:72, b: 34, l: mobile?40:48};
+  const iw = w-m.l-m.r;
+  const panels = [
+    {key:'fbcf', label:'FBCF', sub:'% do PIB', color:'#17150f', min:14, max:22, step:2, fmt:v=>fmt1(v)+'%'},
+    {key:'pov', label:'Pobreza', sub:'% da população', color:'#b23a2a', min:15, max:60, step:15, fmt:v=>fmt0(v)+'%'},
+    {key:'unemp', label:'Desemprego', sub:'% da força de trabalho', color:'#1d5f58', min:5, max:15, step:5, fmt:v=>fmt0(v)+'%'}
+  ];
+  const gap = 26;
+  const ph = (h - m.t - m.b - gap*(panels.length-1)) / panels.length;
+  const titleH = 18;
+  const x = scale(1995,2025,m.l,m.l+iw);
+  const s = makeSvg(w,h,'FBCF, pobreza e desemprego no Brasil, 1995 a 2025');
+
+  panels.forEach((p,pi)=>{
+    const top = m.t + pi*(ph+gap);
+    const plotTop = top + titleH;
+    const plotH = ph - titleH;
+    const y = scale(p.min,p.max,plotTop+plotH,plotTop);
+
+    // panel background
+    s.appendChild(svgEl('rect',{x:m.l-38,y:top,width:iw+44,height:ph,fill:'#fffdf8',opacity:.5}));
+    // title strip
+    s.appendChild(svgEl('rect',{x:m.l-38,y:top,width:6,height:6,fill:p.color}));
+    const title = svgEl('text',{x:m.l-26,y:top+7,class:'axis-label',fill:p.color,'font-size':9});
+    title.textContent = p.label.toUpperCase() + ' · ' + p.sub.toUpperCase();
+    s.appendChild(title);
+
+    // bands
+    PERIODS.forEach(per=>{
+      const x1 = x(clamp(per.start-0.5,1995,2025));
+      const x2 = x(clamp((per.end===2026?2025:per.end)+0.5,1995,2025));
+      s.appendChild(svgEl('rect',{x:x1,y:plotTop,width:Math.max(1,x2-x1),height:plotH,fill:per.color,opacity:.05}));
+    });
+    // grid
+    niceTicks(p.min,p.max,p.step).forEach(v=>{
+      const yy = y(v);
+      s.appendChild(svgEl('line',{x1:m.l,y1:yy,x2:m.l+iw,y2:yy,class:'grid'}));
+      const t = svgEl('text',{x:m.l-6,y:yy+3,'text-anchor':'end',class:'axis-value'});
+      t.textContent = p.fmt(v);
+      s.appendChild(t);
+    });
+    // separators
+    s.appendChild(svgEl('line',{x1:m.l-38,y1:top+ph,x2:m.l+iw+6,y2:top+ph,stroke:'#d5cbbb','stroke-width':1}));
+    s.appendChild(svgEl('line',{x1:m.l,y1:plotTop+plotH,x2:m.l+iw,y2:plotTop+plotH,class:'baseline'}));
+
+    // line (split on nulls)
+    let segs=[], cur=[];
+    DATA.forEach(d=>{
+      const v=d[p.key];
+      if(v==null){ if(cur.length){segs.push(cur);cur=[];} }
+      else cur.push([x(d.y),y(v)]);
+    });
+    if(cur.length) segs.push(cur);
+    segs.forEach(seg=>s.appendChild(svgEl('path',{d:linePath(seg),fill:'none',stroke:p.color,'stroke-width':1.9,'stroke-linejoin':'round','stroke-linecap':'round'})));
+    // last point
+    const last = [...DATA].reverse().find(d=>d[p.key]!=null);
+    if(last){
+      s.appendChild(svgEl('circle',{cx:x(last.y),cy:y(last[p.key]),r:2.8,fill:p.color}));
+      const lab = svgEl('text',{x:x(last.y)+7,y:y(last[p.key])+3,class:'series-label',fill:p.color});
+      lab.textContent = p.fmt(last[p.key]);
+      s.appendChild(lab);
+    }
+  });
+
+  // x axis
+  [1995,2000,2005,2010,2015,2020,2025].forEach(v=>{
+    const t = svgEl('text',{x:x(v),y:h-12,'text-anchor':'middle',class:'axis-value'});
+    t.textContent = v;
+    s.appendChild(t);
+  });
+
+  // shared hover
+  const hover = svgEl('g',{opacity:0});
+  const vline = svgEl('line',{y1:m.t+18,y2:h-m.b,stroke:'#17150f','stroke-width':.7,'stroke-dasharray':'2 3'});
+  hover.appendChild(vline);
+  s.appendChild(hover);
+  DATA.forEach(d=>{
+    const x1=x(clamp(d.y-0.5,1995,2025)), x2=x(clamp(d.y+0.5,1995,2025));
+    addHover(s,x1,m.t,x2-x1,h-m.t-m.b,()=>`
+      <div class="tt-year"><span>${d.y}</span><span>${president(d.y)}</span></div>
+      ${ttRow('#17150f','FBCF',fmt1(d.fbcf)+'% do PIB')}
+      ${d.pov!=null?ttRow('#b23a2a','Pobreza',fmt1(d.pov)+'%'):''}
+      ${ttRow('#1d5f58','Desemprego',fmt1(d.unemp)+'%')}
+    `,()=>{hover.setAttribute('opacity','1');vline.setAttribute('x1',x(d.y));vline.setAttribute('x2',x(d.y));},()=>hover.setAttribute('opacity','0'));
+  });
+
+  box.appendChild(s);
+}
+
+/* ============================================================
+   SCATTER
+   ============================================================ */
+function regression(points){
+  const n=points.length;
+  const sx=points.reduce((a,p)=>a+p[0],0), sy=points.reduce((a,p)=>a+p[1],0);
+  const mx=sx/n, my=sy/n;
+  let num=0,den=0;
+  points.forEach(p=>{num+=(p[0]-mx)*(p[1]-my);den+=(p[0]-mx)**2;});
+  const slope=den?num/den:0, intercept=my-slope*mx;
+  const rnum=num, rden=Math.sqrt(den*points.reduce((a,p)=>a+(p[1]-my)**2,0));
+  return {slope,intercept,r:rden?rnum/rden:0};
+}
+function renderScatter(id, yKey, yLabel, yMin, yMax, yStep, color, noteId, labelYears){
+  const box = document.getElementById(id);
+  if (!box) return;
+  clearNode(box);
+  const w = Math.max(280, box.clientWidth);
+  const h = 320;
+  const m = {t: 18, r: 22, b: 42, l: 48};
+  const iw=w-m.l-m.r, ih=h-m.t-m.b;
+  const x = scale(14,22,m.l,m.l+iw);
+  const y = scale(yMin,yMax,m.t+ih,m.t);
+  const s = makeSvg(w,h,`Dispersão entre FBCF e ${yLabel}`);
+  niceTicks(yMin,yMax,yStep).forEach(v=>{
+    const yy=y(v);
+    s.appendChild(svgEl('line',{x1:m.l,y1:yy,x2:m.l+iw,y2:yy,class:'grid'}));
+    const t=svgEl('text',{x:m.l-6,y:yy+3,'text-anchor':'end',class:'axis-value'});
+    t.textContent=fmt0(v)+'%'; s.appendChild(t);
+  });
+  [14,16,18,20,22].forEach(v=>{
+    const t=svgEl('text',{x:x(v),y:h-16,'text-anchor':'middle',class:'axis-value'});
+    t.textContent=v+'%'; s.appendChild(t);
+  });
+  s.appendChild(svgEl('line',{x1:m.l,y1:m.t+ih,x2:m.l+iw,y2:m.t+ih,class:'baseline'}));
+  s.appendChild(svgEl('line',{x1:m.l,y1:m.t,x2:m.l,y2:m.t+ih,class:'baseline'}));
+  // axis labels
+  const xl=svgEl('text',{x:m.l+iw,y:h-2,'text-anchor':'end',class:'axis-label'}); xl.textContent='FBCF · % DO PIB'; s.appendChild(xl);
+  const yl=svgEl('text',{x:m.l,y:m.t-6,class:'axis-label'}); yl.textContent=yLabel.toUpperCase()+' · %'; s.appendChild(yl);
+
+  const pts = DATA.filter(d=>d[yKey]!=null).map(d=>[d.fbcf,d[yKey],d.y]);
+  const reg = regression(pts.map(p=>[p[0],p[1]]));
+  const x1=14, x2=22;
+  s.appendChild(svgEl('line',{x1:x(x1),y1:y(reg.intercept+reg.slope*x1),x2:x(x2),y2:y(reg.intercept+reg.slope*x2),stroke:color,'stroke-width':1.4,'stroke-dasharray':'5 3',opacity:.8}));
+
+  const outliers = new Set(labelYears || [2009,2010,2015,2016,2020,2021,2025]);
+  pts.forEach(p=>{
+    const c=svgEl('circle',{cx:x(p[0]),cy:y(p[1]),r:3.4,fill:color,opacity:.72,stroke:'#fffdf8','stroke-width':1});
+    c.style.cursor='crosshair';
+    c.addEventListener('pointerenter',e=>showTip(`
+      <div class="tt-year"><span>${p[2]}</span><span>${president(p[2])}</span></div>
+      ${ttRow(color,'FBCF',fmt1(p[0])+'% do PIB')}
+      ${ttRow(null,yLabel,fmt1(p[1])+'%')}
+    `,e));
+    c.addEventListener('pointermove',moveTip);
+    c.addEventListener('pointerleave',hideTip);
+    s.appendChild(c);
+    if(outliers.has(p[2])){
+      const t=svgEl('text',{x:x(p[0])+5,y:y(p[1])-5,class:'axis-value',fill:'#746e61','paint-order':'stroke',stroke:'#fffdf8','stroke-width':2.4});
+      t.textContent=p[2]; s.appendChild(t);
+    }
+  });
+  const rlab=svgEl('text',{x:m.l+iw,y:m.t+12,'text-anchor':'end',class:'axis-value',fill:color,'font-weight':600});
+  rlab.textContent=`r = ${reg.r.toFixed(2).replace('.',',')}`;
+  s.appendChild(rlab);
+  box.appendChild(s);
+}
+
+/* ============================================================
+   INTERNATIONAL COMPARISON
+   ============================================================ */
+function renderIntl(){
+  const box = document.getElementById('chart-intl');
+  if (!box) return;
+  clearNode(box);
+  const w = Math.max(280, box.clientWidth);
+  const h = 340;
+  const m = {t: 16, r: 38, b: 28, l: 72};
+  const iw=w-m.l-m.r, ih=h-m.t-m.b;
+  const items = [
+    {label:'Colômbia', v:16.2},
+    {label:'Brasil', v:16.9},
+    {label:'Alemanha', v:20.5},
+    {label:'EUA', v:21.3},
+    {label:'Chile', v:23.7},
+    {label:'México', v:23.8},
+    {label:'Mundo', v:25.6},
+    {label:'Coreia', v:30.0},
+    {label:'Índia', v:31.6},
+    {label:'China', v:39.7}
+  ];
+  const max=42;
+  const x=scale(0,max,m.l,m.l+iw);
+  const s=makeSvg(w,h,'Comparação internacional da FBCF em 2024');
+  const barH=18, gap=10;
+  items.forEach((it,i)=>{
+    const yy=m.t+i*(barH+gap);
+    const isBr=it.label==='Brasil';
+    s.appendChild(svgEl('text',{x:m.l-6,y:yy+barH/2+4,'text-anchor':'end',class:'axis-value',fill:isBr?'#b23a2a':'#746e61','font-weight':isBr?600:400})).textContent=it.label;
+    s.appendChild(svgEl('rect',{x:m.l,y:yy,width:x(it.v)-m.l,height:barH,fill:isBr?'#b23a2a':'#d5cbbb'}));
+    const t=svgEl('text',{x:x(it.v)+5,y:yy+barH/2+4,class:'axis-value',fill:isBr?'#b23a2a':'#746e61','font-weight':isBr?600:400});
+    t.textContent=fmt1(it.v)+'%'; s.appendChild(t);
+    addHover(s,m.l,yy,iw,barH,()=>`
+      <div class="tt-year"><span>2024</span><span>FBCF</span></div>
+      ${ttRow(isBr?'#b23a2a':'#8c8475',it.label,fmt1(it.v)+'% do PIB')}
+    `);
+  });
+  box.appendChild(s);
+}
+
+/* ============================================================
+   ORIENTATION SCATTER
+   ============================================================ */
+function renderOrientation(){
+  const box = document.getElementById('chart-orientation');
+  if (!box) return;
+  clearNode(box);
+  const w = Math.max(300, box.clientWidth);
+  const h = 330;
+  const m = {t: 22, r: 28, b: 48, l: 46};
+  const iw=w-m.l-m.r, ih=h-m.t-m.b;
+  const x=scale(-4.5,4.5,m.l,m.l+iw);
+  const y=scale(14,20.5,m.t+ih,m.t);
+  const s=makeSvg(w,h,'Orientação econômica e FBCF média por governo');
+  [14,15,16,17,18,19,20].forEach(v=>{
+    const yy=y(v);
+    s.appendChild(svgEl('line',{x1:m.l,y1:yy,x2:m.l+iw,y2:yy,class:'grid'}));
+    const t=svgEl('text',{x:m.l-6,y:yy+3,'text-anchor':'end',class:'axis-value'});t.textContent=v+'%';s.appendChild(t);
+  });
+  s.appendChild(svgEl('line',{x1:x(0),y1:m.t,x2:x(0),y2:m.t+ih,stroke:'#bfb3a0','stroke-width':.8,'stroke-dasharray':'3 3'}));
+  s.appendChild(svgEl('line',{x1:m.l,y1:y(18),x2:m.l+iw,y2:y(18),stroke:'#bfb3a0','stroke-width':.8,'stroke-dasharray':'3 3'}));
+  const xl=svgEl('text',{x:m.l,y:h-8,class:'axis-label'});xl.textContent='LIBERAL';s.appendChild(xl);
+  const xr=svgEl('text',{x:m.l+iw,y:h-8,'text-anchor':'end',class:'axis-label'});xr.textContent='DESENVOLVIMENTISTA';s.appendChild(xr);
+  const yl=svgEl('text',{x:m.l,y:m.t-8,class:'axis-label'});yl.textContent='FBCF MÉDIA · % DO PIB';s.appendChild(yl);
+
+  // jitter to separate Lula/Lula3 and FHC/Bolsonaro
+  const jitter = {fhc:[-0.15,0.16], lula:[0.12,0.10], dilma:[0.05,-0.12], temer:[-0.1,0.08], bolsonaro:[-0.12,-0.16], lula3:[0.18,-0.18]};
+  PERIODS.forEach(p=>{
+    const j=jitter[p.id]||[0,0];
+    const px=x(p.score+j[0]), py=y(p.avgFbcf+j[1]);
+    s.appendChild(svgEl('circle',{cx:px,cy:py,r:6,fill:p.color,stroke:'#fffdf8','stroke-width':1.5}));
+    const t=svgEl('text',{x:px,y:py-11,'text-anchor':'middle',class:'series-label',fill:p.color});
+    t.textContent=p.name; s.appendChild(t);
+    const c=svgEl('circle',{cx:px,cy:py,r:12,fill:'transparent',style:'cursor:pointer'});
+    c.addEventListener('pointerenter',e=>showTip(`
+      <div class="tt-year"><span>${p.start}–${p.end}</span><span>${p.name}</span></div>
+      ${ttRow(p.color,'FBCF média',fmt1(p.avgFbcf)+'% do PIB')}
+      ${ttRow(null,'Investimento público',fmt1(p.avgPub)+'% do PIB')}
+      ${ttRow(null,'PIB médio',fmt1(p.avgGdp)+'% ao ano')}
+      <div class="tt-note">${p.orientation}</div>
+    `,e));
+    c.addEventListener('pointermove',moveTip); c.addEventListener('pointerleave',hideTip);
+    s.appendChild(c);
+  });
+  box.appendChild(s);
+}
+
+/* ============================================================
+   GOVERNMENT SPARKLINES
+   ============================================================ */
+function renderSparks(){
+  document.querySelectorAll('.gov-spark').forEach(box=>{
+    const a=+box.dataset.start, b=+box.dataset.end, color=box.dataset.color||'#17150f';
+    const subset=DATA.filter(d=>d.y>=a&&d.y<=Math.min(b,2025));
+    if(subset.length<2) return;
+    clearNode(box);
+    const w=Math.max(120,box.clientWidth||240); const h=52;
+    const m={l:2,r:2,t:5,b:4};
+    const iw=w-m.l-m.r, ih=h-m.t-m.b;
+    const x=scale(a,Math.min(b,2025),m.l,m.l+iw);
+    const vals=subset.map(d=>d.fbcf);
+    const mn=Math.min(...vals)-.4, mx=Math.max(...vals)+.4;
+    const y=scale(mn,mx,m.t+ih,m.t);
+    const s=makeSvg(w,h,'Minissérie da FBCF do período');
+    s.setAttribute('aria-hidden','true');
+    const pts=subset.map(d=>[x(d.y),y(d.fbcf)]);
+    const area=`M ${pts[0][0]} ${m.t+ih} L ${pts.map(p=>`${p[0]} ${p[1]}`).join(' L ')} L ${pts[pts.length-1][0]} ${m.t+ih} Z`;
+    s.appendChild(svgEl('path',{d:area,fill:color,opacity:.08}));
+    s.appendChild(svgEl('path',{d:linePath(pts),fill:'none',stroke:color,'stroke-width':1.5,'stroke-linejoin':'round','stroke-linecap':'round'}));
+    const last=pts[pts.length-1];
+    s.appendChild(svgEl('circle',{cx:last[0],cy:last[1],r:2.4,fill:color}));
+    box.appendChild(s);
+  });
+}
+
+/* ============================================================
+   ANNUAL TABLE + CSV
+   ============================================================ */
+function renderTable(){
+  const tbody=document.querySelector('#annual-table tbody');
+  if(!tbody) return;
+  tbody.innerHTML=DATA.map(d=>`
+    <tr>
+      <td class="name">${d.y}</td>
+      <td class="num">${fmt1(d.fbcf)}</td>
+      <td class="num">${fmt2(d.pub)}</td>
+      <td class="num">${fmt1(d.priv)}</td>
+      <td class="num">${fmt1(d.pubShare)}</td>
+      <td class="num">${fmt1(d.gdp)}</td>
+      <td class="num">${fmt1(d.unemp)}</td>
+      <td class="num">${d.pov!=null?fmt1(d.pov):'—'}</td>
+      <td class="num">${d.gini!=null?fmt1(d.gini):'—'}</td>
+      <td class="num">${d.hdi!=null?d.hdi.toFixed(3).replace('.',','):'—'}</td>
+    </tr>`).join('');
+}
+function downloadCSV(){
+  const head=['ano','fbcf_pib','investimento_publico_pib','investimento_privado_pib','participacao_publica_pct','pib_crescimento_pct','desemprego_pct','pobreza_pct','gini','idh','fdi_pib','poupanca_pib'];
+  const rows=DATA.map(d=>[d.y,d.fbcf,d.pub,d.priv,d.pubShare,d.gdp,d.unemp,d.pov??'',d.gini??'',d.hdi??'',d.fdi,d.sav]);
+  const csv=[head,...rows].map(r=>r.join(';')).join('\n');
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download='investimento-brasil-1995-2025.csv'; a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+/* ============================================================
+   RENDER ALL
+   ============================================================ */
+let lastWidth=0;
+function renderAll(force){
+  const w=document.documentElement.clientWidth;
+  if(!force && Math.abs(w-lastWidth)<2) return;
+  lastWidth=w;
+  renderHeroSpark();
+  renderMain();
+  renderPubPriv();
+  renderDonuts();
+  renderPubLevels();
+  renderInfra();
+  renderGap();
+  renderSocial();
+  renderScatter('chart-scatter-gdp','gdp','Crescimento do PIB',-4,8,4,'#3b5578',null,[2009,2010,2015,2016]);
+  renderScatter('chart-scatter-unemp','unemp','Desemprego',4,15,2,'#1d5f58',null,[2016,2020,2021,2025]);
+  renderIntl();
+  renderOrientation();
+  renderSparks();
+}
+
+/* ============================================================
+   UI
+   ============================================================ */
+function initUI(){
+  // progress
+  const bar=document.getElementById('progressBar');
+  const onScroll=()=>{
+    const h=document.documentElement;
+    const p=h.scrollTop/(h.scrollHeight-h.clientHeight);
+    bar.style.width=Math.min(100,Math.max(0,p*100))+'%';
+  };
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  window.addEventListener('scroll',()=>{ tooltip.classList.remove('show'); },{passive:true});
+  window.addEventListener('resize',()=>{ tooltip.classList.remove('show'); },{passive:true});
+  document.addEventListener('pointerdown',e=>{ if(!e.target.closest('.chart')) tooltip.classList.remove('show'); },{passive:true});
+
+  // nav active
+  const links=[...document.querySelectorAll('.nav a')];
+  const sections=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){
+        links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+en.target.id));
+      }
+    });
+  },{rootMargin:'-35% 0px -55% 0px',threshold:0});
+  sections.forEach(sec=>obs.observe(sec));
+
+  // reveal
+  const revObs=new IntersectionObserver(entries=>{
+    entries.forEach(en=>{ if(en.isIntersecting){en.target.classList.add('in');revObs.unobserve(en.target);} });
+  },{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
+
+  // count up
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('[data-count]').forEach(el=>{
+    const target=parseFloat(el.dataset.count);
+    const dec=parseInt(el.dataset.dec||'0',10);
+    if(reduce){ el.firstChild.textContent=target.toLocaleString('pt-BR',{minimumFractionDigits:dec,maximumFractionDigits:dec}); return; }
+    let start=null;
+    function step(ts){
+      if(!start) start=ts;
+      const p=Math.min(1,(ts-start)/900);
+      const eased=1-Math.pow(1-p,3);
+      const val=target*eased;
+      el.firstChild.textContent=val.toLocaleString('pt-BR',{minimumFractionDigits:dec,maximumFractionDigits:dec});
+      if(p<1) requestAnimationFrame(step);
+      else el.firstChild.textContent=target.toLocaleString('pt-BR',{minimumFractionDigits:dec,maximumFractionDigits:dec});
+    }
+    requestAnimationFrame(step);
+  });
+
+  // csv
+  const btn=document.getElementById('btn-csv');
+  if(btn) btn.addEventListener('click',downloadCSV);
+
+  // resize
+  let rt=null;
+  window.addEventListener('resize',()=>{ clearTimeout(rt); rt=setTimeout(()=>renderAll(false),140); });
+}
+
+/* ============================================================
+   BOOT
+   ============================================================ */
+document.addEventListener('DOMContentLoaded',()=>{
+  renderAll(true);
+  renderTable();
+  initUI();
+  // fonts can change text metrics; re-render once after load
+  if(document.fonts && document.fonts.ready){
+    document.fonts.ready.then(()=>{ setTimeout(()=>renderAll(true),60); });
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,2006 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas do Desenvolvimento Brasileiro — 1996–2026</title>
+<meta name="description" content="Trinta anos de desenvolvimento brasileiro em fatos datados, dados e mecanismos causais: estabilização, commodities, inclusão, crise, reformas, pandemia, clima e o ciclo 2023–2026.">
+<meta name="author" content="Análise de dados públicos">
+<meta name="theme-color" content="#f2ede3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f2ede3;
+  --paper-2:#ebe4d6;
+  --paper-3:#e2d8c6;
+  --white:#fffdf8;
+  --ink:#17150f;
+  --ink-2:#3d3a32;
+  --muted:#655f53;
+  --line:#d5cbbb;
+  --line-2:#bfb3a0;
+  --green:#1f4d3f;
+  --green-soft:#c9dcd4;
+  --red:#b23a2a;
+  --gold:#a97b28;
+  --blue:#3b5578;
+  --teal:#1d5f58;
+  --plum:#7d4560;
+  --shadow:0 1px 0 rgba(23,21,15,.04),0 24px 60px -38px rgba(23,21,15,.35);
+  --serif:'Fraunces',Georgia,'Times New Roman',serif;
+  --sans:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+::selection{background:var(--green);color:var(--white)}
+a{color:var(--green);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--ink)}
+img,svg{max-width:100%}
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+.mono{font-family:var(--mono)}
+.muted{color:var(--muted)}
+.progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:120;background:transparent;pointer-events:none}
+.progress__bar{height:100%;width:0;background:var(--green);transition:width .08s linear}
+.topbar{position:sticky;top:0;z-index:110;background:rgba(242,237,227,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.topbar__inner{display:flex;align-items:center;justify-content:space-between;gap:24px;height:58px}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink);flex:0 0 auto}
+.brand__mark{width:30px;height:30px;border:1px solid var(--ink);display:grid;place-items:center;font-family:var(--mono);font-size:9px;letter-spacing:.05em;line-height:1;background:var(--green);color:var(--paper)}
+.brand__text{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;align-items:center;gap:2px;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:8px 9px;white-space:nowrap;border-bottom:1px solid transparent;transition:color .15s,border-color .15s}
+.nav a:hover{color:var(--ink)}
+.nav a.active{color:var(--ink);border-bottom-color:var(--green)}
+.topbar__year{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--muted);border:1px solid var(--line-2);padding:4px 7px;white-space:nowrap}
+
+/* hero */
+.hero{position:relative;padding:84px 0 62px;border-bottom:1px solid var(--line);overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:78px 78px;opacity:.2;-webkit-mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.5) 60%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.5) 60%,transparent 100%)}
+.hero__grid{position:relative;display:grid;grid-template-columns:minmax(0,1.55fr) minmax(300px,.72fr);gap:56px;align-items:end}
+.kicker{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:10px;margin-bottom:22px}
+.kicker::before{content:"";width:26px;height:1px;background:var(--green);display:inline-block}
+.hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(44px,6.1vw,84px);line-height:.95;letter-spacing:-.045em;margin:0 0 26px;max-width:900px}
+.hero h1 em{display:block;font-style:italic;font-weight:500;color:var(--green)}
+.hero__deck{font-size:19px;line-height:1.55;color:var(--ink-2);max-width:700px;margin:0 0 28px}
+.hero__byline{font-family:var(--mono);font-size:10px;line-height:1.7;letter-spacing:.04em;color:var(--muted);max-width:650px;border-top:1px solid var(--line);padding-top:16px}
+.hero__card{background:var(--white);border:1px solid var(--line);box-shadow:var(--shadow);padding:22px 22px 16px;position:relative}
+.hero__card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--green)}
+.hero__card-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:10px}
+.hero__card-head span:first-child{font-family:var(--mono);font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+.hero__card-head span:last-child{font-family:var(--serif);font-size:21px;line-height:1}
+.hero-stat{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:16px;padding:9px 0;border-bottom:1px solid var(--line)}
+.hero-stat:last-of-type{border-bottom:0}
+.hero-stat__label{font-size:11.5px;color:var(--muted);line-height:1.35}
+.hero-stat__value{font-family:var(--serif);font-size:30px;line-height:1;letter-spacing:-.03em;white-space:nowrap}
+.hero-stat__value small{font-family:var(--mono);font-size:9px;letter-spacing:.05em;color:var(--muted);margin-left:3px}
+.hero__note{font-size:10.5px;line-height:1.5;color:var(--muted);border-top:1px solid var(--line);padding-top:9px;margin-top:8px}
+
+/* sections */
+.section{padding:88px 0;border-bottom:1px solid var(--line);position:relative;scroll-margin-top:76px}
+.section--tint{background:var(--paper-2)}
+.section--dark{background:var(--ink);color:var(--paper);border-bottom:0}
+.section--dark .muted,.section--dark .section__deck{color:#bcb3a3}
+.section__head{display:grid;grid-template-columns:86px minmax(0,1fr);gap:24px;margin-bottom:38px;align-items:start}
+.section__num{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--green);padding-top:10px}
+.section--dark .section__num{color:var(--green-soft)}
+.section__title{font-family:var(--serif);font-size:clamp(34px,4.2vw,52px);line-height:1.02;letter-spacing:-.035em;font-weight:600;margin:0 0 14px;max-width:920px}
+.section__deck{font-size:17px;line-height:1.6;color:var(--muted);max-width:800px;margin:0}
+.section--dark .section__title{color:var(--paper)}
+h3{font-family:var(--serif);font-weight:600;letter-spacing:-.02em;margin:0}
+p{margin:0 0 16px}
+p:last-child{margin-bottom:0}
+strong{font-weight:600}
+.small{font-size:12px;line-height:1.55;color:var(--muted)}
+.tiny{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.rule{height:1px;background:var(--line);margin:32px 0}
+.grid-2{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:40px;align-items:start}
+.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.grid-2>*,.grid-3>*,.grid-4>*{min-width:0}
+.card{background:var(--white);border:1px solid var(--line);padding:22px}
+.card h4{font-family:var(--serif);font-size:21px;line-height:1.15;margin:0 0 8px;letter-spacing:-.02em}
+.card p{font-size:13px;line-height:1.58;color:var(--ink-2)}
+.card--accent{border-top:3px solid var(--green)}
+.callout{border-left:3px solid var(--green);background:rgba(31,77,63,.065);padding:18px 22px;margin:26px 0}
+.callout p{font-size:15px;line-height:1.55;margin:0;color:var(--ink-2)}
+.callout strong{color:var(--ink)}
+.quote{font-family:var(--serif);font-size:clamp(24px,3vw,36px);line-height:1.16;letter-spacing:-.02em;max-width:940px;margin:0;color:var(--ink)}
+.quote em{color:var(--green)}
+.quote__source{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:14px}
+.tag{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line-2);padding:2px 6px;border-radius:999px;color:var(--muted);white-space:nowrap}
+.tag--green{border-color:#a9c9bd;color:var(--green);background:rgba(31,77,63,.06)}
+.tag--red{border-color:#d9a79d;color:var(--red);background:rgba(178,58,42,.06)}
+.tag--gold{border-color:#d9c18c;color:#7e5a15;background:rgba(169,123,40,.09)}
+.tag--blue{border-color:#aebdd3;color:var(--blue);background:rgba(59,85,120,.06)}
+
+/* metric grid */
+.five{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.five__item{padding:18px 16px;border-right:1px solid var(--line);min-height:150px}
+.five__item:last-child{border-right:0}
+.five__item b{font-family:var(--mono);font-size:8.5px;letter-spacing:.08em;color:var(--green);font-weight:500}
+.five__item p{font-family:var(--serif);font-size:17px;line-height:1.22;letter-spacing:-.01em;margin:9px 0 0;color:var(--ink)}
+.five__item p span{color:var(--muted);font-family:var(--sans);font-size:10.5px;line-height:1.45;display:block;margin-top:6px;letter-spacing:0}
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.metric{padding:17px 16px 15px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(255,253,248,.35)}
+.metric__label{font-size:10.5px;line-height:1.35;color:var(--muted);min-height:29px}
+.metric__value{font-family:var(--serif);font-size:27px;line-height:.98;letter-spacing:-.03em;margin:7px 0 5px}
+.metric__value small{font-family:var(--mono);font-size:8px;color:var(--muted);letter-spacing:.04em;margin-left:3px}
+.metric__delta{font-family:var(--mono);font-size:9px;color:var(--green)}
+.metric__delta.neg{color:var(--red)}
+
+/* era */
+.era{padding:38px 0 8px;border-top:1px solid var(--line)}
+.era:first-of-type{border-top:0}
+.era__head{display:grid;grid-template-columns:132px minmax(0,1fr);gap:28px;margin-bottom:16px;align-items:start}
+.era__years{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--green);padding-top:7px}
+.era__title{font-family:var(--serif);font-size:clamp(30px,3.7vw,44px);line-height:1.02;letter-spacing:-.035em;margin:0 0 10px}
+.era__summary{font-size:14.5px;line-height:1.58;color:var(--ink-2);max-width:830px;margin:0}
+.era__stats{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:12px}
+.era__stat{font-family:var(--mono);font-size:9px;letter-spacing:.03em;color:var(--muted);border-left:2px solid var(--green);padding-left:7px}
+.era__stat b{color:var(--ink);font-weight:500}
+.timeline{position:relative;margin-left:132px;padding-left:30px;border-left:1px solid var(--line)}
+.event{position:relative;padding:15px 0 17px;border-bottom:1px solid var(--line)}
+.event:last-child{border-bottom:0}
+.event::before{content:"";position:absolute;left:-35px;top:23px;width:9px;height:9px;background:var(--paper);border:2px solid var(--green);border-radius:50%}
+.event__top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:2px}
+.event__date{font-family:var(--mono);font-size:9px;letter-spacing:.07em;color:var(--green);white-space:nowrap}
+.event h4{font-family:var(--serif);font-size:22px;line-height:1.1;letter-spacing:-.02em;margin:0 0 5px;font-weight:600}
+.event p{font-size:12.5px;line-height:1.5;color:var(--ink-2);margin:0 0 4px}
+.event p:last-child{margin-bottom:0}
+.event p b{font-family:var(--mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--green);font-weight:500;margin-right:4px}
+.event--turning::before{background:var(--green);border-color:var(--green)}
+.event--crisis::before{background:var(--red);border-color:var(--red)}
+.event--social::before{background:var(--gold);border-color:var(--gold)}
+
+/* forces */
+.forces{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.force{background:var(--white);border:1px solid var(--line);padding:20px;display:flex;flex-direction:column;gap:8px}
+.force__n{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--green)}
+.force h4{font-family:var(--serif);font-size:21px;line-height:1.12;margin:0;letter-spacing:-.02em}
+.force p{font-size:11.5px;line-height:1.5;color:var(--muted);margin:0}
+.force .mech{font-size:10.5px;line-height:1.45;color:var(--ink-2);border-top:1px solid var(--line);padding-top:8px;margin-top:auto}
+.force .mech b{font-family:var(--mono);font-size:8px;letter-spacing:.06em;text-transform:uppercase;color:var(--green)}
+
+/* charts */
+.chart-card{background:var(--white);border:1px solid var(--line);padding:20px 22px 12px}
+.chart-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:6px;flex-wrap:wrap}
+.chart-title{font-size:14px;font-weight:600;line-height:1.3}
+.chart-sub{font-family:var(--mono);font-size:8.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+.chart{width:100%;position:relative;min-height:120px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart svg text{font-family:var(--sans);fill:var(--muted);font-size:11px}
+.chart svg .axis-value{font-family:var(--mono);font-size:9px;fill:var(--muted)}
+.chart svg .axis-label{font-family:var(--mono);font-size:8px;letter-spacing:.07em;text-transform:uppercase;fill:var(--muted)}
+.chart svg .series-label{font-family:var(--sans);font-size:10.5px;font-weight:600;fill:var(--ink)}
+.chart svg .annotation{font-family:var(--sans);font-size:9.5px;fill:var(--ink-2)}
+.chart svg .grid{stroke:var(--line);stroke-width:.7;stroke-dasharray:2 4}
+.chart svg .baseline{stroke:var(--line-2);stroke-width:1}
+.chart-note{font-size:10px;line-height:1.5;color:var(--muted);margin-top:8px}
+.legend{display:flex;gap:13px;flex-wrap:wrap;font-size:10.5px;color:var(--muted);align-items:center}
+.legend span{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.legend i{width:10px;height:10px;display:inline-block;flex:0 0 auto}
+.legend i.dot{border-radius:50%;width:7px;height:7px}
+
+/* tables */
+.table-wrap{width:100%;overflow-x:auto;border:1px solid var(--line);background:var(--white)}
+table{border-collapse:collapse;width:100%;font-size:12px}
+th,td{padding:8px 9px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:8px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--paper-2)}
+tbody tr:hover{background:rgba(169,123,40,.06)}
+td.num,th.num{text-align:right;font-family:var(--mono);font-size:10px;white-space:nowrap}
+td.name{font-weight:600}
+.table-note{font-size:10px;color:var(--muted);margin-top:7px;line-height:1.5}
+.rank{font-family:var(--mono);font-size:10px;letter-spacing:.02em;color:var(--green);font-weight:500;white-space:nowrap}
+.rank--bad{color:var(--red)}
+.rank--mid{color:var(--gold)}
+
+/* causal chains */
+.chains{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.chain{display:grid;grid-template-columns:1.05fr 26px 1.25fr 26px 1.2fr;gap:8px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.chain__box{font-size:11.5px;line-height:1.45;color:var(--ink-2)}
+.chain__box b{display:block;font-family:var(--mono);font-size:8px;letter-spacing:.07em;text-transform:uppercase;color:var(--green);margin-bottom:2px}
+.chain__arrow{font-family:var(--mono);font-size:14px;color:var(--green);text-align:center}
+
+/* verdicts / theses / agenda */
+.verdicts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.verdict{background:var(--white);border:1px solid var(--line);padding:22px}
+.verdict h4{font-family:var(--serif);font-size:23px;line-height:1.1;margin:0 0 10px}
+.verdict ul{margin:0;padding-left:16px;font-size:11.5px;line-height:1.6;color:var(--ink-2)}
+.verdict li{margin-bottom:5px}
+.theses{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.thesis{display:grid;grid-template-columns:64px minmax(0,1fr);gap:20px;padding:20px 0;border-bottom:1px solid var(--line)}
+.thesis__n{font-family:var(--serif);font-size:38px;line-height:1;color:#9fc4b5;letter-spacing:-.04em}
+.thesis h4{font-family:var(--serif);font-size:23px;line-height:1.12;margin:0 0 4px}
+.thesis p{font-size:12.5px;line-height:1.55;color:var(--muted);margin:0}
+.agenda{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.agenda .card h4{font-size:17px}
+.agenda .card p{font-size:11.5px}
+
+/* method */
+details{border-top:1px solid var(--line);padding:17px 0}
+details:last-of-type{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-family:var(--serif);font-size:21px;letter-spacing:-.02em;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--mono);font-size:16px;color:var(--green)}
+details[open] summary::after{content:"–"}
+details .details-body{padding-top:12px;font-size:12.5px;line-height:1.6;color:var(--ink-2);max-width:920px}
+details .details-body ul{margin:0 0 10px;padding-left:18px}
+details .details-body li{margin-bottom:5px}
+.source-list{list-style:none;margin:0;padding:0;counter-reset:src}
+.source-list li{counter-increment:src;position:relative;padding:8px 0 8px 28px;border-bottom:1px solid var(--line);font-size:11.5px;line-height:1.5}
+.source-list li::before{content:counter(src);position:absolute;left:0;top:8px;font-family:var(--mono);font-size:8px;color:var(--green)}
+.source-list a{word-break:break-word}
+
+/* footer */
+.footer{background:var(--ink);color:var(--paper);padding:54px 0 32px}
+.footer__grid{display:grid;grid-template-columns:1.4fr .8fr .8fr;gap:40px}
+.footer h3{font-family:var(--serif);font-size:28px;line-height:1.05;margin:0 0 10px;color:var(--paper)}
+.footer p{font-size:11.5px;line-height:1.6;color:#bcb3a3;max-width:560px}
+.footer__label{font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:#8f8676;margin-bottom:10px}
+.footer a{color:#d9cbb8;text-decoration:none;font-size:11.5px;display:block;margin-bottom:5px}
+.footer a:hover{color:#fff}
+.footer__bottom{display:flex;justify-content:space-between;gap:20px;border-top:1px solid #3a362d;margin-top:34px;padding-top:15px;font-family:var(--mono);font-size:8px;letter-spacing:.07em;text-transform:uppercase;color:#8f8676}
+
+/* tooltip */
+.tooltip{position:fixed;top:0;left:0;z-index:200;pointer-events:none;background:#17150f;color:#f2ede3;padding:9px 11px;max-width:290px;font-size:10.5px;line-height:1.45;box-shadow:0 10px 30px rgba(0,0,0,.25);opacity:0;transform:translate(-9999px,-9999px);transition:opacity .1s}
+.tooltip.show{opacity:1}
+.tt-year{font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:#bcb3a3;margin-bottom:5px;display:flex;justify-content:space-between;gap:12px}
+.tt-row{display:flex;justify-content:space-between;gap:18px;margin:1px 0}
+.tt-row b{font-family:var(--mono);font-weight:500;white-space:nowrap}
+.tt-note{border-top:1px solid #3a362d;margin-top:5px;padding-top:4px;color:#bcb3a3;font-size:9.5px}
+
+.reveal{opacity:0;transform:translateY(12px);transition:opacity .65s ease,transform .65s ease}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}.tooltip{transition:none}}
+
+@media(max-width:1080px){
+  .hero__grid{grid-template-columns:1fr;gap:34px}
+  .hero__card{max-width:560px}
+  .metrics{grid-template-columns:repeat(3,1fr)}
+  .five{grid-template-columns:repeat(3,1fr)}
+  .five__item:nth-child(3){border-right:0}
+  .five__item:nth-child(n+4){border-top:1px solid var(--line)}
+  .forces{grid-template-columns:repeat(2,1fr)}
+  .agenda{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:900px){
+  .wrap{padding:0 22px}
+  .hero{padding:58px 0 46px}
+  .section{padding:64px 0}
+  .section__head{grid-template-columns:52px 1fr;gap:14px}
+  .grid-2{grid-template-columns:1fr}
+  .era__head{grid-template-columns:1fr;gap:6px}
+  .timeline{margin-left:0;padding-left:24px}
+  .event::before{left:-29px}
+  .verdicts{grid-template-columns:1fr}
+  .chain{grid-template-columns:1fr;gap:4px;padding:14px 0}
+  .chain__arrow{text-align:left;transform:rotate(90deg);font-size:12px;width:18px}
+  .footer__grid{grid-template-columns:1fr 1fr}
+  .topbar__year{display:none}
+  .topbar{overflow:hidden}
+  .nav{flex:1;min-width:0;justify-content:flex-start;-webkit-mask-image:linear-gradient(to right,#000 90%,transparent);mask-image:linear-gradient(to right,#000 90%,transparent)}
+  .metric__label{min-height:0}
+}
+@media(max-width:640px){
+  .wrap{padding:0 16px}
+  .hero h1{font-size:clamp(38px,11vw,54px)}
+  .hero__deck{font-size:16.5px}
+  .section__head{grid-template-columns:1fr;gap:8px}
+  .section__num{padding-top:0}
+  .section__title{font-size:34px}
+  .metrics{grid-template-columns:1fr 1fr}
+  .five{grid-template-columns:1fr}
+  .five__item{border-right:0;border-bottom:1px solid var(--line);min-height:0}
+  .five__item:last-child{border-bottom:0}
+  .five__item:nth-child(3){border-right:0}
+  .forces,.agenda{grid-template-columns:1fr}
+  .thesis{grid-template-columns:42px 1fr;gap:12px}
+  .thesis__n{font-size:30px}
+  .era__title{font-size:31px}
+  .event h4{font-size:20px}
+  .footer__grid{grid-template-columns:1fr}
+  .footer__bottom{flex-direction:column;gap:6px}
+  .chart-card{padding:15px 12px 10px}
+  .hero__card{padding:18px}
+  .hero-stat__value{font-size:26px}
+  .nav a{font-size:8.5px;padding:7px 6px}
+  .brand__text{display:none}
+  .mobile-only{display:block}
+}
+.mobile-only{display:none}
+@media print{
+  .topbar,.progress,.tooltip,.nav,.hero::before{display:none!important}
+  body{background:#fff;font-size:10.5pt}
+  .section{padding:26px 0;break-inside:avoid}
+  .chart-card,.card,.force,.verdict{break-inside:avoid;box-shadow:none}
+  a{color:#000;text-decoration:none}
+  .footer{background:#fff;color:#000;border-top:1px solid #000}
+  .footer p,.footer a,.footer__label,.footer__bottom{color:#000}
+  .section--dark{background:#fff!important;color:#000!important}
+  .section--dark .section__title,.section--dark .section__deck,.section--dark .muted{color:#000!important}
+  .section--dark .thesis__n{color:#1f4d3f!important}
+}
+</style>
+</head>
+<body>
+
+<div class="progress"><div class="progress__bar" id="progressBar"></div></div>
+
+<header class="topbar">
+  <div class="wrap topbar__inner">
+    <a class="brand" href="#inicio" aria-label="Voltar ao início">
+      <span class="brand__mark">ATL<br>BR</span>
+      <span class="brand__text">Desenvolvimento · 1996—2026</span>
+    </a>
+    <nav class="nav" aria-label="Seções do atlas">
+      <a href="#retrato">Retrato</a>
+      <a href="#eras">Linha do tempo</a>
+      <a href="#forcas">Forças</a>
+      <a href="#dados">Dados</a>
+      <a href="#mundo">Mundo</a>
+      <a href="#causas">Causas</a>
+      <a href="#balanco">Balanço</a>
+      <a href="#agenda">Agenda</a>
+      <a href="#metodo">Método</a>
+    </nav>
+    <span class="topbar__year">OUT · 2026</span>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="wrap hero__grid">
+    <div>
+      <div class="kicker">Atlas do desenvolvimento brasileiro · 1996—2026</div>
+      <h1>Trinta anos de transformação. <em>E uma produtividade que não veio.</em></h1>
+      <p class="hero__deck">
+        O Brasil é a 11ª maior economia do mundo e a 8ª em paridade de poder de compra. Mas é
+        a 101ª em renda por habitante, a 95ª em produtividade e a 143ª em investimento. Este
+        atlas reconstrói os fatos que explicam por que o país cresceu socialmente sem
+        convergir em renda — um a um, com data, mecanismo e evidência.
+      </p>
+      <div class="hero__byline">
+        Uma leitura de fatos estruturantes a partir de cobertura noticiosa e de relatórios
+        nacionais e internacionais (IBGE, Ipea, BCB, Ministério da Fazenda, World Bank, FMI,
+        OCDE, Cepal, PNUD, INPE, MapBiomas, OMS, Unesco e FAO). Outubro de 2026.
+      </div>
+    </div>
+
+    <aside class="hero__card" aria-label="Indicadores globais de 2024 a 2025">
+      <div class="hero__card-head">
+        <span>Ficha global</span>
+        <span>2024—25</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat__label">PIB per capita vs. EUA · 2025</span>
+        <span class="hero-stat__value">14,3<small>%</small></span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat__label">Pobreza (US$ 6,85/dia) · 2024</span>
+        <span class="hero-stat__value">20,6<small>%</small></span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat__label">Gini · 2024</span>
+        <span class="hero-stat__value">50,3<small>8º/171</small></span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat__label">Investimento · 2025</span>
+        <span class="hero-stat__value">16,8<small>% PIB</small></span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat__label">IDH · 2024</span>
+        <span class="hero-stat__value">0,805<small>2024</small></span>
+      </div>
+      <div class="hero__note">
+        11ª economia nominal e 8ª em PPP; 101ª renda per capita e 143ª em investimento.
+        Fontes: World Bank, PNUD. Posições entre países com dado disponível.
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- CINCO FRASES -->
+<section class="section" id="sintese" style="padding:52px 0">
+  <div class="wrap">
+    <div class="tiny" style="margin-bottom:12px">Em cinco frases</div>
+    <div class="five reveal">
+      <div class="five__item"><b>01 · CRESCIMENTO</b><p>Cresceu, mas não convergiu.<span>11ª economia do mundo, 101ª renda per capita. O Brasil ficou em ~14% da renda dos EUA; a Coreia subiu de 33% para 55%.</span></p></div>
+      <div class="five__item"><b>02 · INCLUSÃO</b><p>Incluiu, mas com desigualdade global.<span>A pobreza caiu 34 p.p.; o Gini de 50,3 é o 8º maior entre 171 países.</span></p></div>
+      <div class="five__item"><b>03 · PRODUTIVIDADE</b><p>Estabilizou, mas não produtizou.<span>Inflação de 916% (1994) para 4,3% (2025); produtividade 95ª de 177 e PISA 65º de 81.</span></p></div>
+      <div class="five__item"><b>04 · ESTADO</b><p>Reformou, mas investe pouco.<span>Investimento de 16,8% do PIB: 143º de 181 países; gap de infraestrutura de 2,35% do PIB.</span></p></div>
+      <div class="five__item"><b>05 · BEM-ESTAR</b><p>Melhorou a vida, mas não a economia.<span>IDH 0,805 e 76 anos; PIB per capita 101º e indústria 83ª de 204.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO LER -->
+<section class="section" id="metodo-resumo">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <div class="section__num">00</div>
+      <div>
+        <h2 class="section__title">Como ler trinta anos sem se perder na espuma dos dias</h2>
+        <p class="section__deck">
+          “Todos os fatos” é uma expressão impossível: trinta anos de cobertura diária somam
+          milhões de notícias. O que este atlas faz é selecionar os fatos que mudaram a
+          trajetória — e explicar o mecanismo que liga cada um ao desenvolvimento.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid-3">
+      <div class="card card--accent reveal">
+        <div class="tiny" style="margin-bottom:8px">Critério 01</div>
+        <h4>Magnitude</h4>
+        <p>O fato moveu um agregado relevante — PIB, inflação, pobreza, investimento, dívida, desmatamento — em pelo menos 0,3 p.p. ou 1% do PIB, ou atingiu milhões de pessoas.</p>
+      </div>
+      <div class="card card--accent reveal">
+        <div class="tiny" style="margin-bottom:8px">Critério 02</div>
+        <h4>Persistência</h4>
+        <p>O efeito durou mais de dois anos ou mudou uma regra permanente: Constituição, lei, marco regulatório, regime fiscal, política social.</p>
+      </div>
+      <div class="card card--accent reveal">
+        <div class="tiny" style="margin-bottom:8px">Critério 03</div>
+        <h4>Mudança de regime</h4>
+        <p>O fato alterou a forma como a economia funciona: câmbio, metas de inflação, teto de gastos, reforma tributária, previdência, abertura comercial.</p>
+      </div>
+      <div class="card card--accent reveal">
+        <div class="tiny" style="margin-bottom:8px">Critério 04</div>
+        <h4>Distribuição</h4>
+        <p>O fato teve efeito claro sobre pobreza, desigualdade, emprego, região, raça, gênero ou acesso a serviços.</p>
+      </div>
+      <div class="card card--accent reveal">
+        <div class="tiny" style="margin-bottom:8px">Critério 05</div>
+        <h4>Externalidade</h4>
+        <p>O fato afetou clima, saúde, segurança, infraestrutura ou credibilidade externa — dimensões que não aparecem no PIB de curto prazo.</p>
+      </div>
+      <div class="card card--accent reveal">
+        <div class="tiny" style="margin-bottom:8px">Critério 06</div>
+        <h4>Evidência</h4>
+        <p>O fato é documentado por fonte primária ou por consenso de relatórios nacionais e internacionais; a interpretação é separada do dado.</p>
+      </div>
+    </div>
+
+    <div class="callout reveal">
+      <p><strong>A regra de leitura.</strong> Cada fato vem com dois parágrafos: <em>como</em>
+      (o canal de transmissão) e <em>por quê</em> (a causa estrutural). O objetivo não é
+      condenar ou absolver governos, mas reconstruir a cadeia: choque → política → incentivo →
+      resultado → evidência.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RETRATO -->
+<section class="section section--tint" id="retrato">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <div class="section__num">01</div>
+      <div>
+        <h2 class="section__title">O retrato em 12 números: o que mudou de verdade</h2>
+        <p class="section__deck">
+          O Brasil de 2025 não é o de 1995. A moeda é estável, a pobreza caiu, a escolaridade
+          subiu, a saúde e a proteção social se expandiram, a internet chegou a quase todos.
+          Mas a produtividade, o investimento e a indústria não acompanharam — e o meio
+          ambiente virou uma restrição central.
+        </p>
+      </div>
+    </div>
+
+    <div class="metrics reveal">
+      <div class="metric"><div class="metric__label">PIB per capita real</div><div class="metric__value">US$ 9.748<small>2025</small></div><div class="metric__delta">+48% vs. 1995 · 94º de 213 (real)</div></div>
+      <div class="metric"><div class="metric__label">Produtividade por trabalhador</div><div class="metric__value">US$ 41.840<small>PPP 2021</small></div><div class="metric__delta">+27% vs. 1995 · 95º de 177</div></div>
+      <div class="metric"><div class="metric__label">Pobreza (US$ 6,85/dia)</div><div class="metric__value">20,6%<small>2024</small></div><div class="metric__delta">−34,2 p.p. · 4,6x Chile</div></div>
+      <div class="metric"><div class="metric__label">Índice de Gini</div><div class="metric__value">50,3<small>2024</small></div><div class="metric__delta">−9,2 pts · 8º maior de 171</div></div>
+      <div class="metric"><div class="metric__label">IDH</div><div class="metric__value">0,805<small>2024</small></div><div class="metric__delta">+0,139 · primeiro “muito alto”</div></div>
+      <div class="metric"><div class="metric__label">Expectativa de vida</div><div class="metric__value">76,0<small>anos</small></div><div class="metric__delta">+8,3 anos vs. 1995</div></div>
+      <div class="metric"><div class="metric__label">Saneamento seguro</div><div class="metric__value">55,0%<small>2024</small></div><div class="metric__delta">+21,3 p.p. vs. 2000</div></div>
+      <div class="metric"><div class="metric__label">Usuários de internet</div><div class="metric__value">84,5%<small>2024</small></div><div class="metric__delta">+84,4 p.p. vs. 1995</div></div>
+      <div class="metric"><div class="metric__label">Indústria de transformação</div><div class="metric__value">11,8%<small>do PIB</small></div><div class="metric__delta neg">−2,7 p.p. · 83º de 204</div></div>
+      <div class="metric"><div class="metric__label">Investimento (FBCF)</div><div class="metric__value">16,8%<small>do PIB</small></div><div class="metric__delta neg">−3,5 p.p. · 143º de 181</div></div>
+      <div class="metric"><div class="metric__label">Inflação (IPCA)</div><div class="metric__value">4,3%<small>2025</small></div><div class="metric__delta">−18,1 p.p. vs. 1995</div></div>
+      <div class="metric"><div class="metric__label">Desmatamento na Amazônia</div><div class="metric__value">5.731<small>km²</small></div><div class="metric__delta">−79% vs. pico de 2004</div></div>
+    </div>
+    <div class="table-note">
+      Fontes: IBGE, World Bank, PNUD, INPE/PRODES. Pobreza: linha de US$ 6,85/dia (PPP 2017);
+      o Banco Mundial revisou as linhas em 2025 e a comparação de níveis entre anos deve ser lida
+      com cautela. IDH: 0,805 é o MHDI/PNUD Brasil de 2024; a série global de 2023 era 0,786.
+      Desmatamento: 2025 consolidado; 2026 é estimativa. Posições internacionais: seção 05.
+    </div>
+  </div>
+</section>
+
+<!-- ERAS -->
+<section class="section" id="eras">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <div class="section__num">02</div>
+      <div>
+        <h2 class="section__title">Seis eras, 48 fatos estruturantes — e o fio que os conecta</h2>
+        <p class="section__deck">
+          A cronologia não é uma sucessão de governos: é uma sequência de choques, escolhas e
+          legados. Cada era começa com o problema herdado e termina com o problema que legou
+          à seguinte. Os fatos marcados em verde mudaram a trajetória; em vermelho, foram
+          crises; em dourado, avanços sociais.
+        </p>
+      </div>
+    </div>
+
+    <!-- ERA 1 -->
+    <article class="era reveal">
+      <div class="era__head">
+        <div class="era__years">1996—2002</div>
+        <div>
+          <h3 class="era__title">Estabilização, crise externa e reforma do Estado</h3>
+          <p class="era__summary">
+            O Real derrubou a inflação, mas o país ainda dependia de poupança externa e viveu
+            três crises cambiais. Privatizações e a Lei de Responsabilidade Fiscal mudaram o
+            Estado; o crescimento foi baixo e a pobreza caiu pouco. O legado foi uma macro
+            estável e um Estado menor — e mais vulnerável a choques.
+          </p>
+          <div class="era__stats">
+            <span class="era__stat">PIB <b>2,4% a.a.</b></span>
+            <span class="era__stat">Inflação <b>916% (1994) → 9,6% (1996)</b></span>
+            <span class="era__stat">Pobreza <b>54,8% → 49,8%</b></span>
+            <span class="era__stat">Investimento <b>18,5% médio</b></span>
+          </div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="event event--turning">
+          <div class="event__top"><span class="event__date">1996</span><span class="tag tag--green">Educação</span></div>
+          <h4>FUNDEF: o dinheiro segue o aluno</h4>
+          <p><b>Como</b> A Emenda Constitucional 14 criou o Fundo de Manutenção e Desenvolvimento do Ensino Fundamental, com 15% das receitas de estados e municípios redistribuídos conforme o número de alunos. Municípios pobres passaram a receber mais; o piso salarial docente e a merenda ganharam lastro.</p>
+          <p><b>Por quê</b> O Brasil tinha 90% das crianças no ensino fundamental, mas exclusão e repetência altíssimas. O FUNDEF atacou a desigualdade de financiamento, não a qualidade pedagógica — um limite que o FUNDEB (2007) e as metas de aprendizagem tentariam corrigir depois.</p>
+        </div>
+        <div class="event event--crisis">
+          <div class="event__top"><span class="event__date">1997</span><span class="tag tag--red">Choque externo</span></div>
+          <h4>Crise asiática: o primeiro teste do Real</h4>
+          <p><b>Como</b> A desvalorização do bath tailandês contaminou moedas e bolsas emergentes. O Banco Central elevou juros a dois dígitos e queimou reservas para defender o câmbio fixo; o crescimento caiu e o desemprego subiu.</p>
+          <p><b>Por quê</b> O Plano Real dependia de juros altos e entrada de capital para financiar o déficit em conta corrente. Com o câmbio sobrevalorizado e a dívida crescente, o país era vulnerável a qualquer onda de aversão a risco.</p>
+        </div>
+        <div class="event event--crisis">
+          <div class="event__top"><span class="event__date">1998</span><span class="tag tag--red">Choque externo</span></div>
+          <h4>Crise russa e o pacote do FMI</h4>
+          <p><b>Como</b> A moratória russa fechou o mercado para emergentes. O Brasil assinou um pacote de US$ 41,5 bilhões com o FMI e elevou a taxa Selic para conter a fuga de capitais; a desaceleração de 1999 foi inevitável.</p>
+          <p><b>Por quê</b> O ajuste fiscal prometido não se completou: o déficit nominal e a dívida crescente minaram a confiança. O pacote comprou tempo, mas não resolveu o desequilíbrio fundamental — o câmbio fixo com mobilidade de capital.</p>
+        </div>
+        <div class="event event--turning">
+          <div class="event__top"><span class="event__date">1999</span><span class="tag tag--green">Regime macro</span></div>
+          <h4>Desvalorização, câmbio flutuante e metas de inflação</h4>
+          <p><b>Como</b> Em janeiro, o real foi desvalorizado; em março, o Banco Central adotou o regime de metas de inflação e o câmbio flutuante. A inflação de 1999 ficou em 8,9%, abaixo do temido, graças à âncora fiscal e à credibilidade nascente.</p>
+          <p><b>Por quê</b> O país escolheu o tripé macroeconômico — metas de inflação, câmbio flutuante e superávit primário — que daria estabilidade às duas décadas seguintes. Foi a reforma mais importante da década, e a menos noticiada.</p>
+        </div>
+        <div class="event event--turning">
+          <div class="event__top"><span class="event__date">2000</span><span class="tag tag--green">Instituições</span></div>
+          <h4>Lei de Responsabilidade Fiscal</h4>
+          <p><b>Como</b> A LRF (Lei Complementar 101) impôs limites a despesas com pessoal, endividamento e criação de despesas permanentes sem receita; criou metas fiscais, transparência e punições para gestores.</p>
+          <p><b>Por quê</b> O descontrole fiscal dos estados e da União era a raiz da inflação e das crises cambiais. A LRF não impediu todos os desequilíbrios, mas mudou o padrão de gestão e deu previsibilidade ao gasto público.</p>
+        </div>
+        <div class="event event--crisis">
+          <div class="event__top"><span class="event__date">2001</span><span class="tag tag--red">Energia</span></div>
+          <h4>Racionamento de energia</h4>
+          <p><b>Como</b> A falta de chuvas esvaziou os reservatórios; o governo exigiu corte de 20% no consumo e acionou usinas térmicas de emergência. O PIB desacelerou e a inflação subiu.</p>
+          <p><b>Por quê</b> O modelo elétrico dependia de hidrelétricas e de investimento estatal, que encolheu com a crise fiscal e a transição regulatória. O racionamento expôs a fragilidade da infraestrutura e o custo de não investir.</p>
+        </div>
+        <div class="event event--crisis">
+          <div class="event__top"><span class="event__date">2002</span><span class="tag tag--red">Política</span></div>
+          <h4>Eleição, risco e acordo com o FMI</h4>
+          <p><b>Como</b> A incerteza sobre a política econômica do próximo governo elevou o prêmio de risco, depreciou o real e pressionou a dívida. O FMI aprovou um novo pacote de US$ 30 bilhões para atravessar a transição.</p>
+          <p><b>Por quê</b> O mercado temia ruptura com o tripé macro. Lula assinou a “Carta ao Povo Brasileiro” e manteve a política econômica, convertendo incerteza em continuidade — uma das decisões mais importantes dos 30 anos.</p>
+        </div>
+        <div class="event event--turning">
+          <div class="event__top"><span class="event__date">1995—2002</span><span class="tag tag--blue">Estado</span></div>
+          <h4>Privatizações e agências reguladoras</h4>
+          <p><b>Como</b> O programa vendeu US$ 78,6 bilhões em empresas entre 1995 e 2002, 80% em infraestrutura e serviços. Telecomunicações, energia, mineração e bancos estaduais passaram ao privado; criaram-se ANATEL, ANEEL e outras agências.</p>
+          <p><b>Por quê</b> O Estado não tinha capital para investir e a dívida era insustentável. A venda reduziu a presença pública, modernizou serviços e atraiu capital, mas também reduziu o investimento público e transferiu ao privado setores com externalidades — um trade-off que voltaria ao debate.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- ERA 2 -->
+    <article class="era reveal">
+      <div class="era__head">
+        <div class="era__years">2003—2010</div>
+        <div>
+          <h3 class="era__title">Commodities, inclusão e o Estado investidor</h3>
+          <p class="era__summary">
+            A China e o ciclo de commodities deram ao Brasil os melhores termos de troca em
+            décadas. O Estado ampliou transferências, crédito e investimento; a pobreza e a
+            desigualdade caíram no maior ritmo da história. Mas o crescimento veio mais do
+            consumo e das exportações de recursos naturais do que da produtividade.
+          </p>
+          <div class="era__stats">
+            <span class="era__stat">PIB <b>4,1% a.a.</b></span>
+            <span class="era__stat">Pobreza <b>50,9% → 32,2%</b></span>
+            <span class="era__stat">Gini <b>57,6 → 53,7</b></span>
+            <span class="era__stat">Investimento <b>18,2% médio</b></span>
+          </div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="event event--social">
+          <div class="event__top"><span class="event__date">2003</span><span class="tag tag--gold">Proteção social</span></div>
+          <h4>Bolsa Família: a maior política de transferência de renda</h4>
+          <p><b>Como</b> O programa unificou Bolsa Escola, Bolsa Alimentação e Auxílio-Gás em uma transferência condicionada à frequência escolar e à vacinação. Chegou a cerca de 13 milhões de famílias e se tornou a principal fonte de renda dos mais pobres.</p>
+          <p><b>Por quê</b> O Brasil tinha pobreza concentrada em famílias com crianças e mulheres chefes de família. A transferência atacou a pobreza no curto prazo e, com condicionalidades, buscou romper a transmissão intergeracional — embora o efeito sobre a pobreza dependa também do crescimento e do salário mínimo.</p>
+        </div>
+        <div class="event event--turning">
+          <div class="event__top"><span class="event__date">2003</span><span class="tag tag--green">Previdência</span></div>
+          <h4>Reforma da Previdência do serviço público</h4>
+          <p><b>Como</b> A reforma unificou regras, taxou inativos, criou idade mínima para novos servidores e mudou o cálculo dos benefícios. O objetivo era conter o déficit previdenciário e preservar o espaço fiscal.</p>
+          <p><b>Por quê</b> O envelhecimento populacional e os privilégios do funcionalismo tornavam o sistema insustentável. A reforma de 2003 foi politicamente custosa e insuficiente: novas reformas viriam em 2019.</p>
+        </div>
+        <div class="event event--turning">
+          <div class="event__top"><span class="event__date">2004—2010</span><span class="tag tag--green">Comércio</span></div>
+          <h4>O superciclo das commodities e a China</h4>
+          <p><b>Como</b> A urbanização chinesa multiplicou a demanda por minério de ferro, soja, petróleo e carne. Os termos de troca brasileiros subiram cerca de 30% em uma década; as exportações para a China passaram de US$ 4 bilhões para US$ 30 bilhões.</p>
+          <p><b>Por quê</b> O Brasil tinha recursos naturais abundantes e custos baixos de produção agrícola e mineral. O ciclo gerou dólares, crescimento e espaço fiscal — mas também reforçou a especialização em recursos naturais e a desindustrialização precoce.</p>
+        </div>
+        <div class="event event--crisis">
+          <div class="event__top"><span class="event__date">2005</span><span class="tag tag--red">Política</span></div>
+          <h4>Mensalão: corrupção no centro do poder</h4>
+          <p><b>Como</b> A revelação de pagamentos a parlamentares em troca de apoio político gerou crise institucional, CPI e julgamento no Supremo. O governo preservou a coalizão e a economia seguiu crescendo.</p>
+          <p><b>Por quê</b> O presidencialismo de coalizão dependia de transferências de poder e recursos para partidos. O escândalo expôs o custo da governabilidade e abriu um ciclo de judicialização da política que culminaria na Lava Jato.</p>
+        </div>
+        <div class="event event--turning">
+          <div class="event__top"><span class="event__date">2006</span><span class="tag tag--green">Energia</span></div>
+          <h4>Pré-sal: a promessa e a armadilha do petróleo</h4>
+          <p><b>Como</b> A descoberta de reservas gigantes no pré-sal levou à criação do regime de partilha e da PPSA, com forte participação da Petrobras. O petróleo se tornou o principal produto de exportação e uma fonte de receita fiscal.</p>
+          <p><b>Por quê</b> O país apostou em uma renda petrolífera de longo prazo para financiar desenvolvimento. A aposta dependia de preço, tecnologia e governança — e ajudou a financiar o Estado, mas aumentou a volatilidade e a dependência de combustíveis fósseis.</p>
+        </div>
+        <div class="event event--turning">
+          <div class="event__top"><span class="event__date">2007</span><span class="tag tag--green">Infraestrutura</span></div>
+          <h4>PAC: o Estado volta a investir</h4>
+          <p><b>Como</b> O Programa de Aceleração do Crescimento previu R$ 503,9 bilhões em obras de transporte, energia, saneamento e habitação, com coordenação do governo federal e participação de estatais e estados.</p>
+          <p><b>Por quê</b> A infraestrutura brasileira era o gargalo mais visível do crescimento. O PAC aumentou o investimento e a capacidade de planejamento, mas enfrentou licenciamento, execução e custos — e virou símbolo tanto do ativismo estatal quanto de suas limitações.</p>
+        </div>
+        <div class="event event--crisis">
+          <div class="event__top"><span class="event__date">2008—2009</span><span class="tag tag--red">Choque externo</span></div>
+          <h4>A crise financeira global e a resposta anticíclica</h4>
+          <p><b>Como</b> A falência do Lehman Brothers congelou o crédito internacional. O Brasil respondeu com redução de juros, expansão do crédito do BNDES, desonerações e investimento público; o PIB caiu apenas 0,1% em 2009 e cresceu 7,5% em 2010.</p>
+          <p><b>Por quê</b> O país tinha reservas, sistema financeiro sólido e espaço fiscal. A resposta funcionou no curto prazo, mas o estímulo se prolongou, alimentou a inflação e criou a base para a crise fiscal de 2015.</p>
+        </div>
+        <div class="event event--social">
+          <div class="event__top"><span class="event__date">2009</span><span class="tag tag--gold">Habitação</span></div>
+          <h4>Minha Casa Minha Vida</h4>
+          <p><b>Como</b> O programa combinou subsídio direto, crédito habitacional e garantias para construtoras, com metas de 1 milhão de moradias. As faixas de renda mais baixas receberam subsídio quase integral.</p>
+          <p><b>Por quê</b> O déficit habitacional era enorme e a construção civil era intensiva em emprego. O MCMV estimulou a economia e reduziu o déficit, mas concentrou-se em periferias com infraestrutura insuficiente e teve problemas de qualidade e localização.</p>
+        </div>
+        <div class="event event--social">
+          <div class="event__top"><span class="event__date">2010</span><span class="tag tag--gold">Resultado</span></div>
+          <h4>O pico da inclusão</h4>
+          <p><b>Como</b> Com crescimento de 7,5%, desemprego em 8,4% e transferências no auge, a pobreza caiu para 32,2% (2011) e o Gini para 53,7 (2009). O salário mínimo acumulou ganho real de 50% em uma década.</p>
+          <p><b>Por quê</b> A combinação de crescimento, formalização, transferências e valorização do mínimo foi a mais redistributiva da história recente. O risco era confundir o ciclo favorável com um modelo permanente de crescimento.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- ERA 3 -->
+    <article class="era reveal">
+      <div class="era__head">
+        <div class="era__years">2011—2016</div>
+        <div>
+          <h3 class="era__title">Desaceleração, intervencionismo e a grande recessão</h3>
+          <p class="era__summary">
+            O modelo de crescimento por consumo, crédito e commodities se esgotou. Desonerações,
+            controle de preços e o PAC 2 não reverteram a queda da produtividade. A Lava Jato
+            paralisou a construção, a recessão de 2015–16 derrubou o PIB e o impeachment abriu
+            uma nova era fiscal.
+          </p>
+          <div class="era__stats">
+            <span class="era__stat">PIB <b>0,4% a.a.</b></span>
+            <span class="era__stat">Investimento <b>20,9% → 15,5%</b></span>
+            <span class="era__stat">Desemprego <b>6,8% → 11,6%</b></span>
+            <span class="era__stat">Pobreza <b>32,2% → 29,1%</b></span>
+          </div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="event event--turning">
+          <div class="event__top"><span class="event__date">2011</span><span class="tag tag--green">Política econômica</span></div>
+          <h4>A “nova matriz econômica”</h4>
+          <p><b>Como</b> O governo combinou juros baixos, crédito subsidiado, desonerações tributárias e controle de preços de combustíveis e energia para compensar o câmbio valorizado e estimular a indústria.</p>
+          <p><b>Por quê</b> A indústria perdia competitividade com o real valorizado e a concorrência chinesa. A resposta tentou compensar o câmbio com subsídios, mas gerou distorções, perda de arrecadação e inflação reprimida — e não elevou a produtividade.</p>
+        </div>
+        <div class="event event--turning">
+          <div class="event__top"><span class="event__date">2011</span><span class="tag tag--blue">Infraestrutura</span></div>
+          <h4>PAC 2 e o ciclo de concessões</h4>
+          <p><b>Como</b> O PAC 2 ampliou o programa para R$ 1,09 trilhão e incluiu concessões de rodovias, ferrovias, portos e aeroportos, com leilões e financiamento do BNDES.</p>
+          <p><b>Por quê</b> O Estado não tinha capacidade de investir tudo o que precisava; as concessões atrairiam capital privado. A execução ficou abaixo do previsto, os retornos foram baixos e a crise política interrompeu leilões.</p>
+        </div>
+        <div class="event event--turning">
+          <div class="event__top"><span class="event__date">2012</span><span class="tag tag--green">Meio ambiente</span></div>
+          <h4>Novo Código Florestal</h4>
+          <p><b>Como</b> A lei anistiou parte do desmatamento irregular anterior a 2008, reduziu a reserva legal em algumas regiões e criou o Cadastro Ambiental Rural (CAR) para regularizar propriedades.</p>
+          <p><b>Por quê</b> O agronegócio pressionava por segurança jurídica e os ambientalistas temiam aumento do desmatamento. O código deu previsibilidade ao produtor, mas enfraqueceu a proteção e transferiu o enforcement para um cadastro de implementação lenta.</p>
+        </div>
+        <div class="event event--crisis">
+          <div class="event__top"><span class="event__date">2013</span><span class="tag tag--red">Sociedade</span></div>
+          <h4>Jornadas de junho</h4>
+          <p><b>Como</b> Protestos contra o aumento das tarifas de ônibus se transformaram em manifestações de massa contra corrupção, má qualidade dos serviços públicos e o custo de vida. O governo respondeu com promessas de investimento e reforma política.</p>
+          <p><b>Por quê</b> O crescimento havia melhorado a renda, mas não a qualidade dos serviços nem a representação política. A classe média emergente cobrava mais do Estado — e a crise de legitimidade abriu espaço para a polarização que viria.</p>
+        </div>
+        <div class="event event--crisis">
+          <div class="event__top"><span class="event__date">2014</span><span class="tag tag--red">Instituições</span></div>
+          <h4>Lava Jato: a maior investigação de corrupção da história</h4>
+          <p><b>Como</b> A operação revelou um cartel de empreiteiras que superfaturava contratos da Petrobras e pagava propinas a políticos. Executivos foram presos e empreiteiras, investigadas; a Petrobras perdeu valor de mercado e a construção civil entrou em colapso.</p>
+          <p><b>Por quê</b> O financiamento de campanhas e a relação entre Estado e empreiteiras criaram um sistema de corrupção sistêmica. A Lava Jato teve efeito moral e institucional, mas também paralisou investimentos, destruiu empregos e foi usada politicamente — um caso ambíguo de desenvolvimento institucional.</p>
+        </div>
+        <div class="event event--crisis">
+          <div class="event__top"><span class="event__date">2014—2016</span><span class="tag tag--red">Recessão</span></div>
+          <h4>A recessão que mudou o país</h4>
+          <p><b>Como</b> O PIB caiu 3,5% em 2015 e 3,3% em 2016; o desemprego chegou a 12,8% em 2017; a pobreza voltou a subir. A crise combinou queda de commodities, ajuste fiscal, incerteza política e paralisia dos investimentos.</p>
+          <p><b>Por quê</b> O Brasil dependia de consumo, crédito e commodities; quando os três viraram, não havia produtividade nem investimento para sustentar o crescimento. A recessão foi a mais longa da série e destruiu a confiança no modelo desenvolvimentista.</p>
+        </div>
+        <div class="event event--crisis">
+          <div class="event__top"><span class="event__date">2015</span><span class="tag tag--red">Fiscal</span></div>
+          <h4>O desequilíbrio fiscal vem à tona</h4>
+          <p><b>Como</b> O superávit primário virou déficit, a dívida bruta subiu e o país perdeu o grau de investimento. O governo cortou investimentos e elevou impostos, mas a recessão reduziu a arrecadação.</p>
+          <p><b>Por quê</b> As desonerações, o crédito subsidiado e o gasto crescente não foram acompanhados de receita permanente. O ajuste chegou tarde e em recessão, aprofundando a queda.</p>
+        </div>
+        <div class="event event--turning">
+          <div class="event__top"><span class="event__date">2016</span><span class="tag tag--green">Regime fiscal</span></div>
+          <h4>Impeachment e o teto de gastos</h4>
+          <p><b>Como</b> Dilma Rousseff foi afastada em agosto; Michel Temer assumiu e aprovou a Emenda Constitucional 95, que limitou o crescimento do gasto primário à inflação por 20 anos.</p>
+          <p><b>Por quê</b> O mercado e parte do Congresso viam o descontrole fiscal como causa da crise. O teto tentou ancorar expectativas, mas comprimiu investimento público e despesas sociais, e foi substituído pelo arcabouço fiscal em 2023.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- ERA 4 -->
+    <article class="era reveal">
+      <div class="era__head">
+        <div class="era__years">2017—2019</div>
+        <div>
+          <h3 class="era__title">Reformas, recuperação lenta e polarização</h3>
+          <p class="era__summary">
+            A reforma trabalhista, a reforma da Previdência, os juros baixos e as concessões
+            destravaram uma recuperação lenta. A greve dos caminhoneiros expôs a dependência
+            do transporte rodoviário; a eleição de Bolsonaro levou ao poder uma agenda liberal
+            com forte componente cultural. A Amazônia voltou ao centro do debate.
+          </p>
+          <div class="era__stats">
+            <span class="era__stat">PIB <b>1,4% a.a.</b></span>
+            <span class="era__stat">Investimento <b>15,0% médio</b></span>
+            <span class="era__stat">Desemprego <b>12,8% → 11,9%</b></span>
+            <span class="era__stat">Pobreza <b>29,3% → 28,0%</b></span>
+          </div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="event event--turning">
+          <div class="event__top"><span class="event__date">2017</span><span class="tag tag--green">Trabalho</span></div>
+          <h4>Reforma trabalhista</h4>
+          <p><b>Como</b> A Lei 13.467 flexibilizou a jornada, terceirizou atividades-fim, criou o trabalho intermitente e reduziu o poder normativo da Justiça do Trabalho. O objetivo era reduzir o custo do trabalho e estimular contratações.</p>
+          <p><b>Por quê</b> O desemprego estava em dois dígitos e a informalidade crescia. A reforma deu mais flexibilidade, mas parte dos empregos criados foi precária e a produtividade não acelerou — o efeito dependia de investimento e qualificação, que não vieram.</p>
+        </div>
+        <div class="event event--turning">
+          <div class="event__top"><span class="event__date">2017</span><span class="tag tag--blue">Infraestrutura</span></div>
+          <h4>PPI e a agenda de concessões</h4>
+          <p><b>Como</b> O Programa de Parcerias de Investimentos organizou leilões de rodovias, ferrovias, portos, aeroportos e energia, com contratos mais claros e financiamento de longo prazo.</p>
+          <p><b>Por quê</b> O Estado não tinha espaço fiscal para investir e o privado precisava de regras estáveis. As concessões avançaram, mas a taxa de desconto e o risco regulatório limitaram o apetite em alguns setores.</p>
+        </div>
+        <div class="event event--crisis">
+          <div class="event__top"><span class="event__date">2018</span><span class="tag tag--red">Logística</span></div>
+          <h4>A greve dos caminhoneiros</h4>
+          <p><b>Como</b> O aumento do diesel levou a uma paralisação nacional de dez dias, que bloqueou rodovias, desabasteceu cidades e parou a indústria. O governo cedeu a subsídios e mudou a política de preços da Petrobras.</p>
+          <p><b>Por quê</b> O Brasil dependia de rodovias para quase tudo e o preço do combustível seguia o mercado internacional. A greve expôs a fragilidade logística e o custo político de uma política de preços transparente.</p>
+        </div>
+        <div class="event event--turning">
+          <div class="event__top"><span class="event__date">2018</span><span class="tag tag--red">Política</span></div>
+          <h4>A eleição de Bolsonaro</h4>
+          <p><b>Como</b> O candidato do PSL venceu com uma agenda de combate à corrupção, liberalização econômica, flexibilização do porte de armas e crítica ao “politicamente correto”. A Lava Jato, a insegurança e a crise econômica alimentaram o voto anti-establishment.</p>
+          <p><b>Por quê</b> A democracia brasileira atravessava uma crise de representação. A eleição mudou o eixo da política econômica para reformas liberais, mas também aprofundou a polarização e a tensão institucional.</p>
+        </div>
+        <div class="event event--turning">
+          <div class="event__top"><span class="event__date">2019</span><span class="tag tag--green">Previdência</span></div>
+          <h4>A reforma da Previdência</h4>
+          <p><b>Como</b> A Emenda Constitucional 103 estabeleceu idade mínima (65 anos para homens, 62 para mulheres), mudou o cálculo dos benefícios e criou regras de transição. A economia estimada foi de cerca de R$ 800 bilhões em dez anos.</p>
+          <p><b>Por quê</b> O déficit previdenciário crescia com o envelhecimento e a informalidade. A reforma era a principal âncora fiscal do governo e destravou a confiança, mas transferiu o ajuste para o futuro e não resolveu a baixa cobertura.</p>
+        </div>
+        <div class="event event--crisis">
+          <div class="event__top"><span class="event__date">2019</span><span class="tag tag--red">Meio ambiente</span></div>
+          <h4>Amazônia: desmatamento e fogo voltam a subir</h4>
+          <p><b>Como</b> O desmatamento na Amazônia Legal subiu para 10.129 km², alta de 34% em relação a 2018; focos de incêndio bateram recorde e a imagem externa do Brasil foi atingida. O governo reduziu multas e enfraqueceu a fiscalização.</p>
+          <p><b>Por quê</b> A redução do enforcement, o sinal político favorável à ocupação e a expansão da fronteira agrícola se combinaram. O custo foi ambiental, diplomático e comercial — e antecipou a centralidade do clima na agenda de desenvolvimento.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- ERA 5 -->
+    <article class="era reveal">
+      <div class="era__head">
+        <div class="era__years">2020—2022</div>
+        <div>
+          <h3 class="era__title">Pandemia, emergência e inflação</h3>
+          <p class="era__summary">
+            A pandemia derrubou o PIB em 2020; o auxílio emergencial evitou um colapso social e
+            reduziu a pobreza, mas veio com inflação e dívida. A vacinação e o boom de commodities
+            permitiram uma recuperação rápida; a política se polarizou e o país chegou a 2022
+            com instituições testadas.
+          </p>
+          <div class="era__stats">
+            <span class="era__stat">PIB <b>−3,3% / +4,8%</b></span>
+            <span class="era__stat">Pobreza <b>20,8% → 30,6% → 25,3%</b></span>
+            <span class="era__stat">Dívida bruta <b>~87% do PIB</b></span>
+            <span class="era__stat">IPCA <b>10,1% em 2021</b></span>
+          </div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="event event--crisis">
+          <div class="event__top"><span class="event__date">2020</span><span class="tag tag--red">Pandemia</span></div>
+          <h4>COVID-19: o choque sanitário e econômico</h4>
+          <p><b>Como</b> A pandemia fechou serviços, derrubou a mobilidade e matou mais de 700 mil brasileiros. O PIB caiu 3,3% em 2020, o desemprego subiu e a pobreza teria explodido sem transferências.</p>
+          <p><b>Por quê</b> O Brasil tinha um sistema de saúde universal, mas capacidade limitada de testagem, rastreamento e coordenação. A resposta econômica foi rápida; a sanitária, fragmentada — um contraste que marcou o período.</p>
+        </div>
+        <div class="event event--social">
+          <div class="event__top"><span class="event__date">2020</span><span class="tag tag--gold">Proteção social</span></div>
+          <h4>Auxílio Emergencial</h4>
+          <p><b>Como</b> O governo pagou R$ 600 a R$ 1.200 por mês a cerca de 67 milhões de pessoas, com custo superior a R$ 300 bilhões. A pobreza caiu para 20,8% em 2020, o menor nível da série, e o Gini recuou para 48,8.</p>
+          <p><b>Por quê</b> A transferência massiva compensou a perda de renda e evitou uma crise social. O custo foi fiscal e inflacionário; a retirada abrupta em 2021 fez a pobreza voltar a 30,6%, mostrando que o programa era emergencial, não estrutural.</p>
+        </div>
+        <div class="event event--turning">
+          <div class="event__top"><span class="event__date">2020</span><span class="tag tag--green">Tecnologia</span></div>
+          <h4>Pix: a infraestrutura digital do sistema financeiro</h4>
+          <p><b>Como</b> O Banco Central lançou o pagamento instantâneo gratuito, disponível 24 horas, integrado a bancos e fintechs. Em poucos anos, o Pix se tornou o principal meio de pagamento do país, com mais de 160 milhões de usuários.</p>
+          <p><b>Por quê</b> O Brasil tinha bancarização alta, mas custo de transação e concentração bancária elevados. O Pix reduziu custos, formalizou transações e aumentou a eficiência do sistema — um ganho de produtividade raro e mensurável.</p>
+        </div>
+        <div class="event event--crisis">
+          <div class="event__top"><span class="event__date">2021</span><span class="tag tag--red">Inflação</span></div>
+          <h4>Inflação em dois dígitos e crise energética</h4>
+          <p><b>Como</b> A reabertura, os estímulos, a desvalorização do real e a crise hídrica elevaram o IPCA a 10,1%. A bandeira tarifária disparou e o Banco Central iniciou o maior ciclo de alta de juros desde o Real.</p>
+          <p><b>Por quê</b> A oferta não acompanhou a demanda estimulada; a seca expôs a dependência hidrelétrica; e a desconfiança fiscal pressionou o câmbio. A inflação corroeu salários e forçou uma política monetária contracionista.</p>
+        </div>
+        <div class="event event--turning">
+          <div class="event__top"><span class="event__date">2021—2022</span><span class="tag tag--green">Política monetária</span></div>
+          <h4>Selic de 2% a 13,75%</h4>
+          <p><b>Como</b> O Banco Central elevou a taxa básica de 2% em 2020 para 13,75% em 2022, um dos maiores ciclos de aperto do mundo. O crédito encareceu, o investimento desacelerou e a inflação começou a ceder em 2023.</p>
+          <p><b>Por quê</b> O regime de metas exigia ancorar expectativas. A credibilidade do BC evitou uma espiral inflacionária, mas o custo recaiu sobre o crescimento e a dívida pública.</p>
+        </div>
+        <div class="event event--turning">
+          <div class="event__top"><span class="event__date">2022</span><span class="tag tag--blue">Estado</span></div>
+          <h4>Privatização da Eletrobras</h4>
+          <p><b>Como</b> A União vendeu ações e perdeu o controle da maior empresa de energia da América Latina; a oferta levantou cerca de R$ 33,7 bilhões. A empresa passou a ter capital disperso e gestão privada.</p>
+          <p><b>Por quê</b> O governo buscava reduzir dívida e atrair investimento; o setor precisava de capital para expansão. A privatização foi a maior desde os anos 1990 e mudou o padrão de investimento em energia.</p>
+        </div>
+        <div class="event event--crisis">
+          <div class="event__top"><span class="event__date">2022</span><span class="tag tag--red">Democracia</span></div>
+          <h4>Eleição polarizada e transição</h4>
+          <p><b>Como</b> Lula venceu Bolsonaro por margem estreita; o presidente derrotado não reconheceu imediatamente o resultado e apoiadores bloquearam rodovias. A transição foi tensa, mas as instituições resistiram.</p>
+          <p><b>Por quê</b> A polarização transformou a eleição em plebiscito sobre a democracia. O custo foi incerteza econômica e institucional; o legado foi a resiliência das instituições — testadas novamente em 8 de janeiro de 2023.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- ERA 6 -->
+    <article class="era reveal">
+      <div class="era__head">
+        <div class="era__years">2023—2026</div>
+        <div>
+          <h3 class="era__title">Retomada, reforma tributária e o novo choque externo</h3>
+          <p class="era__summary">
+            O novo governo retomou o PAC e a política industrial, aprovou a reforma tributária e
+            o arcabouço fiscal. O crescimento surpreendeu em 2023–24, mas juros altos, dívida e
+            tarifas dos EUA limitaram 2025–26. A eleição de 2026 define o próximo ciclo.
+          </p>
+          <div class="era__stats">
+            <span class="era__stat">PIB <b>3,2% / 3,4% / 2,3%</b></span>
+            <span class="era__stat">Inflação <b>~5%</b></span>
+            <span class="era__stat">Selic <b>15% → 14,5%</b></span>
+            <span class="era__stat">Desmatamento <b>5.731 km²</b></span>
+          </div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="event event--crisis">
+          <div class="event__top"><span class="event__date">2023</span><span class="tag tag--red">Democracia</span></div>
+          <h4>8 de janeiro</h4>
+          <p><b>Como</b> Manifestantes invadiram o Congresso, o Supremo e o Planalto em Brasília, pedindo intervenção militar. As instituições reagiram, centenas foram presos e o Congresso retomou a agenda.</p>
+          <p><b>Por quê</b> A eleição polarizada e a desinformação criaram um ambiente de contestação da legitimidade democrática. O episódio testou a resiliência institucional e elevou o prêmio de risco político — mas também produziu uma resposta coordenada dos três Poderes.</p>
+        </div>
+        <div class="event event--turning">
+          <div class="event__top"><span class="event__date">2023</span><span class="tag tag--green">Investimento</span></div>
+          <h4>Novo PAC</h4>
+          <p><b>Como</b> O programa previu R$ 1,7 trilhão em investimentos até 2026, com R$ 371 bilhões do Orçamento, R$ 343 bilhões de estatais, R$ 362 bilhões de financiamentos e R$ 612 bilhões do setor privado.</p>
+          <p><b>Por quê</b> O investimento público estava em 2,6% do PIB e a infraestrutura seguia como gargalo. O PAC tentou combinar investimento público, concessões e crédito — mas a execução dependia de licenciamento, projetos e capacidade dos entes.</p>
+        </div>
+        <div class="event event--turning">
+          <div class="event__top"><span class="event__date">2023</span><span class="tag tag--green">Fiscal</span></div>
+          <h4>Arcabouço fiscal</h4>
+          <p><b>Como</b> A lei complementar substituiu o teto de gastos por uma regra que limita o crescimento da despesa a 70% do crescimento da receita, com bandas para o resultado primário e metas de dívida.</p>
+          <p><b>Por quê</b> O teto de 2016 era rígido e politicamente insustentável; o arcabouço tentou conciliar credibilidade e espaço para investimento. O desafio era arrecadar o suficiente sem elevar a carga tributária de forma regressiva.</p>
+        </div>
+        <div class="event event--turning">
+          <div class="event__top"><span class="event__date">2023</span><span class="tag tag--green">Tributação</span></div>
+          <h4>Reforma tributária: o fim de um sistema caótico</h4>
+          <p><b>Como</b> A Emenda Constitucional 132 substituiu cinco tributos sobre consumo (PIS, Cofins, IPI, ICMS, ISS) por um IVA dual — CBS federal e IBS subnacional — com transição até 2033. Criou também um imposto seletivo sobre bens nocivos.</p>
+          <p><b>Por quê</b> O sistema era complexo, regressivo, litigioso e distorcia decisões de produção e localização. A OCDE estima ganhos de produtividade e PIB no longo prazo; o risco está na implementação e na carga efetiva.</p>
+        </div>
+        <div class="event event--crisis">
+          <div class="event__top"><span class="event__date">2024</span><span class="tag tag--red">Clima</span></div>
+          <h4>Enchentes no Rio Grande do Sul</h4>
+          <p><b>Como</b> Chuvas extremas inundaram cidades inteiras, destruíram infraestrutura e paralisaram a economia gaúcha. O governo federal enviou bilhões em ajuda e crédito; o PIB do estado caiu e a reconstrução se estendeu.</p>
+          <p><b>Por quê</b> A combinação de El Niño, mudança climática e ocupação urbana em áreas de risco ampliou o desastre. O episódio mostrou que adaptação climática é infraestrutura, fiscal e desenvolvimento — não apenas ambientalismo.</p>
+        </div>
+        <div class="event event--turning">
+          <div class="event__top"><span class="event__date">2024</span><span class="tag tag--green">Diplomacia</span></div>
+          <h4>G20 no Rio</h4>
+          <p><b>Como</b> O Brasil presidiu o G20 em 2024 e lançou a Aliança Global contra a Fome e a Pobreza, além de defender cooperação tributária internacional e transição energética.</p>
+          <p><b>Por quê</b> O país usou a presidência para projetar poder normativo e atrair cooperação. O ganho foi diplomático e de imagem; o efeito econômico depende de acordos concretos e de investimento.</p>
+        </div>
+        <div class="event event--crisis">
+          <div class="event__top"><span class="event__date">2025</span><span class="tag tag--red">Comércio</span></div>
+          <h4>Tarifas de 50% dos Estados Unidos</h4>
+          <p><b>Como</b> Em julho, os EUA anunciaram tarifas de 50% sobre parte das exportações brasileiras, efetivas em agosto. Cerca de 36% das exportações aos EUA foram atingidas; o governo lançou um pacote de crédito e apoio aos exportadores.</p>
+          <p><b>Por quê</b> A medida combinou política comercial e pressão política, em um contexto de guerra tarifária global. O impacto direto foi estimado em 0,1–0,3 p.p. do PIB, mas o efeito indireto sobre confiança e investimento foi maior.</p>
+        </div>
+        <div class="event event--turning">
+          <div class="event__top"><span class="event__date">2025</span><span class="tag tag--green">Clima</span></div>
+          <h4>COP30 em Belém</h4>
+          <p><b>Como</b> O Brasil sediou a conferência do clima na Amazônia, com foco em financiamento, adaptação e transição justa. O país chegou com o desmatamento em queda e uma meta de neutralidade climática.</p>
+          <p><b>Por quê</b> A Amazônia é o principal ativo ambiental e diplomático do Brasil. A COP consolidou a virada de imagem após 2019–22, mas o compromisso depende de enforcement, financiamento e modelo de desenvolvimento para a região.</p>
+        </div>
+        <div class="event event--crisis">
+          <div class="event__top"><span class="event__date">2025—2026</span><span class="tag tag--red">Macroeconomia</span></div>
+          <h4>Juros altos, crescimento de 2% e dívida em alta</h4>
+          <p><b>Como</b> O PIB cresceu 2,3% em 2025 e deve crescer cerca de 2% em 2026; a Selic chegou a 15% em 2025 e caiu para 14,5% em 2026; a inflação ficou em torno de 4,5%; a dívida bruta se aproximou de 82% do PIB.</p>
+          <p><b>Por quê</b> O mercado de trabalho aquecido e o fiscal expansionista mantiveram a inflação acima da meta; o Banco Central manteve juros altos. O investimento e a produtividade seguem baixos, e o espaço fiscal é limitado.</p>
+        </div>
+        <div class="event event--crisis">
+          <div class="event__top"><span class="event__date">2026</span><span class="tag tag--red">Política</span></div>
+          <h4>Segundo turno e a incerteza do próximo ciclo</h4>
+          <p><b>Como</b> O primeiro turno, em 4 de outubro, levou Lula e Flávio Bolsonaro ao segundo turno, em 25 de outubro. A campanha girou em torno de fiscal, crescimento, segurança e relação com os EUA.</p>
+          <p><b>Por quê</b> A eleição define a orientação fiscal, a política industrial e a agenda ambiental de 2027–2030. O resultado não está incorporado a este atlas: qualquer projeção de médio prazo depende do novo governo e da composição do Congresso.</p>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- FORÇAS -->
+<section class="section section--tint" id="forcas">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <div class="section__num">03</div>
+      <div>
+        <h2 class="section__title">Nove forças que explicam o que aconteceu — e o que não aconteceu</h2>
+        <p class="section__deck">
+          Os fatos são a superfície. Abaixo deles, nove forças estruturais operaram em
+          praticamente todos os governos. Entender essas forças é mais útil do que decorar a
+          cronologia: elas explicam por que o Brasil avançou socialmente e travou na produtividade.
+        </p>
+      </div>
+    </div>
+
+    <div class="forces">
+      <div class="force reveal">
+        <div class="force__n">01 · MACRO</div>
+        <h4>Estabilidade</h4>
+        <p>O Real, o câmbio flutuante, as metas de inflação e a LRF criaram previsibilidade. A inflação caiu de 916% em 1994 para 4,3% em 2025 e o país aprendeu a absorver choques cambiais.</p>
+        <div class="mech"><b>Como operou</b> Ancorou expectativas, protegeu a renda real e permitiu planejamento de longo prazo. <b>Limite:</b> juros reais altos e episódios de dominância fiscal impediram crescimento mais forte.</div>
+      </div>
+      <div class="force reveal">
+        <div class="force__n">02 · COMÉRCIO</div>
+        <h4>China e commodities</h4>
+        <p>A urbanização chinesa elevou a demanda por soja, minério, petróleo e carne. O ciclo gerou dólares, crescimento e espaço fiscal entre 2003 e 2011.</p>
+        <div class="mech"><b>Como operou</b> Termos de troca favoráveis, exportações e arrecadação. <b>Limite:</b> especialização em recursos naturais, doença holandesa e desindustrialização precoce.</div>
+      </div>
+      <div class="force reveal">
+        <div class="force__n">03 · CRÉDITO</div>
+        <h4>Bancarização e inclusão financeira</h4>
+        <p>Crédito consignado, BNDES, fintechs, Pix e bancos digitais ampliaram o acesso. O consumo cresceu, mas a dívida das famílias e a má alocação também.</p>
+        <div class="mech"><b>Como operou</b> Consumo, investimento e formalização. <b>Limite:</b> crédito caro, concentração bancária e endividamento das famílias.</div>
+      </div>
+      <div class="force reveal">
+        <div class="force__n">04 · ESTADO</div>
+        <h4>Investimento e infraestrutura</h4>
+        <p>PAC, estatais, concessões e PPPs tentaram fechar o gap de infraestrutura. O investimento público oscilou entre 4,6% e 1,9% do PIB e a infraestrutura ficou em 2,3%.</p>
+        <div class="mech"><b>Como operou</b> Demanda, capacidade e custo logístico. <b>Limite:</b> ciclo fiscal, execução, licenciamento e risco regulatório.</div>
+      </div>
+      <div class="force reveal">
+        <div class="force__n">05 · GENTE</div>
+        <h4>Capital humano</h4>
+        <p>FUNDEF/FUNDEB, Prouni, Fies, cotas e expansão universitária elevaram a escolaridade. A qualidade e a aprendizagem, porém, avançaram menos que o acesso.</p>
+        <div class="mech"><b>Como operou</b> Mais anos de estudo, inclusão e mobilidade. <b>Limite:</b> qualidade, evasão, desigualdade educacional e baixa conexão com a produtividade.</div>
+      </div>
+      <div class="force reveal">
+        <div class="force__n">06 · PROTEÇÃO</div>
+        <h4>Transferências e trabalho</h4>
+        <p>Bolsa Família, BPC, salário mínimo e previdência reduziram a pobreza e a desigualdade. O custo fiscal cresceu e a informalidade limitou a cobertura.</p>
+        <div class="mech"><b>Como operou</b> Piso de renda, consumo e estabilidade social. <b>Limite:</b> dependência fiscal, desincentivos marginais e envelhecimento.</div>
+      </div>
+      <div class="force reveal">
+        <div class="force__n">07 · PRODUTIVIDADE</div>
+        <h4>A estrutura que não se modernizou</h4>
+        <p>A indústria de transformação caiu de 14,5% para 11,8% do PIB; a produtividade por trabalhador cresceu apenas 27% em 30 anos, contra 121% na Coreia.</p>
+        <div class="mech"><b>Como operou</b> Desindustrialização, serviços de baixa produtividade e especialização em commodities. <b>Limite:</b> baixo investimento, infraestrutura, competição e P&amp;D.</div>
+      </div>
+      <div class="force reveal">
+        <div class="force__n">08 · INSTITUIÇÕES</div>
+        <h4>Corrupção, justiça e previsibilidade</h4>
+        <p>LRF, Lava Jato, reformas e judicialização mudaram a relação entre Estado e mercado. O combate à corrupção foi real, mas gerou incerteza e paralisia.</p>
+        <div class="mech"><b>Como operou</b> Confiança, custo de capital e risco regulatório. <b>Limite:</b> instabilidade política, excesso de judicialização e captura.</div>
+      </div>
+      <div class="force reveal">
+        <div class="force__n">09 · CLIMA</div>
+        <h4>Amazônia e a nova fronteira</h4>
+        <p>O desmatamento caiu 79% do pico de 2004 a 2025, mas voltou a subir em 2019–22. O clima virou condição de comércio, energia e legitimidade internacional.</p>
+        <div class="mech"><b>Como operou</b> Imagem, acesso a mercados, chuva e segurança energética. <b>Limite:</b> enforcement, financiamento e conflito com a expansão agropecuária.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DADOS -->
+<section class="section" id="dados">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <div class="section__num">04</div>
+      <div>
+        <h2 class="section__title">O que os dados mostram quando a poeira baixa</h2>
+        <p class="section__deck">
+          Três décadas de volatilidade escondem tendências claras: renda e acesso subiram;
+          produtividade, investimento e indústria estagnaram; o clima entrou no balanço.
+          Os gráficos abaixo usam séries longas e comparáveis; a seção seguinte coloca o
+          Brasil no mundo.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="chart-card reveal">
+        <div class="chart-head">
+          <div><div class="chart-title">PIB per capita real — 1995–2025</div><div class="chart-sub">US$ constantes de 2015 · PPP</div></div>
+        </div>
+        <div class="chart" id="chart-gdppc" role="img" aria-label="PIB per capita real do Brasil de 1995 a 2025"></div>
+        <div class="chart-note">Fonte: World Bank, NY.GDP.PCAP.KD. 1995: US$ 6.596; 2025: US$ 9.748. Crescimento médio de 1,3% ao ano — abaixo da média mundial (1,8%) e muito abaixo dos países que se industrializaram.</div>
+      </div>
+      <div class="chart-card reveal">
+        <div class="chart-head">
+          <div><div class="chart-title">Produtividade por trabalhador — 2025</div><div class="chart-sub">PIB por pessoa empregada · US$ PPP de 2021</div></div>
+        </div>
+        <div class="chart" id="chart-productivity" role="img" aria-label="Comparação internacional de produtividade por trabalhador em 2025"></div>
+        <div class="chart-note">Fonte: World Bank, SL.GDP.PCAP.EM.KD. O Brasil está abaixo de México e China e muito abaixo de Coreia e EUA. Em 1995, o Brasil era mais produtivo que a China; hoje, a China o superou.</div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:22px">
+      <div class="chart-card reveal">
+        <div class="chart-head">
+          <div><div class="chart-title">Pobreza e desigualdade — 1995–2024</div><div class="chart-sub">pobreza US$ 6,85/dia · Gini</div></div>
+        </div>
+        <div class="chart" id="chart-poverty" role="img" aria-label="Evolução da pobreza e do Gini no Brasil"></div>
+        <div class="chart-note">Fonte: World Bank. A pobreza caiu 34,2 p.p. e o Gini 9,2 pontos. O maior avanço ocorreu em 2003–2014; houve reversão em 2015–2019 e nova queda em 2022–24. 2020 é atípico (Auxílio Emergencial).</div>
+      </div>
+      <div class="chart-card reveal">
+        <div class="chart-head">
+          <div><div class="chart-title">Inflação — 1996–2025</div><div class="chart-sub">IBGE/IPCA · % ao ano</div></div>
+        </div>
+        <div class="chart" id="chart-inflation" role="img" aria-label="Inflação anual no Brasil de 1996 a 2025"></div>
+        <div class="chart-note">Fonte: IBGE/IPCA. 1994: 916%; 1995: 22,4%. O Real derrubou a hiperinflação; os picos de 2002, 2015 e 2021 mostram que a estabilidade não é automática. Em 2025, 4,3%.</div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:22px">
+      <div class="chart-card reveal">
+        <div class="chart-head">
+          <div><div class="chart-title">Indústria de transformação — 1995–2025</div><div class="chart-sub">% do PIB</div></div>
+        </div>
+        <div class="chart" id="chart-industry" role="img" aria-label="Participação da indústria de transformação no PIB brasileiro"></div>
+        <div class="chart-note">Fonte: World Bank. 14,5% → 11,8% do PIB. A queda foi mais intensa em 2011–2019. Não é só “desindustrialização”: é também perda de complexidade e de capacidade de inovação.</div>
+      </div>
+      <div class="chart-card reveal">
+        <div class="chart-head">
+          <div><div class="chart-title">Investimento — 1995–2025</div><div class="chart-sub">FBCF · % do PIB</div></div>
+        </div>
+        <div class="chart" id="chart-investment" role="img" aria-label="Formação bruta de capital fixo no Brasil"></div>
+        <div class="chart-note">Fonte: IBGE/World Bank. Média de 18,0%; pico de 20,9% em 2013; mínimo de 14,6% em 2017. Em 2025, 16,8% — insuficiente para repor o capital e sustentar crescimento de 3%.</div>
+      </div>
+    </div>
+
+    <div class="chart-card reveal" style="margin-top:22px">
+      <div class="chart-head">
+        <div><div class="chart-title">Desmatamento na Amazônia Legal — 1996–2026</div><div class="chart-sub">km² por ano · PRODES/INPE</div></div>
+      </div>
+      <div class="chart" id="chart-deforestation" role="img" aria-label="Desmatamento anual na Amazônia Legal"></div>
+      <div class="chart-note">Fonte: INPE/PRODES. Pico de 27.772 km² em 2004; queda até 4.571 km² em 2012; alta em 2019–22; 5.731 km² em 2025 e estimativa de 3.335 km² em 2026. Em 2025, a área desmatada foi quase quatro vezes o município de São Paulo.</div>
+    </div>
+
+    <div class="grid-2" style="margin-top:22px">
+      <div class="chart-card reveal">
+        <div class="chart-head">
+          <div><div class="chart-title">Crescimento médio por era — % ao ano</div><div class="chart-sub">PIB real · 1995–2025</div></div>
+        </div>
+        <div class="chart" id="chart-eras" role="img" aria-label="Crescimento médio do PIB por período de governo"></div>
+        <div class="chart-note">Fonte: IBGE/World Bank. O ciclo de commodities explica boa parte do desempenho de 2003–2010; a recessão de 2015–16 explica o colapso de Dilma; a recuperação de 2023–25 é a mais forte desde 2010.</div>
+      </div>
+      <div class="chart-card reveal">
+        <div class="chart-head">
+          <div><div class="chart-title">PIB per capita — Brasil e pares — 2025</div><div class="chart-sub">US$ constantes de 2015</div></div>
+        </div>
+        <div class="chart" id="chart-peers" role="img" aria-label="PIB per capita do Brasil e países comparáveis em 2025"></div>
+        <div class="chart-note">Fonte: World Bank. O Brasil está abaixo de México, China e Chile; a distância para a Coreia aumentou. O país cresce, mas não converge.</div>
+      </div>
+    </div>
+
+    <p class="table-note mobile-only" style="margin-top:20px">Deslize a tabela para o lado para ver todas as colunas →</p>
+    <div class="table-wrap" style="margin-top:10px">
+      <table>
+        <thead><tr><th>Indicador</th><th class="num">1995</th><th class="num">2024/25</th><th class="num">Variação</th><th>Leitura</th></tr></thead>
+        <tbody>
+          <tr><td class="name">PIB per capita real</td><td class="num">6.596</td><td class="num">9.748</td><td class="num">+48%</td><td>Cresceu, mas a 1,3% ao ano — insuficiente para convergir.</td></tr>
+          <tr><td class="name">Produtividade por trabalhador</td><td class="num">33.062</td><td class="num">41.840</td><td class="num">+27%</td><td>Estagnação relativa: Coreia cresceu 121%, China 826%.</td></tr>
+          <tr><td class="name">Pobreza (US$ 6,85/dia)</td><td class="num">54,8%</td><td class="num">20,6%</td><td class="num">−34,2 p.p.</td><td>Maior avanço social da série; parcialmente cíclico.</td></tr>
+          <tr><td class="name">Gini</td><td class="num">59,5</td><td class="num">50,3</td><td class="num">−9,2 pts</td><td>Melhorou, mas o Brasil segue entre os mais desiguais.</td></tr>
+          <tr><td class="name">IDH</td><td class="num">0,666</td><td class="num">0,805</td><td class="num">+0,139</td><td>Primeiro patamar “muito alto” em 2024.</td></tr>
+          <tr><td class="name">Expectativa de vida</td><td class="num">67,7</td><td class="num">76,0</td><td class="num">+8,3 anos</td><td>Ganho consistente, com queda na pandemia.</td></tr>
+          <tr><td class="name">Saneamento seguro</td><td class="num">33,7%*</td><td class="num">55,0%</td><td class="num">+21,3 p.p.</td><td>Avanço lento; 45% ainda sem saneamento seguro.</td></tr>
+          <tr><td class="name">Internet</td><td class="num">0,1%</td><td class="num">84,5%</td><td class="num">+84,4 p.p.</td><td>Inclusão digital rápida, com exclusão de qualidade.</td></tr>
+          <tr><td class="name">Indústria de transformação</td><td class="num">14,5%</td><td class="num">11,8%</td><td class="num">−2,7 p.p.</td><td>Perda de complexidade e de elos produtivos.</td></tr>
+          <tr><td class="name">Investimento (FBCF)</td><td class="num">20,3%</td><td class="num">16,8%</td><td class="num">−3,5 p.p.</td><td>Baixo para repor capital e crescer 3% ao ano.</td></tr>
+          <tr><td class="name">Inflação (IPCA)</td><td class="num">22,4%</td><td class="num">4,3%</td><td class="num">−18,1 p.p.</td><td>Conquista da estabilização, com recaídas.</td></tr>
+          <tr><td class="name">Desmatamento (Amazônia)</td><td class="num">18.161**</td><td class="num">5.731</td><td class="num">−68%</td><td>Queda desde 2004, com alta em 2019–22.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-note">
+      * Saneamento: 2000. ** Desmatamento: 1996. PIB per capita e produtividade em US$ constantes/PPP.
+      Fontes: IBGE, World Bank, PNUD, INPE.
+    </div>
+  </div>
+</section>
+
+<!-- MUNDO -->
+<section class="section section--tint" id="mundo">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <div class="section__num">05</div>
+      <div>
+        <h2 class="section__title">O Brasil no mundo: uma economia grande, um país de renda média</h2>
+        <p class="section__deck">
+          O Brasil é a 11ª maior economia do mundo e a 8ª em paridade de poder de compra.
+          Mas é a 101ª em renda por habitante, a 95ª em produtividade, a 143ª em investimento
+          e a 8ª mais desigual. O tamanho da economia não se converteu em padrão de vida.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="chart-card reveal">
+        <div class="chart-head">
+          <div><div class="chart-title">Renda per capita como % dos EUA — 1995–2025</div><div class="chart-sub">PIB per capita real · EUA = 100</div></div>
+        </div>
+        <div class="chart" id="chart-relative" role="img" aria-label="Renda per capita de Brasil, Coreia, China, México e Chile como porcentagem dos EUA"></div>
+        <div class="chart-note">Fonte: World Bank, NY.GDP.PCAP.KD. O Brasil ficou preso entre 14% e 17% da renda americana por 30 anos; a Coreia passou de 33% para 55%, e a China, de 4% para 20%. México e Chile também não convergiram.</div>
+      </div>
+
+      <div class="reveal">
+        <h3 style="font-size:26px;margin-bottom:12px">O tamanho não é o padrão de vida</h3>
+        <p>
+          Em 2025, o PIB brasileiro foi de US$ 2,28 trilhões — 11º do mundo. Em paridade de
+          poder de compra, US$ 4,99 trilhões — 8º. Mas a renda por habitante foi de US$ 10.713,
+          apenas 101ª entre 214 países. O Brasil é uma economia grande porque tem 213 milhões
+          de habitantes, não porque seja produtivo.
+        </p>
+        <p>
+          O dado mais revelador é a trajetória relativa: o país está na mesma faixa de renda
+          per capita dos EUA desde 1995. A Coreia subiu de 33% para 55%; a China, de 4% para
+          20%; o México recuou de 19% para 15%; o Chile avançou de 17% para 22%. O Brasil não
+          convergiu — ficou preso na armadilha da renda média.
+        </p>
+        <div class="callout" style="margin:18px 0">
+          <p><strong>11ª economia, 101ª renda per capita.</strong> A distância entre o tamanho
+          do PIB e a renda por habitante é a medida mais direta do atraso de produtividade.</p>
+        </div>
+        <ul style="margin:0;padding-left:16px;font-size:12px;line-height:1.7;color:var(--ink-2)">
+          <li><strong>PIB nominal:</strong> 11º de 214 (US$ 2,28 tri).</li>
+          <li><strong>PIB PPP:</strong> 8º de 203 (US$ 4,99 tri).</li>
+          <li><strong>Renda per capita:</strong> 101º de 214 (US$ 10.713).</li>
+          <li><strong>Produtividade:</strong> 95º de 177 (US$ 41.840).</li>
+          <li><strong>Investimento:</strong> 143º de 181 (16,8% do PIB).</li>
+          <li><strong>Desigualdade:</strong> 8º maior Gini de 171 países (50,3).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:22px">
+      <div class="chart-card reveal">
+        <div class="chart-head">
+          <div><div class="chart-title">Desigualdade: Brasil e pares — Gini</div><div class="chart-sub">0 = igualdade · 100 = desigualdade máxima</div></div>
+        </div>
+        <div class="chart" id="chart-gini-global" role="img" aria-label="Comparação internacional do índice de Gini"></div>
+        <div class="chart-note">Fonte: World Bank, dados mais recentes disponíveis (2020–2025). O Brasil tem o 8º maior Gini entre 171 países com dado; está acima de México, Chile e EUA, e muito acima de Coreia e China.</div>
+      </div>
+      <div class="chart-card reveal">
+        <div class="chart-head">
+          <div><div class="chart-title">Educação: PISA 2022 — matemática</div><div class="chart-sub">pontuação média dos alunos de 15 anos</div></div>
+        </div>
+        <div class="chart" id="chart-pisa" role="img" aria-label="Comparação internacional de desempenho em matemática no PISA 2022"></div>
+        <div class="chart-note">Fonte: OCDE, PISA 2022. Brasil: 379 pontos, 65º de 81 países/economias; 93 pontos abaixo da média da OCDE (472). Fica atrás de Chile, México, Peru e Colômbia.</div>
+      </div>
+    </div>
+
+    <p class="table-note mobile-only" style="margin-top:20px">Deslize a tabela para o lado para ver todas as colunas →</p>
+    <div class="table-wrap" style="margin-top:10px">
+      <table class="scorecard">
+        <thead>
+          <tr><th>Indicador</th><th class="num">Brasil</th><th class="num">Referência</th><th>Posição</th><th>Leitura</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="name">PIB nominal</td><td class="num">US$ 2,28 tri</td><td class="num">1,9% do mundo</td><td><span class="rank">11º / 214</span></td><td>Maior da América Latina; 11ª economia do mundo.</td></tr>
+          <tr><td class="name">PIB em PPP</td><td class="num">US$ 4,99 tri</td><td class="num">2,4% do mundo</td><td><span class="rank">8º / 203</span></td><td>À frente de França e Reino Unido em paridade de compra.</td></tr>
+          <tr><td class="name">PIB per capita</td><td class="num">US$ 10.713</td><td class="num">14,3% dos EUA</td><td><span class="rank rank--mid">101º / 214</span></td><td>Mesma faixa relativa de 1995 (15,8%); não convergiu.</td></tr>
+          <tr><td class="name">Produtividade por trabalhador</td><td class="num">US$ 41.840</td><td class="num">42% da Coreia</td><td><span class="rank rank--mid">95º / 177</span></td><td>Abaixo de México e China; acima da Índia.</td></tr>
+          <tr><td class="name">Investimento (FBCF)</td><td class="num">16,8% do PIB</td><td class="num">25,6% mundo</td><td><span class="rank rank--bad">143º / 181</span></td><td>66% da média mundial; 42% da China.</td></tr>
+          <tr><td class="name">Gini</td><td class="num">50,3</td><td class="num">32,9 Coreia</td><td><span class="rank rank--bad">8º maior / 171</span></td><td>Top 5% da desigualdade global; acima de México e Chile.</td></tr>
+          <tr><td class="name">Pobreza (US$ 8,30/dia)</td><td class="num">20,6%</td><td class="num">4,5% Chile</td><td><span class="rank">—</span></td><td>Cerca de 4,6x Chile e 11x EUA; patamar de renda média.</td></tr>
+          <tr><td class="name">IDH</td><td class="num">0,805 (2024)*</td><td class="num">0,786 (2023)</td><td><span class="rank">84º / 193</span></td><td>*MHDI/PNUD Brasil; o HDI global de 2023 é 0,786 (84º).</td></tr>
+          <tr><td class="name">PISA — matemática</td><td class="num">379</td><td class="num">472 OCDE</td><td><span class="rank rank--bad">65º / 81</span></td><td>93 pontos abaixo da OCDE; atrás de Chile, México e Peru.</td></tr>
+          <tr><td class="name">Logística (LPI 2023)</td><td class="num">3,2</td><td class="num">4,3 Singapura</td><td><span class="rank rank--mid">51º / 139</span></td><td>Abaixo de Chile, México e China; acima da média mundial.</td></tr>
+          <tr><td class="name">Inovação (GII 2026)</td><td class="num">33,5</td><td class="num">52º (2025)</td><td><span class="rank rank--mid">53º / 139</span></td><td>Outputs (50º) melhores que inputs (63º); região líder.</td></tr>
+          <tr><td class="name">Indústria de transformação</td><td class="num">11,8% do PIB</td><td class="num">24,7% China</td><td><span class="rank rank--mid">83º / 204</span></td><td>Abaixo de China, Coreia, México e Índia; acima de EUA e Reino Unido.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-note">
+      Posições entre países com dado disponível, não entre todos os países do mundo. PIB nominal, PPP,
+      renda per capita, produtividade, investimento, Gini e pobreza: World Bank (2025 ou último dado).
+      IDH: PNUD/HDR 2025 (0,786 em 2023); MHDI Brasil 2024: 0,805. PISA: OCDE 2022. LPI: Banco Mundial 2023.
+      GII: WIPO 2026. A comparação de pobreza usa a linha de US$ 8,30/dia (PPP 2021), a mais recente do Banco Mundial.
+    </div>
+  </div>
+</section>
+
+<!-- CAUSAS -->
+<section class="section section--tint" id="causas">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <div class="section__num">06</div>
+      <div>
+        <h2 class="section__title">Como e por quê: oito cadeias causais que explicam os 30 anos</h2>
+        <p class="section__deck">
+          A história do desenvolvimento brasileiro não é uma lista de fatos; é um conjunto de
+          cadeias. Abaixo, as oito mais importantes — cada uma liga um choque ou política a um
+          resultado mensurável, com o mecanismo no meio.
+        </p>
+      </div>
+    </div>
+
+    <div class="chains reveal">
+      <div class="chain">
+        <div class="chain__box"><b>Fato</b>Plano Real e tripé macro (1994–1999)</div>
+        <div class="chain__arrow">→</div>
+        <div class="chain__box"><b>Canal</b>Queda da inflação → renda real → consumo; juros altos → câmbio valorizado</div>
+        <div class="chain__arrow">→</div>
+        <div class="chain__box"><b>Efeito</b>Pobreza cai, mas indústria perde competitividade e a dependência externa aumenta.</div>
+      </div>
+      <div class="chain">
+        <div class="chain__box"><b>Fato</b>China e superciclo de commodities (2003–2011)</div>
+        <div class="chain__arrow">→</div>
+        <div class="chain__box"><b>Canal</b>Termos de troca → exportações → dólares → espaço fiscal</div>
+        <div class="chain__arrow">→</div>
+        <div class="chain__box"><b>Efeito</b>Crescimento, transferências, PAC e inclusão; especialização em recursos naturais.</div>
+      </div>
+      <div class="chain">
+        <div class="chain__box"><b>Fato</b>Crédito, formalização e salário mínimo (2003–2014)</div>
+        <div class="chain__arrow">→</div>
+        <div class="chain__box"><b>Canal</b>Renda disponível → consumo → emprego → arrecadação</div>
+        <div class="chain__arrow">→</div>
+        <div class="chain__box"><b>Efeito</b>Pobreza e Gini caem; consumo cresce acima da produtividade e a dívida das famílias sobe.</div>
+      </div>
+      <div class="chain">
+        <div class="chain__box"><b>Fato</b>Lava Jato e crise da construção (2014–2016)</div>
+        <div class="chain__arrow">→</div>
+        <div class="chain__box"><b>Canal</b>Incerteza → crédito → investimento → emprego</div>
+        <div class="chain__arrow">→</div>
+        <div class="chain__box"><b>Efeito</b>Investimento despenca, desemprego dobra e a recessão se aprofunda.</div>
+      </div>
+      <div class="chain">
+        <div class="chain__box"><b>Fato</b>Pandemia e Auxílio Emergencial (2020–2021)</div>
+        <div class="chain__arrow">→</div>
+        <div class="chain__box"><b>Canal</b>Transferência massiva → renda → consumo; oferta restrita → inflação</div>
+        <div class="chain__arrow">→</div>
+        <div class="chain__box"><b>Efeito</b>Pobreza cai em 2020 e volta em 2021; dívida e inflação sobem; juros disparam.</div>
+      </div>
+      <div class="chain">
+        <div class="chain__box"><b>Fato</b>Educação universal e cotas (1996–2014)</div>
+        <div class="chain__arrow">→</div>
+        <div class="chain__box"><b>Canal</b>Mais anos de estudo → capital humano → produtividade (defasada)</div>
+        <div class="chain__arrow">→</div>
+        <div class="chain__box"><b>Efeito</b>Mobilidade e inclusão sobem; a qualidade e a produtividade não acompanham no mesmo ritmo.</div>
+      </div>
+      <div class="chain">
+        <div class="chain__box"><b>Fato</b>Infraestrutura insuficiente e cara (1995–2025)</div>
+        <div class="chain__arrow">→</div>
+        <div class="chain__box"><b>Canal</b>Custo logístico → competitividade → investimento → crescimento</div>
+        <div class="chain__arrow">→</div>
+        <div class="chain__box"><b>Efeito</b>Gap de 2,35% do PIB/ano; exportações e indústria perdem eficiência.</div>
+      </div>
+      <div class="chain">
+        <div class="chain__box"><b>Fato</b>Desmatamento e clima (2004–2026)</div>
+        <div class="chain__arrow">→</div>
+        <div class="chain__box"><b>Canal</b>Imagem → comércio → crédito → chuva → energia → agricultura</div>
+        <div class="chain__arrow">→</div>
+        <div class="chain__box"><b>Efeito</b>Pressão externa, risco de mercado e perdas de capital natural; a queda recente melhora a posição.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BALANÇO -->
+<section class="section" id="balanco">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <div class="section__num">07</div>
+      <div>
+        <h2 class="section__title">O balanço: o que deu certo, o que não deu e o que ficou frágil</h2>
+        <p class="section__deck">
+          Um país pode melhorar a vida das pessoas e, ao mesmo tempo, não construir as bases
+          para crescer no futuro. O balanço dos 30 anos é esse: avanços sociais reais,
+          transformação produtiva incompleta e vulnerabilidades persistentes.
+        </p>
+      </div>
+    </div>
+
+    <div class="verdicts">
+      <div class="verdict reveal">
+        <h4>Deu certo</h4>
+        <ul>
+          <li>Estabilização da moeda e queda da inflação de 916% (1994) para 4,3% (2025).</li>
+          <li>Pobreza de 54,8% para 20,6%; IDH de 0,666 para 0,805 (MHDI 2024; HDI global 2023: 0,786, 84º de 193).</li>
+          <li>Gini de 59,5 para 50,3; vida de 67,7 para 76 anos (acima da média mundial).</li>
+          <li>Universalização do ensino fundamental, expansão do SUS e proteção social.</li>
+          <li>Agronegócio competitivo, matriz elétrica limpa e inclusão digital.</li>
+          <li>Resiliência democrática em 2022–23.</li>
+        </ul>
+      </div>
+      <div class="verdict reveal">
+        <h4>Não deu certo</h4>
+        <ul>
+          <li>Produtividade: 95ª de 177; 42% da Coreia e abaixo de México e China.</li>
+          <li>Indústria: 83ª de 204; abaixo de China, Coreia, México e Índia.</li>
+          <li>Investimento: 143º de 181; 66% da média mundial e 42% da China.</li>
+          <li>Infraestrutura e saneamento seguem com gap de 2,35% do PIB/ano.</li>
+          <li>Gini 50,3: 8º maior de 171 países; violência alta.</li>
+          <li>PISA: 65º de 81; 93 pontos abaixo da OCDE.</li>
+          <li>Desmatamento e clima viraram risco econômico.</li>
+        </ul>
+      </div>
+      <div class="verdict reveal">
+        <h4>Ficou frágil</h4>
+        <ul>
+          <li>Crescimento dependente de consumo, commodities e crédito.</li>
+          <li>Espaço fiscal estreito e dívida em trajetória de alta.</li>
+          <li>Qualidade da educação e da formação técnica.</li>
+          <li>Confiança institucional e previsibilidade regulatória.</li>
+          <li>Adaptação climática e proteção da Amazônia.</li>
+          <li>Envelhecimento populacional e previdência.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout reveal">
+      <p><strong>O paradoxo central.</strong> O Brasil ficou mais justo, mais urbano, mais
+      escolarizado, mais digital e mais estável — mas não ficou mais produtivo. A agenda que
+      falta não é de emergência social, e sim de produtividade: infraestrutura, educação de
+      qualidade, competição, crédito barato, inovação e Estado eficiente.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESES -->
+<section class="section section--dark" id="teses">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <div class="section__num">08</div>
+      <div>
+        <h2 class="section__title">Cinco teses sobre os últimos 30 anos</h2>
+        <p class="section__deck">
+          Uma síntese interpretativa — não um consenso. Cada tese é uma hipótese de leitura
+          sustentada pelos fatos e dados anteriores.
+        </p>
+      </div>
+    </div>
+
+    <div class="theses">
+      <div class="thesis reveal"><div class="thesis__n">01</div><div><h4>O crescimento foi puxado por demanda e commodities, não por produtividade.</h4><p>O país cresceu quando o mundo comprava seus produtos e o crédito/consumo se expandia. Em 30 anos, a renda per capita ficou em ~14% da americana; a Coreia chegou a 55%. Quando os motores pararam, em 2011–16, não havia produtividade para sustentar o ritmo.</p></div></div>
+      <div class="thesis reveal"><div class="thesis__n">02</div><div><h4>O progresso social foi real, mas parcialmente cíclico.</h4><p>A pobreza caiu muito entre 2003 e 2014, voltou a subir na recessão e caiu de novo com transferências e emprego. O piso social é mais sólido que antes, mas o Gini de 50,3 ainda é o 8º maior entre 171 países.</p></div></div>
+      <div class="thesis reveal"><div class="thesis__n">03</div><div><h4>O Estado oscilou entre investidor e regulador; nenhum modelo se consolidou.</h4><p>Privatizou nos anos 1990, investiu nos 2000, intervencionou nos 2010, concessionou nos 2010–20 e voltou a investir em 2023. A cada ciclo, a infraestrutura pagou o custo da descontinuidade — e o investimento segue em 143º de 181 países.</p></div></div>
+      <div class="thesis reveal"><div class="thesis__n">04</div><div><h4>Choques externos e crises políticas explicam mais do que a ideologia.</h4><p>FHC e Dilma, de orientações opostas, tiveram as maiores médias de FBCF; Temer, liberal, teve a menor. O ciclo econômico, o espaço fiscal e a confiança pesaram mais que o rótulo.</p></div></div>
+      <div class="thesis reveal"><div class="thesis__n">05</div><div><h4>A sustentabilidade deixou de ser apêndice e virou condição de competitividade.</h4><p>Do desmatamento recorde de 2004 à COP30 em Belém, o Brasil passou de vilão a protagonista. O capital natural é ativo econômico — e o passivo ambiental cobra juros comerciais e financeiros.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENDA -->
+<section class="section" id="agenda">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <div class="section__num">09</div>
+      <div>
+        <h2 class="section__title">Agenda 2026–2036: o que faria diferença de verdade</h2>
+        <p class="section__deck">
+          Se o diagnóstico é produtividade baixa com avanço social incompleto, a agenda não
+          pode ser apenas fiscal nem apenas social. Ela precisa combinar as duas coisas — e
+          assumir que o clima e a demografia mudaram as regras do jogo.
+        </p>
+      </div>
+    </div>
+
+    <div class="agenda">
+      <div class="card card--accent reveal"><div class="tiny" style="margin-bottom:7px">01 · Produtividade</div><h4>Educação com aprendizagem</h4><p>O acesso ao ensino fundamental está próximo da universalização; o desafio é qualidade, formação técnica, creche e conectividade. Sem capital humano, nenhuma política industrial funciona.</p></div>
+      <div class="card card--accent reveal"><div class="tiny" style="margin-bottom:7px">02 · Infraestrutura</div><h4>Fechar o gap com regulação estável</h4><p>Concessões, PPPs e investimento público em saneamento, transportes e mobilidade. O gap de 2,35% do PIB/ano não se fecha sem capital privado e capacidade estatal.</p></div>
+      <div class="card card--accent reveal"><div class="tiny" style="margin-bottom:7px">03 · Fiscal</div><h4>Espaço fiscal com eficiência</h4><p>Revisar gastos obrigatórios, melhorar a qualidade do gasto e preservar o investimento. A dívida em trajetória de alta é o principal risco de médio prazo.</p></div>
+      <div class="card card--accent reveal"><div class="tiny" style="margin-bottom:7px">04 · Competição</div><h4>Abrir, simplificar e inovar</h4><p>Reforma tributária, ambiente de negócios, crédito barato, abertura comercial e política de concorrência. A produtividade nasce da competição, não do subsídio.</p></div>
+      <div class="card card--accent reveal"><div class="tiny" style="margin-bottom:7px">05 · Clima</div><h4>Amazônia como ativo, não passivo</h4><p>Enforcement, financiamento verde, bioeconomia e adaptação. O Brasil tem uma das matrizes elétricas mais limpas entre as grandes economias; pode transformar isso em vantagem.</p></div>
+      <div class="card card--accent reveal"><div class="tiny" style="margin-bottom:7px">06 · Sociedade</div><h4>Reduzir desigualdades persistentes</h4><p>Pobreza caiu, mas desigualdade de renda, raça, gênero e região segue alta. Políticas focalizadas e serviços de qualidade são condição de coesão e crescimento.</p></div>
+    </div>
+
+    <div class="callout reveal">
+      <p><strong>O teste de 2026–2030.</strong> O novo governo herda uma economia com
+      desemprego baixo, inflação sob controle, dívida alta e produtividade estagnada. O
+      espaço para errar é pequeno: sem consolidar o fiscal, os juros sufocam o investimento;
+      sem investir, o crescimento não se sustenta; sem produtividade, a inclusão vira
+      redistribuição de um bolo que não cresce.</p>
+    </div>
+  </div>
+</section>
+
+<!-- METODO -->
+<section class="section section--tint" id="metodo">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <div class="section__num">10</div>
+      <div>
+        <h2 class="section__title">Método, fontes e limites</h2>
+        <p class="section__deck">
+          Um atlas de 30 anos precisa ser explícito sobre o que seleciona, o que mede e o que
+          não consegue provar. Abaixo, os critérios, as fontes e as principais fragilidades.
+        </p>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <details open>
+        <summary>Como a seleção foi feita</summary>
+        <div class="details-body">
+          <p>A base foi construída em três camadas: (1) cobertura noticiosa de agências e
+          jornais nacionais e internacionais, com datas e contexto; (2) relatórios periódicos
+          de instituições nacionais (IBGE, Ipea, BCB, Ministério da Fazenda, INPE, MapBiomas)
+          e internacionais (World Bank, FMI, OCDE, Cepal, PNUD, OMS, Unesco, FAO); (3) séries
+          estatísticas longas.</p>
+          <p>Um fato entrou se atendesse a pelo menos dois critérios: magnitude, persistência,
+          mudança de regime, efeito distributivo ou externalidade. Notícias episódicas sem
+          efeito estrutural foram excluídas. A cronologia não é exaustiva: é uma seleção
+          argumentada, não um arquivo de tudo o que aconteceu. Para um monitor diário, o
+          método pode ser automatizado com feeds de notícias e um banco de eventos; este
+          atlas é a camada estrutural, não o noticiário em tempo real.</p>
+        </div>
+      </details>
+      <details>
+        <summary>O que os dados permitem — e o que não permitem</summary>
+        <div class="details-body">
+          <ul>
+            <li><strong>Causalidade:</strong> as cadeias causais são interpretações baseadas em evidência, não experimentos. Em vários casos, a direção do efeito é ambígua (investimento e crescimento se determinam mutuamente).</li>
+            <li><strong>Séries:</strong> houve revisões metodológicas nas contas nacionais, na pobreza e no mercado de trabalho. Principalmente a linha de pobreza do Banco Mundial foi revisada em 2025; a série longa usa US$ 6,85/dia (PPP 2017) e deve ser lida como tendência, não como nível exato.</li>
+            <li><strong>IDH:</strong> 0,805 é o MHDI/PNUD Brasil de 2024; a série global de 2023 era 0,786. São medidas próximas, mas não idênticas.</li>
+            <li><strong>2026:</strong> os dados anuais são parciais e o segundo turno presidencial ocorre em 25/10/2026; o resultado não está incorporado.</li>
+            <li><strong>Desmatamento:</strong> 2025 é consolidado; 2026 é estimativa do INPE (outubro de 2026).</li>
+            <li><strong>Rankings:</strong> as posições são entre países com dado disponível, não entre todos os países. PISA, LPI e GII usam metodologias e amostras próprias; servem como ordem de grandeza, não como medida exata.</li>
+          </ul>
+        </div>
+      </details>
+      <details>
+        <summary>Fontes principais</summary>
+        <div class="details-body" style="max-width:none">
+          <ol class="source-list">
+            <li>IBGE. <em>Sistema de Contas Nacionais</em>, <em>PNAD Contínua</em>, <em>IPCA</em> e <em>Censo 2022</em>. <a href="https://www.ibge.gov.br" target="_blank" rel="noopener">ibge.gov.br</a>.</li>
+            <li>World Bank. <em>World Development Indicators</em> e <em>Brazil Overview</em> (out. 2026). <a href="https://data.worldbank.org/country/brazil" target="_blank" rel="noopener">data.worldbank.org</a>.</li>
+            <li>Banco Central do Brasil. <em>Relatório de Política Monetária</em> (mar./jun. 2026), <em>Focus</em> e séries de crédito e dívida. <a href="https://www.bcb.gov.br" target="_blank" rel="noopener">bcb.gov.br</a>.</li>
+            <li>Ministério da Fazenda. <em>Brazil Macro Monitor</em> (mar. 2026) e <em>Relatório de Avaliação de Receitas e Despesas</em>. <a href="https://www.gov.br/fazenda" target="_blank" rel="noopener">gov.br/fazenda</a>.</li>
+            <li>Ipea. <em>Texto para Discussão 2515</em> (investimento público), <em>Carta de Conjuntura</em> e estudos de pobreza e produtividade. <a href="https://www.ipea.gov.br" target="_blank" rel="noopener">ipea.gov.br</a>.</li>
+            <li>OCDE. <em>Economic Surveys: Brazil 2023</em>, <em>Economic Outlook</em> 2025–2026 e <em>PISA 2022</em>. <a href="https://www.oecd.org/brazil/" target="_blank" rel="noopener">oecd.org</a>.</li>
+            <li>World Bank. <em>Logistics Performance Index 2023</em>. <a href="https://lpi.worldbank.org" target="_blank" rel="noopener">lpi.worldbank.org</a>.</li>
+            <li>WIPO. <em>Global Innovation Index 2025/2026</em>. <a href="https://www.wipo.int/gii-ranking" target="_blank" rel="noopener">wipo.int</a>.</li>
+            <li>FMI. <em>Brazil: 2026 Article IV Consultation</em> (jul. 2026). <a href="https://www.imf.org" target="_blank" rel="noopener">imf.org</a>.</li>
+            <li>PNUD. <em>Relatório do Desenvolvimento Humano 2025</em> e <em>MHDI Brasil 2024</em>. <a href="https://hdr.undp.org" target="_blank" rel="noopener">hdr.undp.org</a>.</li>
+            <li>INPE. <em>PRODES — Amazônia Legal</em>, taxas 1988–2026. <a href="https://terrabrasilis.dpi.inpe.br" target="_blank" rel="noopener">terrabrasilis.dpi.inpe.br</a>.</li>
+            <li>MapBiomas e SEEG. <em>Uso da terra e emissões</em>. <a href="https://mapbiomas.org" target="_blank" rel="noopener">mapbiomas.org</a>.</li>
+            <li>OMS, Unesco e FAO. Indicadores de saúde, educação e segurança alimentar. <a href="https://www.who.int" target="_blank" rel="noopener">who.int</a>.</li>
+            <li>Reuters, Valor, Agência Brasil, Folha, Estadão, NYT, BBC e CNBC. Cobertura noticiosa de 1996–2026, usada para datar e contextualizar os fatos.</li>
+            <li>BNDES. <em>Privatização no Brasil — 1990–1994 e 1995–2002</em>. <a href="https://web.bndes.gov.br" target="_blank" rel="noopener">bndes.gov.br</a>.</li>
+            <li>OCDE (2025). <em>The reform of Brazil’s consumption tax system</em>. <a href="https://www.oecd.org" target="_blank" rel="noopener">oecd.org</a>.</li>
+            <li>Reuters/NYT (2025). Tarifas dos EUA sobre o Brasil; Reuters (2026). Eleição e economia. <a href="https://www.reuters.com" target="_blank" rel="noopener">reuters.com</a>.</li>
+          </ol>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__label">Sobre este atlas</div>
+        <h3>Trinta anos de desenvolvimento — e o que ainda falta</h3>
+        <p>Um atlas analítico dos fatos que moldaram o Brasil entre 1996 e 2026: estabilização, commodities, inclusão, crise, reformas, pandemia, clima e o novo ciclo político. Cada fato vem com mecanismo e evidência; cada tese é uma interpretação, não um veredito.</p>
+      </div>
+      <div>
+        <div class="footer__label">Seções</div>
+        <a href="#retrato">01 · Retrato</a>
+        <a href="#eras">02 · Linha do tempo</a>
+        <a href="#forcas">03 · Forças</a>
+        <a href="#dados">04 · Dados</a>
+        <a href="#mundo">05 · Mundo</a>
+        <a href="#causas">06 · Causas</a>
+        <a href="#balanco">07 · Balanço</a>
+        <a href="#teses">08 · Teses</a>
+        <a href="#agenda">09 · Agenda</a>
+      </div>
+      <div>
+        <div class="footer__label">Dados e série</div>
+        <a href="#metodo">Método e limites</a>
+        <a href="#metodo">Fontes</a>
+        <a href="composicao-pib-brasil-1995-2025.html">Composição do PIB, ano a ano</a>
+        <a href="investimento-brasil-1995-2025.html">Relatório de investimento (FBCF)</a>
+        <a href="#" onclick="window.print();return false;">Imprimir / salvar PDF</a>
+        <a href="#inicio">Voltar ao topo ↑</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>Elaborado com dados públicos · outubro de 2026</span>
+      <span>Brasil · 1996—2026</span>
+    </div>
+  </div>
+</footer>
+
+<div class="tooltip" id="tooltip" role="status" aria-live="polite"></div>
+
+<script>
+/* ============================================================
+   DADOS
+   ============================================================ */
+const GDPPC = [
+  [1995,6596],[1996,6641],[1997,6765],[1998,6688],[1999,6622],[2000,6818],
+  [2001,6823],[2002,6945],[2003,6941],[2004,7259],[2005,7410],[2006,7622],
+  [2007,8003],[2008,8331],[2009,8246],[2010,8793],[2011,9068],[2012,9168],
+  [2013,9367],[2014,9338],[2015,8936],[2016,8578],[2017,8628],[2018,8722],
+  [2019,8771],[2020,8435],[2021,8799],[2022,9032],[2023,9288],[2024,9567],[2025,9748]
+];
+const POV = [
+  [1995,54.8],[1996,54.9],[1997,55.1],[1998,54.3],[1999,55.8],[2000,null],
+  [2001,50.3],[2002,49.8],[2003,50.9],[2004,49.5],[2005,47.5],[2006,43.7],
+  [2007,41.2],[2008,38.2],[2009,36.3],[2010,null],[2011,32.2],[2012,30.4],
+  [2013,27.9],[2014,26.4],[2015,27.4],[2016,29.1],[2017,29.3],[2018,28.7],
+  [2019,28.0],[2020,20.8],[2021,30.6],[2022,25.3],[2023,23.3],[2024,20.6]
+];
+const GINI = [
+  [1995,59.5],[1996,59.8],[1997,59.8],[1998,59.6],[1999,59.0],[2000,null],
+  [2001,58.4],[2002,58.1],[2003,57.6],[2004,56.5],[2005,56.3],[2006,55.6],
+  [2007,54.9],[2008,54.0],[2009,53.7],[2010,null],[2011,52.9],[2012,53.4],
+  [2013,52.7],[2014,52.1],[2015,51.9],[2016,53.4],[2017,53.3],[2018,53.9],
+  [2019,53.5],[2020,48.8],[2021,52.9],[2022,51.9],[2023,51.5],[2024,50.3]
+];
+const INFL = [
+  [1996,9.56],[1997,5.22],[1998,1.65],[1999,8.94],[2000,5.97],[2001,7.67],
+  [2002,12.53],[2003,9.30],[2004,7.60],[2005,5.69],[2006,3.14],[2007,4.46],
+  [2008,5.90],[2009,4.31],[2010,5.91],[2011,6.50],[2012,5.84],[2013,5.91],
+  [2014,6.41],[2015,10.67],[2016,6.29],[2017,2.95],[2018,3.75],[2019,4.31],
+  [2020,4.52],[2021,10.06],[2022,5.79],[2023,4.62],[2024,4.83],[2025,4.26]
+];
+const MANU = [
+  [1995,14.54],[1996,13.07],[1997,13.02],[1998,12.16],[1999,12.31],[2000,13.13],
+  [2001,13.09],[2002,12.36],[2003,14.45],[2004,15.10],[2005,14.74],[2006,14.11],
+  [2007,14.15],[2008,13.96],[2009,13.06],[2010,12.72],[2011,11.78],[2012,10.68],
+  [2013,10.48],[2014,10.34],[2015,10.52],[2016,10.79],[2017,10.72],[2018,10.53],
+  [2019,10.33],[2020,10.69],[2021,11.90],[2022,13.07],[2023,13.25],[2024,12.11],[2025,11.77]
+];
+const FBCF = [
+  [1995,20.29],[1996,18.64],[1997,19.12],[1998,18.54],[1999,17.02],[2000,18.30],
+  [2001,18.42],[2002,17.93],[2003,16.60],[2004,17.32],[2005,17.06],[2006,17.21],
+  [2007,18.00],[2008,19.39],[2009,19.10],[2010,20.53],[2011,20.61],[2012,20.72],
+  [2013,20.91],[2014,19.87],[2015,17.84],[2016,15.52],[2017,14.56],[2018,15.10],
+  [2019,15.47],[2020,16.56],[2021,17.92],[2022,17.80],[2023,16.41],[2024,16.91],[2025,16.84]
+];
+const DEFOR = [
+  [1996,18161],[1997,13227],[1998,17383],[1999,17259],[2000,18226],[2001,18165],
+  [2002,21651],[2003,25396],[2004,27772],[2005,19014],[2006,14286],[2007,11651],
+  [2008,12911],[2009,7464],[2010,7000],[2011,6418],[2012,4571],[2013,5891],
+  [2014,5012],[2015,6207],[2016,7893],[2017,6947],[2018,7536],[2019,10129],
+  [2020,11088],[2021,13038],[2022,11594],[2023,9064],[2024,6518],[2025,5731],[2026,3335]
+];
+const ERAS = [
+  {label:'FHC 1995–2002', value:2.4, color:'#6b7c93'},
+  {label:'Lula 2003–2010', value:4.1, color:'#a97b28'},
+  {label:'Dilma 2011–2016', value:0.4, color:'#b23a2a'},
+  {label:'Temer 2016–2018', value:-0.1, color:'#3b5578'},
+  {label:'Bolsonaro 2019–2022', value:1.4, color:'#1f4d3f'},
+  {label:'Lula 3 2023–2025', value:3.0, color:'#7d4560'}
+];
+const PROD = [
+  {label:'EUA', value:156983},
+  {label:'Coreia', value:99046},
+  {label:'Chile', value:65211},
+  {label:'México', value:48141},
+  {label:'China', value:48126},
+  {label:'Brasil', value:41840, highlight:true},
+  {label:'Índia', value:24842}
+];
+const PEERS = [
+  {label:'EUA', value:67946},
+  {label:'Coreia', value:37470},
+  {label:'Chile', value:14905},
+  {label:'China', value:13793},
+  {label:'México', value:10257},
+  {label:'Brasil', value:9748, highlight:true},
+  {label:'Colômbia', value:6976},
+  {label:'Peru', value:6891}
+];
+const REL = {
+  BRA:[15.8,15.5,15.3,14.7,14.0,14.0,14.0,14.2,13.9,14.1,14.1,14.2,14.8,15.5,15.9,16.6,17.0,17.0,17.1,16.8,15.7,14.9,14.8,14.6,14.4,14.2,13.9,14.0,14.1,14.3,14.3],
+  KOR:[33.4,34.8,35.5,32.5,34.7,36.5,38.0,40.4,40.6,41.4,42.0,43.2,45.0,46.4,48.2,50.4,51.5,51.7,52.5,52.9,53.1,54.0,54.7,54.9,54.9,55.8,55.1,55.7,55.4,55.4,55.1],
+  CHN:[3.7,3.9,4.1,4.3,4.4,4.6,5.0,5.3,5.7,6.1,6.6,7.2,8.1,9.0,10.1,10.9,11.8,12.4,13.2,13.8,14.4,15.1,15.8,16.4,17.0,17.8,18.2,18.4,19.0,19.6,20.3],
+  MEX:[19.1,19.4,19.9,20.1,19.6,19.7,19.3,18.9,18.5,18.3,18.0,18.3,18.2,18.3,17.5,17.8,18.0,18.1,17.8,17.7,17.6,17.6,17.4,17.2,16.6,15.5,15.4,15.6,15.6,15.4,15.1],
+  CHL:[17.3,17.8,18.3,18.2,17.3,17.4,17.8,18.0,18.3,18.8,19.2,19.8,20.4,21.1,21.4,22.1,23.0,23.9,24.1,23.9,23.6,23.5,23.1,23.0,22.3,21.3,22.3,22.2,21.8,21.9,21.9]
+};
+const GINI_GLOBAL = [
+  {label:'Colômbia', value:54.4},
+  {label:'África do Sul', value:54.1},
+  {label:'Brasil', value:50.3, highlight:true},
+  {label:'Chile', value:43.0},
+  {label:'México', value:42.6},
+  {label:'EUA', value:41.8},
+  {label:'China', value:36.0},
+  {label:'Coreia', value:32.9}
+];
+const PISA = [
+  {label:'Singapura', value:575},
+  {label:'Coreia', value:527},
+  {label:'OCDE', value:472, color:'#8c8475'},
+  {label:'EUA', value:465},
+  {label:'Chile', value:412},
+  {label:'México', value:395},
+  {label:'Peru', value:391},
+  {label:'Colômbia', value:383},
+  {label:'Brasil', value:379, highlight:true}
+];
+
+const fmt1 = v => (v==null || Number.isNaN(v)) ? '—' : v.toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1});
+const fmt0 = v => (v==null || Number.isNaN(v)) ? '—' : v.toLocaleString('pt-BR',{minimumFractionDigits:0,maximumFractionDigits:0});
+const fmtInt = v => (v==null || Number.isNaN(v)) ? '—' : v.toLocaleString('pt-BR',{maximumFractionDigits:0});
+
+/* ============================================================
+   HELPERS SVG
+   ============================================================ */
+const NS='http://www.w3.org/2000/svg';
+const tooltip=document.getElementById('tooltip');
+let hideTimer=null;
+function svgEl(tag,attrs={}){const el=document.createElementNS(NS,tag);for(const k in attrs){if(attrs[k]===undefined||attrs[k]===null)continue;el.setAttribute(k,attrs[k]);}return el;}
+function makeSvg(w,h,label){const s=svgEl('svg',{viewBox:`0 0 ${w} ${h}`,role:'img','aria-label':label});s.style.width='100%';s.style.height='auto';s.style.display='block';return s;}
+function clearNode(n){while(n.firstChild)n.removeChild(n.firstChild);}
+function scale(d0,d1,r0,r1){return v=>r0+(v-d0)/(d1-d0)*(r1-r0);}
+function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+function ticks(min,max,step){const out=[];for(let v=Math.ceil(min/step)*step;v<=max+1e-9;v+=step)out.push(+v.toFixed(6));return out;}
+function linePath(pts){return pts.map((p,i)=>`${i===0?'M':'L'} ${p[0].toFixed(2)} ${p[1].toFixed(2)}`).join(' ');}
+function showTip(html,ev){tooltip.innerHTML=html;tooltip.classList.add('show');moveTip(ev);if(hideTimer)clearTimeout(hideTimer);}
+function moveTip(ev){const pad=14;const r=tooltip.getBoundingClientRect();let x=ev.clientX+pad,y=ev.clientY+pad;if(x+r.width>window.innerWidth-8)x=ev.clientX-r.width-pad;if(y+r.height>window.innerHeight-8)y=ev.clientY-r.height-pad;tooltip.style.transform=`translate(${Math.max(8,x)}px, ${Math.max(8,y)}px)`;}
+function hideTip(){hideTimer=setTimeout(()=>tooltip.classList.remove('show'),40);}
+function ttRow(color,label,value){return `<div class="tt-row"><span>${color?`<i style="display:inline-block;width:7px;height:7px;background:${color};margin-right:5px"></i>`:''}${label}</span><b>${value}</b></div>`;}
+function addHover(svg,x,y,w,h,htmlFn,onEnter,onLeave){const r=svgEl('rect',{x,y,width:Math.max(1,w),height:h,fill:'transparent',style:'cursor:crosshair'});r.addEventListener('pointerenter',e=>{showTip(typeof htmlFn==='function'?htmlFn():htmlFn,e);if(onEnter)onEnter();});r.addEventListener('pointermove',e=>moveTip(e));r.addEventListener('pointerleave',()=>{hideTip();if(onLeave)onLeave();});svg.appendChild(r);return r;}
+
+/* ============================================================
+   LINE CHART
+   ============================================================ */
+function renderLine(id,data,opts){
+  const box=document.getElementById(id);if(!box)return;clearNode(box);
+  const w=Math.max(300,box.clientWidth);
+  const mobile=w<600;
+  const h=mobile?300:340;
+  const m={t:24,r:mobile?16:24,b:38,l:mobile?38:48};
+  const iw=w-m.l-m.r,ih=h-m.t-m.b;
+  const x=scale(opts.x0,opts.x1,m.l,m.l+iw);
+  const y=scale(opts.y0,opts.y1,m.t+ih,m.t);
+  const s=makeSvg(w,h,opts.label);
+
+  ticks(opts.y0,opts.y1,opts.step).forEach(v=>{
+    const yy=y(v);
+    s.appendChild(svgEl('line',{x1:m.l,y1:yy,x2:m.l+iw,y2:yy,class:'grid'}));
+    const t=svgEl('text',{x:m.l-7,y:yy+3,'text-anchor':'end',class:'axis-value'});
+    t.textContent=opts.fmtY?opts.fmtY(v):fmt0(v);
+    s.appendChild(t);
+  });
+  s.appendChild(svgEl('line',{x1:m.l,y1:m.t+ih,x2:m.l+iw,y2:m.t+ih,class:'baseline'}));
+
+  const pts=data.map(d=>[x(d[0]),y(d[1])]);
+  if(opts.area!==false){
+    const area=`M ${pts[0][0]} ${m.t+ih} L ${pts.map(p=>`${p[0].toFixed(2)} ${p[1].toFixed(2)}`).join(' L ')} L ${pts[pts.length-1][0]} ${m.t+ih} Z`;
+    s.appendChild(svgEl('path',{d:area,fill:opts.color,opacity:.07}));
+  }
+  s.appendChild(svgEl('path',{d:linePath(pts),fill:'none',stroke:opts.color,'stroke-width':2,'stroke-linejoin':'round','stroke-linecap':'round'}));
+
+  if(opts.annotations){
+    opts.annotations.forEach(a=>{
+      const d=data.find(p=>p[0]===a.y);if(!d)return;
+      const px=x(a.y),py=y(d[1]);
+      s.appendChild(svgEl('circle',{cx:px,cy:py,r:3,fill:'#fffdf8',stroke:opts.color,'stroke-width':1.6}));
+      const t=svgEl('text',{x:px+(a.dx||0),y:py+(a.dy||-10),'text-anchor':a.anchor||'middle',class:'annotation'});
+      t.textContent=a.label;s.appendChild(t);
+    });
+  }
+
+  const xTicks=opts.xTicks||[1995,2000,2005,2010,2015,2020,2025];
+  xTicks.forEach(v=>{
+    if(v<opts.x0||v>opts.x1)return;
+    const t=svgEl('text',{x:x(v),y:h-14,'text-anchor':'middle',class:'axis-value'});
+    t.textContent=v;s.appendChild(t);
+  });
+
+  data.forEach(d=>{
+    if(d[1]==null)return;
+    const x1=x(clamp(d[0]-0.5,opts.x0,opts.x1));
+    const x2=x(clamp(d[0]+0.5,opts.x0,opts.x1));
+    addHover(s,x1,m.t,x2-x1,ih,()=>`
+      <div class="tt-year"><span>${d[0]}</span><span>${opts.tag||''}</span></div>
+      ${ttRow(opts.color,opts.series,d[1].toLocaleString('pt-BR',{minimumFractionDigits:opts.dec||0,maximumFractionDigits:opts.dec||0})+opts.unit)}
+    `);
+  });
+
+  box.appendChild(s);
+}
+
+/* ============================================================
+   SMALL MULTIPLES — POVERTY + GINI
+   ============================================================ */
+function renderPoverty(){
+  const box=document.getElementById('chart-poverty');if(!box)return;clearNode(box);
+  const w=Math.max(300,box.clientWidth);
+  const h=330;
+  const m={t:12,r:62,b:30,l:42};
+  const iw=w-m.l-m.r;
+  const gap=22,ph=(h-m.t-m.b-gap)/2;
+  const x=scale(1995,2024,m.l,m.l+iw);
+  const s=makeSvg(w,h,'Pobreza e desigualdade no Brasil');
+  const panels=[
+    {data:POV,label:'POBREZA · % DA POPULAÇÃO',color:'#b23a2a',min:15,max:60,step:15,unit:'%',dec:1,end:'20,6%'},
+    {data:GINI,label:'GINI · ÍNDICE',color:'#1f4d3f',min:45,max:62,step:5,unit:'',dec:1,end:'50,3'}
+  ];
+  panels.forEach((p,pi)=>{
+    const top=m.t+pi*(ph+gap),plotH=ph-14,plotTop=top+14;
+    const y=scale(p.min,p.max,plotTop+plotH,plotTop);
+    s.appendChild(svgEl('rect',{x:m.l-34,y:top,width:iw+40,height:ph,fill:'#fffdf8',opacity:.5}));
+    s.appendChild(svgEl('rect',{x:m.l-34,y:top,width:5,height:5,fill:p.color}));
+    const title=svgEl('text',{x:m.l-25,y:top+5,class:'axis-label',fill:p.color,'font-size':8.5});
+    title.textContent=p.label;s.appendChild(title);
+    ticks(p.min,p.max,p.step).forEach(v=>{
+      const yy=y(v);
+      s.appendChild(svgEl('line',{x1:m.l,y1:yy,x2:m.l+iw,y2:yy,class:'grid'}));
+      const t=svgEl('text',{x:m.l-6,y:yy+3,'text-anchor':'end',class:'axis-value'});t.textContent=fmt0(v)+(p.unit?'%':'');s.appendChild(t);
+    });
+    s.appendChild(svgEl('line',{x1:m.l,y1:plotTop+plotH,x2:m.l+iw,y2:plotTop+plotH,class:'baseline'}));
+    let segs=[],cur=[];
+    p.data.forEach(d=>{if(d[1]==null){if(cur.length){segs.push(cur);cur=[];}}else cur.push([x(d[0]),y(d[1])]);});
+    if(cur.length)segs.push(cur);
+    segs.forEach(seg=>s.appendChild(svgEl('path',{d:linePath(seg),fill:'none',stroke:p.color,'stroke-width':1.8,'stroke-linejoin':'round','stroke-linecap':'round'})));
+    const last=[...p.data].reverse().find(d=>d[1]!=null);
+    if(last){s.appendChild(svgEl('circle',{cx:x(last[0]),cy:y(last[1]),r:2.6,fill:p.color}));const lab=svgEl('text',{x:x(last[0])+6,y:y(last[1])+3,class:'series-label',fill:p.color});lab.textContent=p.end;s.appendChild(lab);}
+  });
+  [1995,2000,2005,2010,2015,2020,2024].forEach(v=>{const t=svgEl('text',{x:x(v),y:h-10,'text-anchor':'middle',class:'axis-value'});t.textContent=v;s.appendChild(t);});
+  POV.forEach(d=>{
+    const x1=x(clamp(d[0]-0.5,1995,2024)),x2=x(clamp(d[0]+0.5,1995,2024));
+    const g=GINI.find(q=>q[0]===d[0]);
+    addHover(s,x1,m.t,x2-x1,h-m.t-m.b,()=>`
+      <div class="tt-year"><span>${d[0]}</span><span>Brasil</span></div>
+      ${d[1]!=null?ttRow('#b23a2a','Pobreza',fmt1(d[1])+'%'):''}
+      ${g&&g[1]!=null?ttRow('#1f4d3f','Gini',fmt1(g[1])):''}
+    `);
+  });
+  box.appendChild(s);
+}
+
+/* ============================================================
+   BARS HORIZONTAL
+   ============================================================ */
+function renderBarsH(id,items,opts){
+  const box=document.getElementById(id);if(!box)return;clearNode(box);
+  const w=Math.max(300,box.clientWidth);
+  const h=opts.height||Math.max(220,40+items.length*28);
+  const m={t:12,r:opts.r||64,b:20,l:opts.l||92};
+  const iw=w-m.l-m.r;
+  const max=opts.max||Math.max(...items.map(i=>i.value))*1.12;
+  const x=scale(opts.min||0,max,m.l,m.l+iw);
+  const s=makeSvg(w,h,opts.label);
+  const barH=opts.barH||18,gap=opts.gap||10;
+  items.forEach((it,i)=>{
+    const yy=m.t+i*(barH+gap);
+    const color=it.highlight?opts.highlightColor||'#1f4d3f':it.color||opts.color||'#c9bda8';
+    s.appendChild(svgEl('text',{x:m.l-7,y:yy+barH/2+3.5,'text-anchor':'end',class:'axis-value',fill:it.highlight?'#1f4d3f':'#655f53','font-weight':it.highlight?600:400})).textContent=it.label;
+    s.appendChild(svgEl('rect',{x:m.l,y:yy,width:x(Math.max(0,it.value))-m.l,height:barH,fill:color}));
+    const t=svgEl('text',{x:x(Math.max(0,it.value))+5,y:yy+barH/2+3.5,class:'axis-value',fill:it.highlight?'#1f4d3f':'#655f53','font-weight':it.highlight?600:400});
+    t.textContent=opts.fmt?opts.fmt(it.value):fmt0(it.value);s.appendChild(t);
+    addHover(s,m.l,yy,iw,barH,()=>`
+      <div class="tt-year"><span>${opts.year||''}</span><span>${opts.series||''}</span></div>
+      ${ttRow(color,it.label,(opts.fmt?opts.fmt(it.value):fmt0(it.value))+(opts.unit||''))}
+    `);
+  });
+  box.appendChild(s);
+}
+
+/* ============================================================
+   BARS VERTICAL — DEFORESTATION
+   ============================================================ */
+function renderDeforestation(){
+  const box=document.getElementById('chart-deforestation');if(!box)return;clearNode(box);
+  const w=Math.max(320,box.clientWidth);
+  const h=320;
+  const m={t:22,r:20,b:38,l:46};
+  const iw=w-m.l-m.r,ih=h-m.t-m.b;
+  const x=scale(1996,2026,m.l,m.l+iw);
+  const y=scale(0,30000,m.t+ih,m.t);
+  const s=makeSvg(w,h,'Desmatamento anual na Amazônia Legal');
+  ticks(0,30000,5000).forEach(v=>{
+    const yy=y(v);
+    s.appendChild(svgEl('line',{x1:m.l,y1:yy,x2:m.l+iw,y2:yy,class:'grid'}));
+    const t=svgEl('text',{x:m.l-6,y:yy+3,'text-anchor':'end',class:'axis-value'});t.textContent=fmtInt(v/1000)+'k';s.appendChild(t);
+  });
+  const bw=Math.max(4,(iw/(DEFOR.length))*0.62);
+  DEFOR.forEach(d=>{
+    const isEst=d[0]===2026;
+    const color=isEst?'#c9bda8':(d[0]===2004?'#b23a2a':(d[0]>=2019&&d[0]<=2022?'#b23a2a':'#1f4d3f'));
+    s.appendChild(svgEl('rect',{x:x(d[0])-bw/2,y:y(d[1]),width:bw,height:m.t+ih-y(d[1]),fill:color,opacity:isEst?.55:.9}));
+    addHover(s,x(d[0])-bw/2,m.t,bw,ih,()=>`
+      <div class="tt-year"><span>${d[0]}</span><span>${isEst?'estimativa':'PRODES'}</span></div>
+      ${ttRow(color,'Desmatamento',fmtInt(d[1])+' km²')}
+      <div class="tt-note">${isEst?'Estimativa INPE (out. 2026)':'Taxa consolidada'}</div>
+    `);
+  });
+  [1996,2000,2004,2008,2012,2016,2020,2024,2026].forEach(v=>{
+    const t=svgEl('text',{x:x(v),y:h-12,'text-anchor':'middle',class:'axis-value'});t.textContent=v;s.appendChild(t);
+  });
+  const ann=svgEl('text',{x:x(2004),y:y(27772)-8,'text-anchor':'middle',class:'annotation'});ann.textContent='Pico 27,8 mil km²';s.appendChild(ann);
+  const ann2=svgEl('text',{x:x(2026),y:y(3335)-8,'text-anchor':'middle',class:'annotation'});ann2.textContent='2026*';s.appendChild(ann2);
+  box.appendChild(s);
+}
+
+/* ============================================================
+   ERAS BARS
+   ============================================================ */
+function renderEras(){
+  const box=document.getElementById('chart-eras');if(!box)return;clearNode(box);
+  const w=Math.max(300,box.clientWidth);
+  const h=280;
+  const m={t:16,r:52,b:24,l:126};
+  const iw=w-m.l-m.r;
+  const x=scale(-1,5,m.l,m.l+iw);
+  const s=makeSvg(w,h,'Crescimento médio do PIB por era');
+  const zero=x(0);
+  s.appendChild(svgEl('line',{x1:zero,y1:m.t,x2:zero,y2:h-m.b,stroke:'#bfb3a0','stroke-width':1}));
+  ERAS.forEach((e,i)=>{
+    const yy=m.t+i*34;
+    const val=e.value;
+    const x1=val>=0?zero:x(val), x2=val>=0?x(val):zero;
+    s.appendChild(svgEl('text',{x:m.l-7,y:yy+14,'text-anchor':'end',class:'axis-value',fill:'#17150f'})).textContent=e.label;
+    s.appendChild(svgEl('rect',{x:x1,y:yy,width:Math.max(1,x2-x1),height:20,fill:e.color}));
+    const t=svgEl('text',{x:val>=0?x2+5:x1-5,y:yy+14,'text-anchor':val>=0?'start':'end',class:'axis-value',fill:e.color,'font-weight':600});
+    t.textContent=fmt1(val)+'%';s.appendChild(t);
+    addHover(s,Math.min(x1,x2),yy,Math.abs(x2-x1)+2,20,()=>`
+      <div class="tt-year"><span>${e.label}</span><span>Média</span></div>
+      ${ttRow(e.color,'PIB real',fmt1(val)+'% ao ano')}
+    `);
+  });
+  [0,1,2,3,4,5].forEach(v=>{const t=svgEl('text',{x:x(v),y:h-8,'text-anchor':'middle',class:'axis-value'});t.textContent=v+'%';s.appendChild(t);});
+  box.appendChild(s);
+}
+
+/* ============================================================
+   RELATIVE INCOME TO THE US
+   ============================================================ */
+function renderRelative(){
+  const box=document.getElementById('chart-relative');if(!box)return;clearNode(box);
+  const w=Math.max(320,box.clientWidth);
+  const h=360;
+  const m={t:22,r:54,b:36,l:38};
+  const iw=w-m.l-m.r,ih=h-m.t-m.b;
+  const x=scale(1995,2025,m.l,m.l+iw);
+  const y=scale(0,60,m.t+ih,m.t);
+  const s=makeSvg(w,h,'Renda per capita relativa aos EUA');
+  const series=[
+    {key:'BRA',name:'Brasil',color:'#1f4d3f'},
+    {key:'KOR',name:'Coreia',color:'#3b5578'},
+    {key:'CHN',name:'China',color:'#a97b28'},
+    {key:'MEX',name:'México',color:'#b23a2a'},
+    {key:'CHL',name:'Chile',color:'#7d4560'}
+  ];
+  ticks(0,60,15).forEach(v=>{
+    const yy=y(v);
+    s.appendChild(svgEl('line',{x1:m.l,y1:yy,x2:m.l+iw,y2:yy,class:'grid'}));
+    const t=svgEl('text',{x:m.l-6,y:yy+3,'text-anchor':'end',class:'axis-value'});t.textContent=v+'%';s.appendChild(t);
+  });
+  s.appendChild(svgEl('line',{x1:m.l,y1:m.t+ih,x2:m.l+iw,y2:m.t+ih,class:'baseline'}));
+  series.forEach(se=>{
+    const pts=REL[se.key].map((v,i)=>[x(1995+i),y(v)]);
+    s.appendChild(svgEl('path',{d:linePath(pts),fill:'none',stroke:se.color,'stroke-width':1.9,'stroke-linejoin':'round','stroke-linecap':'round'}));
+    const last=pts[pts.length-1];
+    s.appendChild(svgEl('circle',{cx:last[0],cy:last[1],r:2.7,fill:se.color}));
+    const offsets={BRA:11,KOR:-4,CHN:10,MEX:-6,CHL:-6};
+    const lab=svgEl('text',{x:last[0]+7,y:last[1]+(offsets[se.key]||0),class:'series-label',fill:se.color,'font-size':9});
+    lab.textContent=se.key+' '+fmt1(REL[se.key][30])+'%';s.appendChild(lab);
+  });
+  [1995,2000,2005,2010,2015,2020,2025].forEach(v=>{const t=svgEl('text',{x:x(v),y:h-12,'text-anchor':'middle',class:'axis-value'});t.textContent=v;s.appendChild(t);});
+  const ann=svgEl('text',{x:x(1998),y:y(7.5),class:'annotation',fill:'#1f4d3f'});
+  ann.textContent='Brasil preso em ~14–17% dos EUA';s.appendChild(ann);
+  for(let i=0;i<31;i++){
+    const yr=1995+i;
+    const x1=x(clamp(yr-0.5,1995,2025)),x2=x(clamp(yr+0.5,1995,2025));
+    addHover(s,x1,m.t,x2-x1,ih,()=>`
+      <div class="tt-year"><span>${yr}</span><span>EUA = 100</span></div>
+      ${series.map(se=>ttRow(se.color,se.name,fmt1(REL[se.key][i])+'%')).join('')}
+    `);
+  }
+  box.appendChild(s);
+}
+
+/* ============================================================
+   RENDER ALL
+   ============================================================ */
+let lastWidth=0;
+function renderAll(force){
+  const w=document.documentElement.clientWidth;
+  if(!force && Math.abs(w-lastWidth)<2) return;
+  lastWidth=w;
+  renderLine('chart-gdppc',GDPPC,{x0:1995,x1:2025,y0:6000,y1:10200,step:1000,color:'#1f4d3f',label:'PIB per capita real',series:'PIB per capita',unit:' US$',dec:0,tag:'PIB per capita',fmtY:v=>fmtInt(v/1000)+'k',annotations:[{y:2013,label:'2013',dy:-12},{y:2016,label:'2016',dy:16},{y:2025,label:'2025',dx:-6,anchor:'end'}]});
+  renderLine('chart-inflation',INFL,{x0:1996,x1:2025,y0:0,y1:14,step:4,color:'#b23a2a',label:'Inflação anual',series:'IPCA',unit:'%',dec:1,tag:'IPCA',xTicks:[1996,2000,2005,2010,2015,2020,2025],annotations:[{y:2002,label:'2002',dy:-12},{y:2015,label:'2015',dy:-12},{y:2021,label:'2021',dy:-12},{y:2025,label:'2025',dx:-6,anchor:'end'}]});
+  renderLine('chart-industry',MANU,{x0:1995,x1:2025,y0:9,y1:16,step:1,color:'#3b5578',label:'Indústria de transformação',series:'Indústria de transformação',unit:'% do PIB',dec:1,tag:'% do PIB',annotations:[{y:1995,label:'14,5%',dx:8,dy:-8,anchor:'start'},{y:2025,label:'11,8%',dx:-6,dy:-10,anchor:'end'}]});
+  renderLine('chart-investment',FBCF,{x0:1995,x1:2025,y0:13,y1:22,step:2,color:'#1f4d3f',label:'Formação bruta de capital fixo',series:'FBCF',unit:'% do PIB',dec:1,tag:'% do PIB',annotations:[{y:2013,label:'20,9%',dy:-10},{y:2017,label:'14,6%',dy:16},{y:2025,label:'16,8%',dx:-6,anchor:'end'}]});
+  renderPoverty();
+  renderDeforestation();
+  renderEras();
+  renderRelative();
+  renderBarsH('chart-productivity',PROD,{label:'Produtividade por trabalhador',series:'PIB por pessoa empregada',year:'2025',unit:' US$ PPP',max:165000,fmt:v=>fmtInt(v),highlightColor:'#1f4d3f',color:'#c9bda8',l:84,r:66,height:260,barH:19});
+  renderBarsH('chart-peers',PEERS,{label:'PIB per capita — Brasil e pares',series:'PIB per capita',year:'2025',unit:' US$',max:72000,fmt:v=>fmtInt(v),highlightColor:'#1f4d3f',color:'#c9bda8',l:84,r:62,height:280,barH:19});
+  renderBarsH('chart-gini-global',GINI_GLOBAL,{label:'Gini — Brasil e pares',series:'Gini',year:'último dado',unit:'',max:60,fmt:v=>fmt1(v),highlightColor:'#b23a2a',color:'#c9bda8',l:110,r:46,height:300,barH:20});
+  renderBarsH('chart-pisa',PISA,{label:'PISA 2022 — matemática',series:'Pontuação',year:'2022',unit:' pts',max:620,fmt:v=>fmt0(v),highlightColor:'#b23a2a',color:'#c9bda8',l:88,r:54,height:330,barH:18});
+}
+
+/* ============================================================
+   UI
+   ============================================================ */
+function initUI(){
+  const bar=document.getElementById('progressBar');
+  const onScroll=()=>{const h=document.documentElement;const p=h.scrollTop/(h.scrollHeight-h.clientHeight);bar.style.width=Math.min(100,Math.max(0,p*100))+'%';};
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  window.addEventListener('scroll',()=>{tooltip.classList.remove('show');},{passive:true});
+  window.addEventListener('resize',()=>{tooltip.classList.remove('show');},{passive:true});
+  document.addEventListener('pointerdown',e=>{if(!e.target.closest('.chart'))tooltip.classList.remove('show');},{passive:true});
+
+  const links=[...document.querySelectorAll('.nav a')];
+  const sections=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  const obs=new IntersectionObserver(entries=>{entries.forEach(en=>{if(en.isIntersecting){links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+en.target.id));}});},{rootMargin:'-35% 0px -55% 0px',threshold:0});
+  sections.forEach(sec=>obs.observe(sec));
+  const retrato=document.getElementById('retrato');
+  window.addEventListener('scroll',()=>{if(retrato && window.scrollY < retrato.offsetTop-120){links.forEach(a=>a.classList.remove('active'));}},{passive:true});
+
+  const revObs=new IntersectionObserver(entries=>{entries.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');revObs.unobserve(en.target);}});},{threshold:.06,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
+
+  let rt=null;
+  window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>renderAll(false),140);});
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  renderAll(true);
+  initUI();
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(()=>{setTimeout(()=>renderAll(true),60);});}
+});
+</script>
+</body>
+</html>

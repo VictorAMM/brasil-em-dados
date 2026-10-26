@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Composição do PIB brasileiro — 1995–2025</title>
+<meta name="description" content="Composição do PIB brasileiro ano a ano: agropecuária, indústria, serviços e impostos; consumo das famílias, governo, investimento e setor externo. Tabela completa e CSV.">
+<meta name="theme-color" content="#f2ede3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f2ede3;--paper-2:#ebe4d6;--white:#fffdf8;--ink:#17150f;--ink-2:#3d3a32;--muted:#655f53;
+  --line:#d5cbbb;--line-2:#bfb3a0;--green:#1f4d3f;--red:#b23a2a;--gold:#a97b28;--blue:#3b5578;--teal:#1d5f58;--plum:#7d4560;
+  --serif:'Fraunces',Georgia,'Times New Roman',serif;--sans:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;--mono:'JetBrains Mono',ui-monospace,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--green);color:var(--white)}
+a{color:var(--green);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--ink)}
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+.mono{font-family:var(--mono)}
+.muted{color:var(--muted)}
+.progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:120;pointer-events:none}
+.progress__bar{height:100%;width:0;background:var(--green);transition:width .08s linear}
+.topbar{position:sticky;top:0;z-index:110;background:rgba(242,237,227,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.topbar__inner{display:flex;align-items:center;justify-content:space-between;gap:24px;height:58px}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink);flex:0 0 auto}
+.brand__mark{width:30px;height:30px;border:1px solid var(--ink);display:grid;place-items:center;font-family:var(--mono);font-size:9px;line-height:1;background:var(--green);color:var(--paper)}
+.brand__text{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;align-items:center;gap:2px;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:8px 9px;white-space:nowrap;border-bottom:1px solid transparent}
+.nav a:hover{color:var(--ink)}
+.nav a.active{color:var(--ink);border-bottom-color:var(--green)}
+.topbar__year{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--muted);border:1px solid var(--line-2);padding:4px 7px;white-space:nowrap}
+
+.hero{position:relative;padding:78px 0 54px;border-bottom:1px solid var(--line);overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:78px 78px;opacity:.18;-webkit-mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.45) 60%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.45) 60%,transparent 100%);pointer-events:none}
+.hero__grid{position:relative;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(300px,.7fr);gap:52px;align-items:end}
+.kicker{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.kicker::before{content:"";width:26px;height:1px;background:var(--green)}
+.hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(42px,5.9vw,80px);line-height:.95;letter-spacing:-.045em;margin:0 0 22px}
+.hero h1 em{display:block;font-style:italic;font-weight:500;color:var(--green)}
+.hero__deck{font-size:18.5px;line-height:1.55;color:var(--ink-2);max-width:700px;margin:0 0 24px}
+.hero__byline{font-family:var(--mono);font-size:9.5px;line-height:1.7;letter-spacing:.04em;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;max-width:650px}
+.hero__card{background:var(--white);border:1px solid var(--line);box-shadow:0 1px 0 rgba(23,21,15,.04),0 24px 60px -38px rgba(23,21,15,.35);padding:20px 20px 14px;position:relative}
+.hero__card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--green)}
+.hero__card-head{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:8px}
+.hero__card-head span:first-child{font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.hero__card-head span:last-child{font-family:var(--serif);font-size:20px}
+.hero-stat{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--line)}
+.hero-stat:last-of-type{border-bottom:0}
+.hero-stat__label{font-size:11px;color:var(--muted);line-height:1.3}
+.hero-stat__value{font-family:var(--serif);font-size:27px;line-height:1;letter-spacing:-.03em;white-space:nowrap}
+.hero-stat__value small{font-family:var(--mono);font-size:8px;color:var(--muted);margin-left:2px}
+.hero__note{font-size:9.5px;line-height:1.45;color:var(--muted);border-top:1px solid var(--line);padding-top:8px;margin-top:7px}
+
+.section{padding:78px 0;border-bottom:1px solid var(--line);scroll-margin-top:76px}
+.section--tint{background:var(--paper-2)}
+.section__head{display:grid;grid-template-columns:80px minmax(0,1fr);gap:22px;margin-bottom:30px}
+.section__num{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--green);padding-top:9px}
+.section__title{font-family:var(--serif);font-size:clamp(32px,4vw,49px);line-height:1.02;letter-spacing:-.035em;font-weight:600;margin:0 0 12px}
+.section__deck{font-size:16.5px;line-height:1.58;color:var(--muted);max-width:820px;margin:0}
+h3{font-family:var(--serif);font-weight:600;letter-spacing:-.02em;margin:0}
+p{margin:0 0 14px}p:last-child{margin-bottom:0}
+.tiny{font-family:var(--mono);font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.chart-card{background:var(--white);border:1px solid var(--line);padding:18px 20px 10px}
+.chart-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:4px;flex-wrap:wrap}
+.chart-title{font-size:13.5px;font-weight:600;line-height:1.3}
+.chart-sub{font-family:var(--mono);font-size:8px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+.chart{width:100%;position:relative;min-height:120px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart svg text{font-family:var(--sans);fill:var(--muted);font-size:11px}
+.chart svg .axis-value{font-family:var(--mono);font-size:9px;fill:var(--muted)}
+.chart svg .axis-label{font-family:var(--mono);font-size:8px;letter-spacing:.07em;text-transform:uppercase;fill:var(--muted)}
+.chart svg .series-label{font-family:var(--sans);font-size:10px;font-weight:600;fill:var(--ink)}
+.chart svg .annotation{font-family:var(--sans);font-size:9.5px;fill:var(--ink-2)}
+.chart svg .grid{stroke:var(--line);stroke-width:.7;stroke-dasharray:2 4}
+.chart svg .baseline{stroke:var(--line-2);stroke-width:1}
+.chart-note{font-size:9.5px;line-height:1.5;color:var(--muted);margin-top:7px}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:10px;color:var(--muted);align-items:center}
+.legend span{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.legend i{width:9px;height:9px;display:inline-block}
+.grid-2{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:34px;align-items:start}
+.grid-2>*{min-width:0}
+.callout{border-left:3px solid var(--green);background:rgba(31,77,63,.065);padding:16px 20px;margin:20px 0}
+.callout p{font-size:14px;line-height:1.55;margin:0;color:var(--ink-2)}
+.callout strong{color:var(--ink)}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
+.stat{border-top:2px solid var(--ink);padding-top:11px}
+.stat__value{font-family:var(--serif);font-size:34px;line-height:.95;letter-spacing:-.04em;margin-bottom:5px}
+.stat__label{font-size:10.5px;line-height:1.35;color:var(--muted)}
+.stat__note{font-family:var(--mono);font-size:8px;color:var(--muted);margin-top:3px}
+
+.tabs{display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:10px}
+.tab{font-family:var(--mono);font-size:9px;letter-spacing:.07em;text-transform:uppercase;background:transparent;border:1px solid var(--line-2);color:var(--muted);padding:7px 12px;cursor:pointer}
+.tab.active{background:var(--green);border-color:var(--green);color:var(--white)}
+.tab:hover{color:var(--ink)}
+#btn-csv{margin-left:auto;font-family:var(--mono);font-size:8.5px;letter-spacing:.07em;text-transform:uppercase;background:var(--ink);color:var(--paper);border:0;padding:8px 11px;cursor:pointer}
+.table-wrap{width:100%;overflow-x:auto;border:1px solid var(--line);background:var(--white)}
+table{border-collapse:collapse;width:100%;font-size:11.5px}
+th,td{padding:8px 9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-family:var(--mono);font-size:7.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--paper-2);white-space:nowrap}
+td.num,th.num{text-align:right;font-family:var(--mono);font-size:10px;white-space:nowrap}
+td.name{font-weight:600;white-space:nowrap}
+th:first-child,td:first-child{width:64px}
+tbody tr:hover{background:rgba(169,123,40,.06)}
+tr.total td{border-top:2px solid var(--ink);background:var(--paper-2);font-weight:600}
+.table-note{font-size:9.5px;line-height:1.5;color:var(--muted);margin-top:7px}
+details{border-top:1px solid var(--line);padding:16px 0}
+details:last-of-type{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-family:var(--serif);font-size:20px;letter-spacing:-.02em;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:14px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--mono);font-size:15px;color:var(--green)}
+details[open] summary::after{content:"–"}
+details .details-body{padding-top:11px;font-size:12px;line-height:1.6;color:var(--ink-2);max-width:900px}
+details .details-body ul{margin:0 0 10px;padding-left:17px}
+details .details-body li{margin-bottom:5px}
+.footer{background:var(--ink);color:var(--paper);padding:46px 0 28px}
+.footer__grid{display:grid;grid-template-columns:1.4fr .8fr .8fr;gap:34px}
+.footer h3{font-family:var(--serif);font-size:26px;line-height:1.05;margin:0 0 8px;color:var(--paper)}
+.footer p{font-size:11px;line-height:1.55;color:#bcb3a3;max-width:560px}
+.footer__label{font-family:var(--mono);font-size:8px;letter-spacing:.11em;text-transform:uppercase;color:#8f8676;margin-bottom:9px}
+.footer a{color:#d9cbb8;text-decoration:none;font-size:11px;display:block;margin-bottom:4px}
+.footer a:hover{color:#fff}
+.footer__bottom{display:flex;justify-content:space-between;gap:18px;border-top:1px solid #3a362d;margin-top:28px;padding-top:13px;font-family:var(--mono);font-size:7.5px;letter-spacing:.07em;text-transform:uppercase;color:#8f8676}
+.tooltip{position:fixed;top:0;left:0;z-index:200;pointer-events:none;background:#17150f;color:#f2ede3;padding:9px 11px;max-width:300px;font-size:10px;line-height:1.45;box-shadow:0 10px 30px rgba(0,0,0,.25);opacity:0;transform:translate(-9999px,-9999px);transition:opacity .1s}
+.tooltip.show{opacity:1}
+.tt-year{font-family:var(--mono);font-size:8px;letter-spacing:.09em;text-transform:uppercase;color:#bcb3a3;margin-bottom:5px;display:flex;justify-content:space-between;gap:12px}
+.tt-row{display:flex;justify-content:space-between;gap:16px;margin:1px 0}
+.tt-row b{font-family:var(--mono);font-weight:500;white-space:nowrap}
+.tt-note{border-top:1px solid #3a362d;margin-top:5px;padding-top:4px;color:#bcb3a3;font-size:9px}
+.reveal{opacity:0;transform:translateY(10px);transition:opacity .6s,transform .6s}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}}
+@media(max-width:1000px){
+  .hero__grid{grid-template-columns:1fr;gap:28px}.hero__card{max-width:560px}
+  .grid-2{grid-template-columns:1fr}
+  .stat-row{grid-template-columns:1fr 1fr}
+  .footer__grid{grid-template-columns:1fr 1fr}
+  .nav{flex:1;min-width:0}
+}
+@media(max-width:640px){
+  .wrap{padding:0 16px}.hero{padding:52px 0 40px}.hero h1{font-size:clamp(36px,10.5vw,50px)}
+  .hero__deck{font-size:16px}.section{padding:56px 0}
+  .section__head{grid-template-columns:1fr;gap:7px}.section__num{padding-top:0}
+  .section__title{font-size:31px}.stat-row{grid-template-columns:1fr 1fr}
+  .chart-card{padding:14px 11px 8px}.footer__grid{grid-template-columns:1fr}
+  .footer__bottom{flex-direction:column;gap:5px}.nav a{font-size:8px;padding:6px 5px}
+  .brand__text{display:none}.topbar{overflow:hidden}.nav__ext{display:none}
+  .nav{justify-content:flex-start;-webkit-mask-image:linear-gradient(to right,#000 90%,transparent);mask-image:linear-gradient(to right,#000 90%,transparent)}
+  .tabs{position:relative}.tab{font-size:8px;padding:6px 9px}#btn-csv{margin-left:0}
+}
+.mobile-only{display:none}
+@media(max-width:640px){.mobile-only{display:block}}
+@media print{
+  .topbar,.progress,.tooltip,.nav,.hero::before{display:none!important}
+  body{background:#fff;font-size:10pt}.section{padding:24px 0;break-inside:avoid}
+  .chart-card,.stat{break-inside:avoid}.footer{background:#fff;color:#000;border-top:1px solid #000}
+  .footer p,.footer a,.footer__label,.footer__bottom{color:#000}
+}
+</style>
+</head>
+<body>
+
+<div class="progress"><div class="progress__bar" id="progressBar"></div></div>
+
+<header class="topbar">
+  <div class="wrap topbar__inner">
+    <a class="brand" href="#inicio" aria-label="Início">
+      <span class="brand__mark">PIB<br>BR</span>
+      <span class="brand__text">Composição · 1995—2025</span>
+    </a>
+    <nav class="nav" aria-label="Seções">
+      <a href="#oferta">Oferta</a>
+      <a href="#demanda">Demanda</a>
+      <a href="#tabela">Tabela</a>
+      <a href="#metodo">Método</a>
+      <a class="nav__ext" href="desenvolvimento-brasil-1996-2026.html">Atlas</a>
+    </nav>
+    <span class="topbar__year">OUT · 2026</span>
+  </div>
+</header>
+
+<main>
+
+<section class="hero" id="inicio">
+  <div class="wrap hero__grid">
+    <div>
+      <div class="kicker">Composição do PIB brasileiro · 1995—2025</div>
+      <h1>O Brasil produz serviços. <em>Mas investe pouco e depende do consumo.</em></h1>
+      <p class="hero__deck">
+        A composição do PIB ano a ano, em duas óticas: de onde vem a produção
+        (agropecuária, indústria, serviços) e para onde vai a demanda (famílias,
+        governo, investimento e setor externo). Uma série de 31 anos, com tabela
+        completa e CSV.
+      </p>
+      <div class="hero__byline">
+        Fonte: World Bank/IBGE, Contas Nacionais. Participações calculadas sobre o PIB a preços
+        de mercado; valores em R$ correntes derivados da participação. 2025 preliminar.
+        Atualizado em outubro de 2026.
+      </div>
+    </div>
+    <aside class="hero__card" aria-label="Composição do PIB em 2025">
+      <div class="hero__card-head"><span>Ficha do PIB</span><span>2025</span></div>
+      <div class="hero-stat"><span class="hero-stat__label">Serviços</span><span class="hero-stat__value">59,7<small>%</small></span></div>
+      <div class="hero-stat"><span class="hero-stat__label">Indústria</span><span class="hero-stat__value">20,2<small>%</small></span></div>
+      <div class="hero-stat"><span class="hero-stat__label">Agropecuária</span><span class="hero-stat__value">6,1<small>%</small></span></div>
+      <div class="hero-stat"><span class="hero-stat__label">Impostos líquidos</span><span class="hero-stat__value">14,0<small>%</small></span></div>
+      <div class="hero-stat"><span class="hero-stat__label">Consumo das famílias</span><span class="hero-stat__value">63,4<small>%</small></span></div>
+      <div class="hero__note">PIB corrente: R$ 12,74 trilhões. FBCF: 16,8%. Governo: 19,1%. Exportações líquidas: +0,4%.</div>
+    </aside>
+  </div>
+</section>
+
+<section class="section" id="oferta">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <div class="section__num">01</div>
+      <div>
+        <h2 class="section__title">Oferta: serviços dominam, indústria perde peso, agro ganha espaço</h2>
+        <p class="section__deck">
+          Em 1995, a indústria respondia por 23,4% do PIB e os serviços por 58,1%.
+          Em 2025, a indústria caiu para 20,2% e os serviços subiram para 59,7%;
+          a agropecuária passou de 5,0% para 6,1%. A mudança é lenta, mas consistente:
+          o Brasil se tornou ainda mais um país de serviços — e menos industrial.
+        </p>
+      </div>
+    </div>
+
+    <div class="chart-card reveal">
+      <div class="chart-head">
+        <div><div class="chart-title">Composição do PIB por atividade — 1995–2025</div><div class="chart-sub">% do PIB a preços de mercado · soma = 100%</div></div>
+        <div class="legend">
+          <span><i style="background:#a97b28"></i>Agropecuária</span>
+          <span><i style="background:#3b5578"></i>Indústria</span>
+          <span><i style="background:#1f4d3f"></i>Serviços</span>
+          <span><i style="background:#c9bda8"></i>Impostos líquidos</span>
+        </div>
+      </div>
+      <div class="chart" id="chart-supply" role="img" aria-label="Composição do PIB por atividade de 1995 a 2025"></div>
+      <div class="chart-note">
+        Fonte: World Bank/IBGE, NV.AGR.TOTL.ZS, NV.IND.TOTL.ZS, NV.SRV.TOTL.ZS. “Indústria” inclui
+        extrativa, transformação, construção e utilities. “Impostos líquidos” é o resíduo entre o PIB
+        a preços de mercado e o valor adicionado a preços básicos.
+      </div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat reveal"><div class="stat__value">59,7%</div><div class="stat__label">Serviços em 2025</div><div class="stat__note">58,1% em 1995 · pico de 63,3% em 2017</div></div>
+      <div class="stat reveal"><div class="stat__value">20,2%</div><div class="stat__label">Indústria em 2025</div><div class="stat__note">23,4% em 1995 · pico de 24,3% em 2004</div></div>
+      <div class="stat reveal"><div class="stat__value">6,1%</div><div class="stat__label">Agropecuária em 2025</div><div class="stat__note">5,0% em 1995 · pico de 6,6% em 2021</div></div>
+      <div class="stat reveal"><div class="stat__value">14,0%</div><div class="stat__label">Impostos líquidos em 2025</div><div class="stat__note">13,5% em 1995 · pico de 15,5% em 2008</div></div>
+    </div>
+
+    <div class="callout reveal">
+      <p><strong>O que mudou de verdade:</strong> a indústria perdeu 3,2 p.p. do PIB em 30 anos,
+      enquanto serviços e agropecuária ganharam 1,6 e 1,1 p.p. Na composição, o espaço da
+      indústria foi ocupado sobretudo por serviços e commodities — não por uma indústria
+      mais produtiva. É uma mudança de estrutura, não de eficiência.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tint" id="demanda">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <div class="section__num">02</div>
+      <div>
+        <h2 class="section__title">Demanda: o consumo manda, o investimento perde espaço</h2>
+        <p class="section__deck">
+          O consumo das famílias ficou estabilizado em torno de 63% do PIB; o governo,
+          em 19%; o investimento caiu de 20,3% para 16,8%; e as exportações líquidas
+          passaram de negativas para levemente positivas. O país consome hoje uma fatia
+          maior do que investe — e isso limita o crescimento futuro.
+        </p>
+      </div>
+    </div>
+
+    <div class="chart-card reveal">
+      <div class="chart-head">
+        <div><div class="chart-title">Composição da demanda — 1995–2025</div><div class="chart-sub">% do PIB · exportações líquidas e estoque podem ser negativos</div></div>
+        <div class="legend">
+          <span><i style="background:#1f4d3f"></i>Famílias</span>
+          <span><i style="background:#3b5578"></i>Governo</span>
+          <span><i style="background:#b23a2a"></i>FBCF</span>
+          <span><i style="background:#a97b28"></i>Exportações líquidas</span>
+        </div>
+      </div>
+      <div class="chart" id="chart-demand" role="img" aria-label="Composição da demanda do PIB de 1995 a 2025"></div>
+      <div class="chart-note">
+        Fonte: World Bank/IBGE, NE.CON.PRVT.ZS, NE.CON.GOVT.ZS, NE.GDI.FTOT.ZS, NE.EXP.GNFS.ZS,
+        NE.IMP.GNFS.ZS. A soma dos componentes não fecha 100% por causa da variação de estoques
+        e da discrepância estatística; o resíduo está na tabela.
+      </div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat reveal"><div class="stat__value">63,4%</div><div class="stat__label">Consumo das famílias em 2025</div><div class="stat__note">63,7% em 1995 · pico de 65,3% em 1997</div></div>
+      <div class="stat reveal"><div class="stat__value">19,1%</div><div class="stat__label">Consumo do governo em 2025</div><div class="stat__note">20,9% em 1995 · pico de 20,9% em 1995</div></div>
+      <div class="stat reveal"><div class="stat__value">16,8%</div><div class="stat__label">FBCF em 2025</div><div class="stat__note">20,3% em 1995 · pico de 20,9% em 2013</div></div>
+      <div class="stat reveal"><div class="stat__value">+0,4%</div><div class="stat__label">Exportações líquidas em 2025</div><div class="stat__note">−1,9% em 1995 · pico de +3,4% em 2004</div></div>
+    </div>
+
+    <div class="callout reveal">
+      <p><strong>A conta que não fecha:</strong> consumo + governo + investimento + exportações
+      líquidas = 99,8% do PIB em 2025. O resíduo de 0,2% é estoque/erro estatístico. Em anos
+      de crise, esse resíduo fica negativo e revela acumulação indesejada de estoques.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="tabela">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <div class="section__num">03</div>
+      <div>
+        <h2 class="section__title">A tabela completa, ano a ano</h2>
+        <p class="section__deck">
+          Alterne entre oferta e demanda. As participações são percentuais do PIB; o PIB
+          está em R$ bilhões correntes. O CSV traz as duas óticas, valores em R$ e resíduos.
+        </p>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="supply">Oferta</button>
+      <button class="tab" data-tab="demand">Demanda</button>
+      <button id="btn-csv">Baixar CSV</button>
+    </div>
+    <p class="table-note mobile-only" style="margin:0 0 7px">Deslize a tabela para o lado para ver todas as colunas →</p>
+    <div class="table-wrap">
+      <table id="data-table">
+        <thead></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="table-note" id="table-note"></div>
+  </div>
+</section>
+
+<section class="section section--tint" id="metodo">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <div class="section__num">04</div>
+      <div>
+        <h2 class="section__title">Método, fontes e limites</h2>
+        <p class="section__deck">
+          A composição é uma fotografia contábil. Ela ajuda a ver o peso dos setores e da
+          demanda, mas não mede produtividade, qualidade ou informalidade. Leia com as
+          notas abaixo.
+        </p>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <details open>
+        <summary>O que entra em cada bloco</summary>
+        <div class="details-body">
+          <ul>
+            <li><strong>Agropecuária:</strong> agricultura, pecuária, silvicultura e pesca (valor adicionado).</li>
+            <li><strong>Indústria:</strong> extrativa, transformação, construção e eletricidade/água/esgoto/resíduos.</li>
+            <li><strong>Serviços:</strong> comércio, transporte, informação, financeiro, imobiliário, administração pública, saúde, educação e outros serviços.</li>
+            <li><strong>Impostos líquidos:</strong> impostos sobre produtos menos subsídios; é o resíduo que leva o valor adicionado ao PIB a preços de mercado.</li>
+            <li><strong>Demanda:</strong> consumo das famílias, consumo do governo, formação bruta de capital fixo (FBCF), exportações e importações de bens e serviços. A variação de estoques e a discrepância estatística aparecem como resíduo.</li>
+          </ul>
+        </div>
+      </details>
+      <details>
+        <summary>Por que as somas não dão exatamente 100%</summary>
+        <div class="details-body">
+          <p>Na oferta, a soma de agropecuária, indústria e serviços é o valor adicionado a preços
+          básicos; o PIB a preços de mercado inclui impostos líquidos de subsídios. Por isso, a
+          quarta fatia é necessária para fechar 100%.</p>
+          <p>Na demanda, a identidade contábil é PIB = consumo das famílias + consumo do governo +
+          FBCF + variação de estoques + exportações − importações. Como a variação de estoques
+          não é divulgada separadamente na série usada, ela aparece no resíduo “estoque/erro”.
+          Em alguns anos, o resíduo é negativo; isso é normal em contas nacionais.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Fontes e anos</summary>
+        <div class="details-body">
+          <ul>
+            <li>World Bank, World Development Indicators: NV.AGR.TOTL.ZS, NV.IND.TOTL.ZS, NV.SRV.TOTL.ZS, NE.CON.PRVT.ZS, NE.CON.GOVT.ZS, NE.GDI.FTOT.ZS, NE.EXP.GNFS.ZS, NE.IMP.GNFS.ZS, NY.GDP.MKTP.CN. As contas nacionais do WDI são compiladas a partir do IBGE e das Nações Unidas.</li>
+            <li>IBGE, Sistema de Contas Nacionais — referência de definições e de ordem de grandeza.</li>
+            <li>2025 preliminar; 2026 não incluído.</li>
+          </ul>
+          <p>Os valores em R$ bilhões são derivados da aplicação das participações ao PIB corrente;
+          não são a abertura oficial em valores correntes por atividade. Para análise de nível,
+          use as tabelas do IBGE; para comparação de composição ao longo do tempo, as
+          participações são a medida mais estável.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__label">Sobre esta página</div>
+        <h3>Composição do PIB, ano a ano</h3>
+        <p>Uma série de 31 anos para ver o que o Brasil produz e para onde vai a demanda. Página complementar ao Atlas do Desenvolvimento Brasileiro.</p>
+      </div>
+      <div>
+        <div class="footer__label">Seções</div>
+        <a href="#oferta">01 · Oferta</a>
+        <a href="#demanda">02 · Demanda</a>
+        <a href="#tabela">03 · Tabela</a>
+        <a href="#metodo">04 · Método</a>
+      </div>
+      <div>
+        <div class="footer__label">Dados</div>
+        <a href="desenvolvimento-brasil-1996-2026.html">Atlas do desenvolvimento</a>
+        <a href="investimento-brasil-1995-2025.html">Relatório de investimento</a>
+        <a href="#" onclick="window.print();return false;">Imprimir / salvar PDF</a>
+        <a href="#inicio">Voltar ao topo ↑</a>
+      </div>
+    </div>
+    <div class="footer__bottom"><span>Elaborado com dados públicos · outubro de 2026</span><span>Brasil · 1995—2025</span></div>
+  </div>
+</footer>
+
+<div class="tooltip" id="tooltip" role="status" aria-live="polite"></div>
+
+<script>
+const YEARS = Array.from({length:31},(_,i)=>1995+i);
+const GDP = [705.9915529,854.7636078,952.0891961,1002.3510192,1087.7104561,1199.0920709,1315.7554678,1488.7872552,1717.9503964,1957.751213,2170.5845035,2409.4499215,2720.2629376,3109.8030889,3333.0393552,3885.8469998,4376.3819999,4814.7599996,5331.6189996,5778.953,5995.7869997,6269.3280007,6585.4790001,7004.1409999,7389.1309995,7609.5970006,9012.1419993,10079.6766792,10943.3446679,11779.2505816,12738.5656139];
+const AGRI = [5.01,4.77,4.69,4.75,4.65,4.75,4.80,5.48,6.17,5.67,4.65,4.37,4.42,4.57,4.48,4.12,4.34,4.17,4.51,4.33,4.32,4.89,4.60,4.42,4.21,5.71,6.56,5.77,6.02,5.75,6.09];
+const IND = [23.38,22.34,22.59,22.12,21.75,23.01,22.64,22.50,23.08,24.31,24.17,23.54,23.13,23.09,21.88,23.27,23.10,22.13,21.22,20.47,19.36,18.35,18.19,18.75,18.75,19.51,22.12,22.82,22.14,20.94,20.15];
+const SERV = [58.12,60.32,60.61,61.12,60.20,58.25,57.71,57.35,56.36,54.92,56.08,57.14,57.73,56.80,59.15,57.61,57.57,58.73,59.68,61.25,62.31,63.20,63.34,62.65,63.07,61.45,56.91,58.09,59.18,59.17,59.74];
+const HOUSE = [63.71,65.16,65.31,64.14,64.68,64.59,64.11,61.90,61.84,60.21,60.50,60.44,59.87,59.73,61.96,60.22,60.27,61.41,61.72,62.96,63.96,64.25,64.49,64.62,65.14,63.14,61.37,63.06,62.92,63.96,63.44];
+const GOV = [20.93,19.75,19.54,20.07,19.78,18.77,19.34,19.81,19.08,18.47,18.89,19.04,18.94,18.84,19.65,19.02,18.67,18.53,18.89,19.15,19.78,20.38,20.16,19.90,19.98,20.14,18.55,18.40,19.04,18.77,19.13];
+const GFCF = [20.29,18.64,19.12,18.54,17.02,18.30,18.42,17.93,16.60,17.32,17.06,17.21,18.00,19.39,19.10,20.53,20.61,20.72,20.91,19.87,17.84,15.52,14.56,15.10,15.47,16.56,17.92,17.80,16.41,16.91,16.84];
+const EXP = [7.53,6.73,6.98,7.03,9.56,10.19,12.37,14.23,15.18,16.55,15.24,14.37,13.33,13.53,10.85,10.87,11.58,11.88,11.74,11.01,12.90,12.47,12.52,14.63,14.12,16.45,19.11,19.63,17.97,17.94,17.82];
+const IMP = [9.46,8.91,9.59,9.41,11.42,12.45,14.56,13.39,12.96,13.13,11.84,11.67,11.96,13.72,11.25,11.91,12.35,13.24,14.04,13.67,14.05,12.07,11.80,14.24,14.77,15.85,18.55,19.19,15.70,17.65,17.47];
+
+const DATA = YEARS.map((y,i)=>{
+  const tax=+(100-AGRI[i]-IND[i]-SERV[i]).toFixed(1);
+  const net=+(EXP[i]-IMP[i]).toFixed(1);
+  const stock=+(100-HOUSE[i]-GOV[i]-GFCF[i]-net).toFixed(1);
+  return {y,gdp:GDP[i],agri:AGRI[i],ind:IND[i],serv:SERV[i],tax,house:HOUSE[i],gov:GOV[i],gfcf:GFCF[i],exp:EXP[i],imp:IMP[i],net,stock};
+});
+const fmt1=v=>v.toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1});
+const fmt0=v=>v.toLocaleString('pt-BR',{maximumFractionDigits:0});
+const fmt2=v=>v.toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1});
+const NS='http://www.w3.org/2000/svg';
+const tooltip=document.getElementById('tooltip');
+let hideTimer=null;
+function svgEl(t,a={}){const e=document.createElementNS(NS,t);for(const k in a){if(a[k]===undefined||a[k]===null)continue;e.setAttribute(k,a[k]);}return e;}
+function makeSvg(w,h,label){const s=svgEl('svg',{viewBox:`0 0 ${w} ${h}`,role:'img','aria-label':label});s.style.width='100%';s.style.height='auto';s.style.display='block';return s;}
+function clearNode(n){while(n.firstChild)n.removeChild(n.firstChild);}
+function scale(d0,d1,r0,r1){return v=>r0+(v-d0)/(d1-d0)*(r1-r0);}
+function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+function ticks(min,max,step){const o=[];for(let v=Math.ceil(min/step)*step;v<=max+1e-9;v+=step)o.push(+v.toFixed(6));return o;}
+function linePath(pts){return pts.map((p,i)=>`${i===0?'M':'L'} ${p[0].toFixed(2)} ${p[1].toFixed(2)}`).join(' ');}
+function showTip(html,e){tooltip.innerHTML=html;tooltip.classList.add('show');moveTip(e);if(hideTimer)clearTimeout(hideTimer);}
+function moveTip(e){const pad=14,r=tooltip.getBoundingClientRect();let x=e.clientX+pad,y=e.clientY+pad;if(x+r.width>innerWidth-8)x=e.clientX-r.width-pad;if(y+r.height>innerHeight-8)y=e.clientY-r.height-pad;tooltip.style.transform=`translate(${Math.max(8,x)}px, ${Math.max(8,y)}px)`;}
+function hideTip(){hideTimer=setTimeout(()=>tooltip.classList.remove('show'),40);}
+function ttRow(color,label,value){return `<div class="tt-row"><span>${color?`<i style="display:inline-block;width:7px;height:7px;background:${color};margin-right:5px"></i>`:''}${label}</span><b>${value}</b></div>`;}
+function addHover(svg,x,y,w,h,htmlFn){const r=svgEl('rect',{x,y,width:Math.max(1,w),height:h,fill:'transparent',style:'cursor:crosshair'});r.addEventListener('pointerenter',e=>showTip(typeof htmlFn==='function'?htmlFn():htmlFn,e));r.addEventListener('pointermove',e=>moveTip(e));r.addEventListener('pointerleave',hideTip);svg.appendChild(r);return r;}
+
+function renderSupply(){
+  const box=document.getElementById('chart-supply');if(!box)return;clearNode(box);
+  const w=Math.max(320,box.clientWidth),h=390;
+  const m={t:22,r:22,b:34,l:40},iw=w-m.l-m.r,ih=h-m.t-m.b;
+  const x=scale(1995,2025,m.l,m.l+iw),y=scale(0,100,m.t+ih,m.t);
+  const s=makeSvg(w,h,'Composição do PIB por atividade');
+  ticks(0,100,20).forEach(v=>{const yy=y(v);s.appendChild(svgEl('line',{x1:m.l,y1:yy,x2:m.l+iw,y2:yy,class:'grid'}));const t=svgEl('text',{x:m.l-6,y:yy+3,'text-anchor':'end',class:'axis-value'});t.textContent=v+'%';s.appendChild(t);});
+  s.appendChild(svgEl('line',{x1:m.l,y1:m.t+ih,x2:m.l+iw,y2:m.t+ih,class:'baseline'}));
+  const series=[
+    {k:'agri',c:'#a97b28',n:'Agropecuária'},
+    {k:'ind',c:'#3b5578',n:'Indústria'},
+    {k:'serv',c:'#1f4d3f',n:'Serviços'},
+    {k:'tax',c:'#c9bda8',n:'Impostos líquidos'}
+  ];
+  let cum=DATA.map(()=>0);
+  series.forEach(se=>{
+    const top=DATA.map((d,i)=>cum[i]+d[se.k]);
+    const path=`M ${x(1995)} ${y(cum[0])} `+DATA.map((d,i)=>`L ${x(d.y)} ${y(top[i])}`).join(' ')+` L ${x(2025)} ${y(cum[30])} `+DATA.slice().reverse().map((d,i)=>`L ${x(d.y)} ${y(cum[30-i])}`).join(' ')+' Z';
+    s.appendChild(svgEl('path',{d:path,fill:se.c,stroke:'#fffdf8','stroke-width':.5}));
+    cum=top;
+  });
+  [1995,2000,2005,2010,2015,2020,2025].forEach(v=>{const t=svgEl('text',{x:x(v),y:h-12,'text-anchor':'middle',class:'axis-value'});t.textContent=v;s.appendChild(t);});
+  [
+    {t:'Serviços',x:2016,y:54,fill:'#fffdf8'},
+    {t:'Indústria',x:2016,y:14,fill:'#fffdf8'},
+    {t:'Agro',x:2016,y:2.2,fill:'#17150f'},
+    {t:'Impostos',x:2016,y:93.2,fill:'#17150f'}
+  ].forEach(l=>{
+    const tx=svgEl('text',{x:x(l.x),y:y(l.y)+3,'text-anchor':'middle','font-weight':600,'letter-spacing':'.03em',style:`fill:${l.fill};font-size:9.5px`});
+    tx.textContent=l.t;s.appendChild(tx);
+  });
+  DATA.forEach((d,i)=>{
+    const x1=x(clamp(d.y-.5,1995,2025)),x2=x(clamp(d.y+.5,1995,2025));
+    addHover(s,x1,m.t,x2-x1,ih,()=>`
+      <div class="tt-year"><span>${d.y}</span><span>PIB R$ ${fmt1(d.gdp)} bi</span></div>
+      ${ttRow('#a97b28','Agropecuária',fmt1(d.agri)+'%')}
+      ${ttRow('#3b5578','Indústria',fmt1(d.ind)+'%')}
+      ${ttRow('#1f4d3f','Serviços',fmt1(d.serv)+'%')}
+      ${ttRow('#c9bda8','Impostos líquidos',fmt1(d.tax)+'%')}
+    `);
+  });
+  box.appendChild(s);
+}
+
+function renderDemand(){
+  const box=document.getElementById('chart-demand');if(!box)return;clearNode(box);
+  const w=Math.max(320,box.clientWidth),h=390;
+  const m={t:22,r:62,b:34,l:40},iw=w-m.l-m.r,ih=h-m.t-m.b;
+  const x=scale(1995,2025,m.l,m.l+iw),y=scale(-5,70,m.t+ih,m.t);
+  const s=makeSvg(w,h,'Composição da demanda do PIB');
+  ticks(-5,70,10).forEach(v=>{const yy=y(v);s.appendChild(svgEl('line',{x1:m.l,y1:yy,x2:m.l+iw,y2:yy,class:v===0?'baseline':'grid'}));const t=svgEl('text',{x:m.l-6,y:yy+3,'text-anchor':'end',class:'axis-value'});t.textContent=v+'%';s.appendChild(t);});
+  const series=[
+    {k:'house',c:'#1f4d3f',n:'Famílias'},
+    {k:'gov',c:'#3b5578',n:'Governo'},
+    {k:'gfcf',c:'#b23a2a',n:'FBCF'},
+    {k:'net',c:'#a97b28',n:'Exp. líquidas'}
+  ];
+  series.forEach(se=>{
+    const pts=DATA.map((d,i)=>[x(d.y),y(d[se.k])]);
+    s.appendChild(svgEl('path',{d:linePath(pts),fill:'none',stroke:se.c,'stroke-width':1.9,'stroke-linejoin':'round','stroke-linecap':'round'}));
+    const last=pts[30];s.appendChild(svgEl('circle',{cx:last[0],cy:last[1],r:2.7,fill:se.c}));
+    const offs={house:0,gov:-4,gfcf:8,net:-7};
+    const lab=svgEl('text',{x:last[0]+6,y:last[1]+(offs[se.k]||0),class:'series-label',style:`fill:${se.c};font-size:9.5px`});
+    lab.textContent=se.n+' '+fmt1(DATA[30][se.k])+'%';s.appendChild(lab);
+  });
+  [1995,2000,2005,2010,2015,2020,2025].forEach(v=>{const t=svgEl('text',{x:x(v),y:h-12,'text-anchor':'middle',class:'axis-value'});t.textContent=v;s.appendChild(t);});
+  const ann=svgEl('text',{x:x(2006),y:y(-3.5),class:'annotation',style:'fill:#a97b28'});ann.textContent='Exp. líquidas: +3,4% em 2004';s.appendChild(ann);
+  [[2013,20.91,-6],[2021,14.56,12]].forEach(([yr,val,dy])=>{
+    const px=x(yr),py=y(val);
+    s.appendChild(svgEl('circle',{cx:px,cy:py,r:2.2,fill:'#b23a2a'}));
+    const t=svgEl('text',{x:px+5,y:py+dy,class:'annotation',style:'fill:#b23a2a;font-size:9px'});
+    t.textContent=fmt1(val)+'%';s.appendChild(t);
+  });
+  DATA.forEach((d,i)=>{
+    const x1=x(clamp(d.y-.5,1995,2025)),x2=x(clamp(d.y+.5,1995,2025));
+    addHover(s,x1,m.t,x2-x1,ih,()=>`
+      <div class="tt-year"><span>${d.y}</span><span>PIB R$ ${fmt1(d.gdp)} bi</span></div>
+      ${ttRow('#1f4d3f','Famílias',fmt1(d.house)+'%')}
+      ${ttRow('#3b5578','Governo',fmt1(d.gov)+'%')}
+      ${ttRow('#b23a2a','FBCF',fmt1(d.gfcf)+'%')}
+      ${ttRow('#a97b28','Exp. líquidas',fmt1(d.net)+'%')}
+      ${ttRow(null,'Estoque/erro',fmt1(d.stock)+'%')}
+    `);
+  });
+  box.appendChild(s);
+}
+
+let currentTab='supply';
+function renderTable(tab){
+  currentTab=tab;
+  const table=document.getElementById('data-table');
+  const thead=table.querySelector('thead'),tbody=table.querySelector('tbody');
+  const note=document.getElementById('table-note');
+  if(tab==='supply'){
+    thead.innerHTML=`<tr><th>Ano</th><th class="num">PIB (R$ bi)</th><th class="num">Agro (%)</th><th class="num">Indústria (%)</th><th class="num">Serviços (%)</th><th class="num">Impostos (%)</th></tr>`;
+    tbody.innerHTML=DATA.map(d=>`<tr><td class="name">${d.y}</td><td class="num">${fmt1(d.gdp)}</td><td class="num">${fmt1(d.agri)}</td><td class="num">${fmt1(d.ind)}</td><td class="num">${fmt1(d.serv)}</td><td class="num">${fmt1(d.tax)}</td></tr>`).join('');
+    note.textContent='Oferta: participações % do PIB a preços de mercado. A soma de agro + indústria + serviços + impostos = 100%. PIB em R$ bilhões correntes.';
+  }else{
+    thead.innerHTML=`<tr><th>Ano</th><th class="num">PIB (R$ bi)</th><th class="num">Famílias (%)</th><th class="num">Governo (%)</th><th class="num">FBCF (%)</th><th class="num">Export. (%)</th><th class="num">Import. (%)</th><th class="num">Exp. líquidas (%)</th><th class="num">Estoque/erro (%)</th></tr>`;
+    tbody.innerHTML=DATA.map(d=>`<tr><td class="name">${d.y}</td><td class="num">${fmt1(d.gdp)}</td><td class="num">${fmt1(d.house)}</td><td class="num">${fmt1(d.gov)}</td><td class="num">${fmt1(d.gfcf)}</td><td class="num">${fmt1(d.exp)}</td><td class="num">${fmt1(d.imp)}</td><td class="num">${fmt1(d.net)}</td><td class="num">${fmt1(d.stock)}</td></tr>`).join('');
+    note.textContent='Demanda: participações % do PIB. Exportações líquidas = exportações − importações. Estoque/erro = resíduo para fechar 100% (variação de estoques + discrepância estatística).';
+  }
+  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
+}
+
+function downloadCSV(){
+  const head=['ano','pib_brl_bilhoes','agro_pct','industria_pct','servicos_pct','impostos_pct','agro_brl_bi','industria_brl_bi','servicos_brl_bi','impostos_brl_bi','familias_pct','governo_pct','fbcf_pct','exportacoes_pct','importacoes_pct','exportacoes_liquidas_pct','estoque_erro_pct','familias_brl_bi','governo_brl_bi','fbcf_brl_bi','exportacoes_brl_bi','importacoes_brl_bi','exportacoes_liquidas_brl_bi','estoque_erro_brl_bi'];
+  const rows=DATA.map(d=>[
+    d.y,d.gdp,d.agri,d.ind,d.serv,d.tax,
+    d.gdp*d.agri/100,d.gdp*d.ind/100,d.gdp*d.serv/100,d.gdp*d.tax/100,
+    d.house,d.gov,d.gfcf,d.exp,d.imp,d.net,d.stock,
+    d.gdp*d.house/100,d.gdp*d.gov/100,d.gdp*d.gfcf/100,d.gdp*d.exp/100,d.gdp*d.imp/100,d.gdp*d.net/100,d.gdp*d.stock/100
+  ]);
+  const cell=v=>Number(v).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1,useGrouping:false});
+  const csv=[head.join(';'),...rows.map(r=>r.map((v,i)=>i===0?v:cell(v)).join(';'))].join('\n');
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+  const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='composicao-pib-brasil-1995-2025.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+let lastWidth=0;
+function renderAll(force){
+  const w=document.documentElement.clientWidth;
+  if(!force&&Math.abs(w-lastWidth)<2)return;lastWidth=w;
+  renderSupply();renderDemand();
+}
+function initUI(){
+  const bar=document.getElementById('progressBar');
+  const onScroll=()=>{const h=document.documentElement;const p=h.scrollTop/(h.scrollHeight-h.clientHeight);bar.style.width=Math.min(100,Math.max(0,p*100))+'%';};
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+  addEventListener('scroll',()=>tooltip.classList.remove('show'),{passive:true});
+  addEventListener('resize',()=>tooltip.classList.remove('show'),{passive:true});
+  document.addEventListener('pointerdown',e=>{if(!e.target.closest('.chart'))tooltip.classList.remove('show');},{passive:true});
+  document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>renderTable(b.dataset.tab)));
+  document.getElementById('btn-csv').addEventListener('click',downloadCSV);
+  const links=[...document.querySelectorAll('.nav a')];
+  const sections=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  const obs=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting)links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+en.target.id));});},{rootMargin:'-35% 0px -55% 0px',threshold:0});
+  sections.forEach(s=>obs.observe(s));
+  const revObs=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');revObs.unobserve(en.target);}});},{threshold:.06,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
+  let rt=null;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>renderAll(false),140);});
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  renderAll(true);renderTable('supply');initUI();
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(()=>setTimeout(()=>renderAll(true),60));}
+});
+</script>
+</body>
+</html>
